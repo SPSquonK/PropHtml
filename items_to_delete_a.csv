@@ -1,0 +1,810 @@
+Supprimer ?	240					
+	II_WEA_SWO_WOODEN	Epée en Bois	1	1	JOB_VAGRANT	
+	II_WEA_SWO_LONG	Epée Longue	1	1	JOB_VAGRANT	
+	II_WEA_SWO_PENEL2	Epée Penel	1	1	JOB_MERCENARY	
+	II_WEA_SWO_CRIMSON2	Epée Crimson	1	1	JOB_MERCENARY	
+	II_WEA_SWO_BROAD	Epée Broad	1	1	JOB_MERCENARY	
+	II_WEA_SWO_SIRAIN	Epée Sirain	1	1	JOB_MERCENARY	
+	II_WEA_SWO_SEED	Epée Crimson	1	1	JOB_MERCENARY	
+	II_WEA_SWO_KARLIM	Epée Karlim	1	1	JOB_MERCENARY	
+	II_WEA_SWO_GEMINI	Epée Gemini	1	1	JOB_MERCENARY	
+	II_WEA_SWO_GORE	Epée Fuseau	1	1	JOB_MERCENARY	
+	II_WEA_SWO_HARTBONG	Bâton de Cupidon	1	1	JOB_VAGRANT	
+	II_WEA_SWO_POLICE_CLUB	Matraque de Policier	1	1	JOB_VAGRANT	
+	II_WEA_SWO_APPLE	Pomme farineuse	1	1	JOB_VAGRANT	
+	II_WEA_SWO_BAMBOO	Bâton en Bambou	1	1	JOB_VAGRANT	
+	II_WEA_SWO_UMBRELLA01	Parapluie ensanglanté.	1	1	JOB_VAGRANT	
+	II_WEA_SWO_PARASOL	Parapluie de Miss Madrigal	1	1	JOB_VAGRANT	
+	II_GEN_GEM_GEM_CHAINSAW	Tronçonneuse	1	1	JOB_VAGRANT	Touché + 100%
+x	II_WEA_SWO_PPWOODEN	Epée en bois moisie	1	1	JOB_VAGRANT	
+	II_GEN_GEM_GEM_CHAINSAWKR	Tronçonneuse	1	1	JOB_VAGRANT	Touché + 100%
+	II_EVE_WEA_SWO_BHWOODEN	Epée en bois Bahamut	1	1	JOB_VAGRANT	
+	II_WEA_SWO_SUHO_BAD	Epée du Vieux Gardien	1	1	JOB_VAGRANT	
+	II_WEA_SWT_SUHO_BAD	Espadon du vieux Gardien	1	1	JOB_VAGRANT	
+x	II_WEA_SWO_RENTAL01	Epée à Une Main de Débutant (Location)	1	1	JOB_VAGRANT	
+	II_WEA_AXE_SUHO_BAD	Hache du vieux Gardien	1	1	JOB_VAGRANT	
+	II_WEA_AXT_SUHO_BAD	Doloire du vieux Gardien	1	1	JOB_VAGRANT	
+x	II_WEA_AXE_RENTAL01	Hache de Débutant (Location)	1	1	JOB_VAGRANT	
+	II_WEA_CHE_SUHO_BAD	Sceptre du vieux Gardien	1	1	JOB_VAGRANT	
+x	II_WEA_CHE_RENTAL01	Sceptre de Débutant (Location)	1	1	JOB_ASSIST	
+	II_WEA_KNU_ISHOFIST	Poing de Bruce (G)	1	1	JOB_VAGRANT	ATQ + 10
+	II_WEA_KNU_SUHO_BAD	Poing du vieux Gardien	1	1	JOB_VAGRANT	
+x	II_WEA_KNU_RENTAL01	Poing de Débutant (Location)	1	1	JOB_ASSIST	
+	II_WEA_WAN_SUHO_BAD	Baguette du vieux Gardien	1	1	JOB_VAGRANT	
+x	II_WEA_WAN_RENTAL01	Baguette de Débutant (Location)	1	1	JOB_MAGICIAN	
+	II_WEA_STA_SUHO_BAD	Bâton du vieux Gardien	1	1	JOB_VAGRANT	
+x	II_WEA_STA_RENTAL01	Bâton de Débutant (Location)	1	1	JOB_MAGICIAN	
+	II_WEA_YOY_SUHO_BAD	Yo-yo du vieux Gardien	1	1	JOB_VAGRANT	
+x	II_WEA_YOY_RENTAL01	Yo-yo de Débutant (Location)	1	1	JOB_ACROBAT	
+	II_WEA_BOW_SUHO_BAD	Arc du vieux Gardien	1	1	JOB_VAGRANT	
+x	II_WEA_BOW_RENTAL01	Arc de Débutant (Location)	1	1	JOB_ACROBAT	
+	II_WEA_LC_TURTLEKING_SHIELD	Carapace de Tortue Tyran	1	1	JOB_VAGRANT	
+x	II_ARM_ARM_SHI_RENTAL01	Bouclier de Débutant (Location)	1	1	JOB_VAGRANT	
+	II_ARM_ARM_SHI_GREEN	Bouclier Vert	1	3	JOB_VAGRANT	
+	II_WEA_SWO_BOBOKU	Epée Boboku	1	5	JOB_VAGRANT	FOR + 1;PV max. + 50
+	II_WEA_AXE_LUDA	Hache Luda	1	5	JOB_VAGRANT	FOR + 1;Touché + 10%
+	II_WEA_SWO_HANDCLAW	Epée Dentelée	1	6	JOB_VAGRANT	
+	II_ARM_ARM_SHI_LIGHT	Bouclier Lumière	1	7	JOB_VAGRANT	
+	II_WEA_AXE_RODNEY	Hache Rodney	1	9	JOB_VAGRANT	
+	II_ARM_ARM_SHI_ROUND	Bouclier Rond	1	9	JOB_VAGRANT	
+	II_WEA_SWO_PARMIL	Epée Parmil	1	10	JOB_VAGRANT	
+	II_WEA_SWO_KEHIN	Epée Kehin	1	11	JOB_MERCENARY	FOR + 1
+	II_WEA_AXE_GRABBER	Hache Grabber	1	11	JOB_MERCENARY	END + 1
+	II_WEA_CHEE_MERYL	Sceptre Meryl	1	11	JOB_ASSIST	END + 1;Touché + 50%
+	II_WEA_KNU_PAZION	Poing Pazion	1	11	JOB_ASSIST	END + 1
+	II_WEA_WAN_NEFUME	Baguette Nefume	1	11	JOB_MAGICIAN	INT + 1
+	II_WEA_STA_SHUPRIM	Bâton Shuprim	1	11	JOB_MAGICIAN	INT + 1;Touché + 20%
+	II_ARM_ARM_SHI_BATTLE	Bouclier Bataille	1	11	JOB_VAGRANT	
+	II_WEA_SWO_CRIMSON	Epée Crimson	1	13	JOB_VAGRANT	
+	II_WEA_AXE_MORROW	Hache Morrow	1	13	JOB_VAGRANT	
+	II_WEA_SWO_PETAL	Epée Fortis	1	15	JOB_MERCENARY	
+	II_WEA_SWO_BLINK	Epée Scintillante	1	15	JOB_MERCENARY	
+	II_WEA_SWO_FALL	Epée Brillante	1	15	JOB_VAGRANT	FOR + 2;DEX + 2
+	II_WEA_SWO_SWORDBRAVERY	Epée Courage	1	15	JOB_VAGRANT	
+x	II_WEA_SWO_SUHO1	Epée du petit Gardien	1	15	JOB_MERCENARY	Vit Atq + 240%;Critique + 6%;Dégâts des coups critiques + 10%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_SWO_PERIODSUHO7	Epée du Gardien (7 jours)	1	15	JOB_MERCENARY	Vit Atq + 240%;Critique + 6%;Dégâts des coups critiques + 10%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_SWO_PERIODSUHO30	Epée du Gardien (30 jours)	1	15	JOB_MERCENARY	Vit Atq + 240%;Critique + 6%;Dégâts des coups critiques + 10%;Renvoi des dégâts + 1%;Touché + 10%
+	II_WEA_AXE_CURNING	Hache Curning	1	15	JOB_MERCENARY	
+	II_WEA_AXE_SHYADIN	Hache Shyadin	1	15	JOB_MERCENARY	
+	II_WEA_AXE_FALL	Griffes de Lawolf	1	15	JOB_VAGRANT	FOR + 2;Vit Atq + 100%
+x	II_WEA_AXE_SUHO1	Hache du petit Gardien	1	15	JOB_MERCENARY	Vit Atq + 120%;Critique + 15%;Dégâts des coups critiques + 6%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_AXE_PERIODSUHO7	Hache du Gardien (7 jours)	1	15	JOB_MERCENARY	Vit Atq + 120%;Critique + 15%;Dégâts des coups critiques + 6%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_AXE_PERIODSUHO30	Hache du Gardien (30 jours)	1	15	JOB_MERCENARY	Vit Atq + 120%;Critique + 15%;Dégâts des coups critiques + 6%;Renvoi des dégâts + 1%;Touché + 10%
+	II_WEA_CHEE_PLIM	Sceptre Plim	1	15	JOB_ASSIST	Touché + 15%
+	II_WEA_CHEE_SCULL	Sceptre Skull	1	15	JOB_ASSIST	Touché + 15%
+	II_WEA_CHEE_CHE15	Sceptre Flarine	1	15	JOB_ASSIST	INT + 2;PM max. + 5%
+	II_WEA_CHE_DEVOTION	Sceptre Dévotion	1	15	JOB_ASSIST	
+x	II_WEA_CHE_SUHO1	Sceptre du petit Gardien	1	15	JOB_ASSIST	Vitesse d'incantation + 10%;Attaque + 10%;INT + 10;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_CHE_PERIODSUHO7	Sceptre du Gardien (7 jours)	1	15	JOB_ASSIST	Vitesse d'incantation + 10%;Attaque + 10%;INT + 10;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_CHE_PERIODSUHO30	Sceptre du Gardien (30 jours)	1	15	JOB_ASSIST	Vitesse d'incantation + 10%;Attaque + 10%;INT + 10;Renvoi des dégâts + 1%;Touché + 10%
+	II_WEA_KNU_OVERAM	Poing Overam	1	15	JOB_ASSIST	
+	II_WEA_KNU_SARDINE	Poing Sardin	1	15	JOB_ASSIST	
+	II_WEA_KNU_FALL	Poing de Fer	1	15	JOB_ASSIST	FOR + 2;Critique + 1%
+x	II_WEA_KNU_SUHO1	Poing du petit Gardien	1	15	JOB_ASSIST	Critique + 6%;Vit Atq + 60%;Dégâts des coups critiques + 23%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_KNU_PERIODSUHO7	Poing du Gardien (7 jours)	1	15	JOB_ASSIST	Critique + 6%;Vit Atq + 60%;Dégâts des coups critiques + 23%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_KNU_PERIODSUHO30	Poing du Gardien (30 jours)	1	15	JOB_ASSIST	Critique + 6%;Vit Atq + 60%;Dégâts des coups critiques + 23%;Renvoi des dégâts + 1%;Touché + 10%
+	II_WEA_WAN_SEAL	Baguette Sceau	1	15	JOB_MAGICIAN	
+	II_WEA_WAN_CUBIC	Baguette Cubique	1	15	JOB_MAGICIAN	
+	II_WEA_WAN_WAN15	Baguette Illumination	1	15	JOB_MAGICIAN	INT + 2;Maîtrise de la Foudre + 10%
+	II_WEA_WAN_WANDMULE	Baguette Mule	1	15	JOB_MAGICIAN	
+x	II_WEA_WAN_SUHO1	Baguette du petit Gardien	1	15	JOB_MAGICIAN	Vitesse d'incantation + 10%;Attaque + 9%;INT + 10;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_WAN_PERIODSUHO7	Baguette du Gardien (7 jours)	1	15	JOB_MAGICIAN	Vitesse d'incantation + 10%;Attaque + 9%;INT + 10;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_WAN_PERIODSUHO30	Baguette du Gardien (30 jours)	1	15	JOB_MAGICIAN	Vitesse d'incantation + 10%;Attaque + 9%;INT + 10;Renvoi des dégâts + 1%;Touché + 10%
+	II_WEA_STA_MILE	Bâton Mile	1	15	JOB_MAGICIAN	Touché + 15%
+	II_WEA_STA_NILE	Bâton Nile	1	15	JOB_MAGICIAN	Touché + 15%
+	II_WEA_STA_STA15	Bâton Luena	1	15	JOB_MAGICIAN	INT + 3;Maîtrise du Vent + 5%
+x	II_WEA_STA_SUHO1	Bâton du petit Gardien	1	15	JOB_MAGICIAN	Vitesse d'incantation + 10%;Attaque + 12%;INT + 12;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_STA_PERIODSUHO7	Bâton du Gardien (7 jours)	1	15	JOB_MAGICIAN	Vitesse d'incantation + 10%;Attaque + 12%;INT + 12;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_STA_PERIODSUHO30	Bâton du Gardien (30 jours)	1	15	JOB_MAGICIAN	Vitesse d'incantation + 10%;Attaque + 12%;INT + 12;Renvoi des dégâts + 1%;Touché + 10%
+	II_WEA_YOY_ITUN	Yo-yo Itun	1	15	JOB_ACROBAT	
+	II_WEA_YOY_SLEPIN	Yo-yo Slepin	1	15	JOB_ACROBAT	
+	II_WEA_YOY_YOY15	Jouet d'Ivillis	1	15	JOB_ACROBAT	DEX + 2;Vit Atq + 100%
+x	II_WEA_YOY_SUHO1	Yo-yo du petit Gardien	1	15	JOB_ACROBAT	Vit Atq + 300%;Attaque + 5%;Dégâts des coups critiques + 28%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_YOY_PERIODSUHO7	Yo-yo du Gardien (7 jours)	1	15	JOB_ACROBAT	Vit Atq + 300%;Attaque + 5%;Dégâts des coups critiques + 28%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_YOY_PERIODSUHO30	Yo-yo du Gardien (30 jours)	1	15	JOB_ACROBAT	Vit Atq + 300%;Attaque + 5%;Dégâts des coups critiques + 28%;Renvoi des dégâts + 1%;Touché + 10%
+	II_WEA_BOW_WOODNE	Arc Carbone	1	15	JOB_ACROBAT	
+	II_WEA_BOW_GREENT	Arc Verdi	1	15	JOB_ACROBAT	
+	II_WEA_BOW_BOW15	Arc Précision	1	15	JOB_ACROBAT	DEX + 2;Touché + 10%
+x	II_WEA_BOW_SUHO1	Arc du petit Gardien	1	15	JOB_ACROBAT	Critique + 15%;Attaque + 9%;Dégâts des coups critiques + 21%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_BOW_PERIODSUHO7	Arc du Gardien (7 jours)	1	15	JOB_ACROBAT	Critique + 15%;Attaque + 9%;Dégâts des coups critiques + 21%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_BOW_PERIODSUHO30	Arc du Gardien (30 jours)	1	15	JOB_ACROBAT	Critique + 15%;Attaque + 9%;Dégâts des coups critiques + 21%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_CBOW_WOODNE	Fausse arbalète (TEST ONLY)	1	15	JOB_VAGRANT	
+	II_ARM_ARM_SHI_SENTINEL	Bouclier Sentinelle	1	15	JOB_VAGRANT	
+	II_WEA_SWO_ARKON	Epée Arkon	6	18	JOB_MERCENARY	
+	II_WEA_AXE_KARHEM	Hache Karhem	6	18	JOB_MERCENARY	
+	II_WEA_CHEE_GRIM	Sceptre Grim	6	18	JOB_ASSIST	Touché + 20%
+	II_WEA_KNU_BABIL	Poing Babil	6	18	JOB_ASSIST	
+	II_WEA_WAN_DIA	Baguette Dia	6	18	JOB_MAGICIAN	
+	II_WEA_STA_VEGA	Bâton Vega	6	18	JOB_MAGICIAN	Touché + 20%
+	II_ARM_ARM_SHI_SPARKLE	Bouclier Etincelle	6	20	JOB_VAGRANT	
+	II_WEA_SWO_OUTLAW	Epée Bandit	7	22	JOB_MERCENARY	
+	II_WEA_AXE_BRONZE	Hache en Bronze	7	22	JOB_MERCENARY	
+	II_WEA_CHEE_HUEY	Sceptre Huey	7	22	JOB_ASSIST	Touché + 15%
+	II_WEA_KNU_TWIT	Poing Twit	7	22	JOB_ASSIST	
+	II_WEA_WAN_EPI	Baguette Quartz	7	22	JOB_MAGICIAN	
+	II_WEA_STA_INNER	Bâton Inner	7	22	JOB_MAGICIAN	Touché + 15%
+	II_WEA_YOY_CLIENT	Yo-yo Client	7	22	JOB_ACROBAT	
+	II_WEA_BOW_STIENG	Arc Etrange	7	22	JOB_ACROBAT	
+	II_ARM_ARM_SHI_FURY	Bouclier Fureur	7	23	JOB_VAGRANT	
+	II_WEA_SWO_ZIRKAN	Epée Zirkan	8	24	JOB_MERCENARY	DEF + 12
+	II_WEA_SWO_CLOSEITEM1	Epée Sewal	8	24	JOB_MERCENARY	DEF + 5
+	II_WEA_SWO_CLOSEITEM2	Epée Mangchi	8	24	JOB_MERCENARY	DEF + 5
+	II_WEA_SWO_CLOSEITEM3	Epée Pinokio	8	24	JOB_MERCENARY	DEF + 5
+	II_WEA_SWO_CLOSEITEM4	Epée Emperor	8	24	JOB_MERCENARY	DEF + 5
+	II_WEA_SWO_CLOSEITEM5	Epée Snipar	8	24	JOB_MERCENARY	DEF + 5
+	II_WEA_AXE_CREST	Hache Crest	8	24	JOB_MERCENARY	DEF + 12
+	II_WEA_CHEE_PAPANG	Sceptre Pang	8	24	JOB_ASSIST	PV max. + 100;Touché + 50%
+	II_WEA_CHE_CLOSEITEM1	Sceptre Cauchemar	8	24	JOB_ASSIST	PV max. + 100
+	II_WEA_KNU_PRENIL	Poing Prenil	8	24	JOB_ASSIST	PV max. + 100
+	II_WEA_WAN_DAZZLE	Baguette Dazzle	8	24	JOB_MAGICIAN	INT + 2
+	II_WEA_STA_PAPANEW	Bâton Papan	8	24	JOB_MAGICIAN	INT + 2
+	II_WEA_SWO_TRITIUM	Epée Tritium	8	25	JOB_MERCENARY	Vit Atq + 100%
+	II_WEA_SWO_PERICUUM	Epée Pericuum	8	25	JOB_MERCENARY	Vit Atq + 50%
+	II_WEA_AXE_TRITIUM	Hache Tritium	8	25	JOB_MERCENARY	Vit Atq + 100%
+	II_WEA_AXE_PERICUUM	Hache Pericuum	8	25	JOB_MERCENARY	Vit Atq + 50%
+	II_WEA_CHEE_TRITIUM	Sceptre Tritium	8	25	JOB_ASSIST	INT + 5
+	II_WEA_CHEE_PERICUUM	Sceptre Pericuum	8	25	JOB_ASSIST	INT + 2
+	II_WEA_KNU_TRITIUM	Poing Tritium	8	25	JOB_ASSIST	Vit Atq + 100%
+	II_WEA_KNU_PERICUUM	Poing Pericuum	8	25	JOB_ASSIST	Vit Atq + 50%
+	II_WEA_WAN_TRITIUM	Baguette Tritium	8	25	JOB_MAGICIAN	INT + 5
+	II_WEA_WAN_PERICUUM	Baguette Pericuum	8	25	JOB_MAGICIAN	INT + 2
+	II_WEA_STA_TRITIUM	Bâton Tritium	8	25	JOB_MAGICIAN	INT + 5
+	II_WEA_STA_PERICUUM	Bâton Pericuum	8	25	JOB_MAGICIAN	INT + 2
+	II_WEA_YOY_TRITIUM	Yo-yo Tritium	8	25	JOB_ACROBAT	Vit Atq + 100%
+	II_WEA_BOW_TRITIUM	Arc Tritium	8	25	JOB_ACROBAT	Vit Atq + 100%
+	II_WEA_SWO_FAIRSLENDER	Epée Ténèbre	9	27	JOB_MERCENARY	
+	II_WEA_SWO_CLIP	Epée Clip	9	27	JOB_MERCENARY	
+	II_WEA_AXE_GRANG	Hache Grang	9	27	JOB_MERCENARY	
+	II_WEA_AXE_DRONE	Hache Drone	9	27	JOB_MERCENARY	
+	II_WEA_CHEE_KUDOS	Sceptre Kudos	9	27	JOB_ASSIST	Touché + 15%
+	II_WEA_CHEE_SAYRAM	Sceptre Sayram	9	27	JOB_ASSIST	Touché + 15%
+	II_WEA_KNU_XENO	Poing Xeno	9	27	JOB_ASSIST	
+	II_WEA_KNU_SIDE	Poing Side	9	27	JOB_ASSIST	
+	II_WEA_WAN_NIZ	Baguette Saphire	9	27	JOB_MAGICIAN	
+	II_WEA_WAN_RUBY	Baguette Rubis	9	27	JOB_MAGICIAN	
+	II_WEA_STA_HERALD	Bâton Herald	9	27	JOB_MAGICIAN	Touché + 15%
+	II_WEA_STA_ADDSELF	Bâton Sajoumem	9	27	JOB_MAGICIAN	Touché + 15%
+	II_WEA_YOY_TENSU	Yo-yo Tensu	9	27	JOB_ACROBAT	
+	II_WEA_YOY_EMPORE	Yo-yo Emporer	9	27	JOB_ACROBAT	
+	II_WEA_BOW_CLASEM	Arc Inclassable	9	27	JOB_ACROBAT	
+	II_WEA_BOW_REDIAN	Arc Sanglant	9	27	JOB_ACROBAT	
+	II_ARM_ARM_SHI_SHURAIN	Bouclier Shurain	9	28	JOB_VAGRANT	
+	II_WEA_SWO_SWD30	Fer de Clockworks	10	30	JOB_MERCENARY	FOR + 3;Critique + 1%
+x	II_WEA_SWO_ENTANALE	Epée Entanalle	10	30	JOB_MERCENARY	[Doublon avec l'épée Ombre lv 110, épée donnée lors d'une quête et comme sfflyf n'a pas de quête osef)
+	II_WEA_AXE_AXE30	Hache Elémentaire	10	30	JOB_MERCENARY	FOR + 3;Augmentation de la force + 3
+	II_WEA_CHEE_CHE30	Sceptre Sacré	10	30	JOB_ASSIST	INT + 3;PM max. + 10%
+	II_WEA_KNU_KNU30	Poing Acier	10	30	JOB_ASSIST	FOR + 3;Vit Atq + 100%
+	II_WEA_WAN_WAN30	Baguette Sismique	10	30	JOB_MAGICIAN	INT + 3;Vitesse d'incantation + 5%
+	II_WEA_STA_STA30	Bâton Flamboyant	10	30	JOB_MAGICIAN	INT + 4;Maîtrise du Feu + 5%
+	II_WEA_YOY_YOY30	Roue du Wheelem	10	30	JOB_ACROBAT	Touché + 10%;Critique + 3%
+	II_WEA_BOW_BOW30	Arc des esprits	10	30	JOB_ACROBAT	DEX + 3;Augmentation de la force + 2
+	II_ARM_ARM_SHI_HEAVY	Bouclier Massif	11	33	JOB_VAGRANT	
+	II_WEA_SWO_TAO	Epée Tao	11	34	JOB_MERCENARY	
+	II_WEA_SWO_STRAD	Epée Strad	11	34	JOB_MERCENARY	FOR + 2
+	II_WEA_AXE_PROEM	Hache Proem	11	34	JOB_MERCENARY	
+	II_WEA_AXE_CANINE	Hache Canine	11	34	JOB_MERCENARY	FOR + 2
+	II_WEA_CHEE_SAINT	Sceptre Saint	11	34	JOB_ASSIST	Touché + 15%
+	II_WEA_CHEE_DAIN	Sceptre Dain	11	34	JOB_ASSIST	Touché + 20%
+	II_WEA_KNU_TALIN	Poing Talin	11	34	JOB_ASSIST	
+	II_WEA_KNU_SALAMANDER	Poing Salamandre	11	34	JOB_ASSIST	Touché + 12%
+	II_WEA_WAN_KALIS	Baguette Kalis	11	34	JOB_MAGICIAN	
+	II_WEA_WAN_PENY	Baguette Peny	11	34	JOB_MAGICIAN	INT + 2
+	II_WEA_STA_SIGN	Bâton Symbolique	11	34	JOB_MAGICIAN	Touché + 15%
+	II_WEA_STA_PINSI	Bâton Pinsi	11	34	JOB_MAGICIAN	INT + 2;PM max. + 20
+	II_WEA_YOY_DICEIN	Yo-yo Dicein	11	34	JOB_ACROBAT	
+	II_WEA_BOW_CRISTI	Arc Cristia	11	34	JOB_ACROBAT	
+	II_ARM_ARM_SHI_GYRO	Bouclier Gyro	11	35	JOB_VAGRANT	
+	II_WEA_SWO_SIBAK	Epée Sibak	13	39	JOB_MERCENARY	Touché + 5%
+	II_WEA_AXE_CRAWLER	Hache Crawler	13	39	JOB_MERCENARY	Touché + 4%;END + 1
+	II_WEA_CHEE_SEPHY	Sceptre Sephy	13	39	JOB_ASSIST	END + 3
+	II_WEA_KNU_GIGATON	Poing Gigaton	13	39	JOB_ASSIST	END + 3
+	II_WEA_WAN_ECLIPSE	Baguette Horizon	13	39	JOB_MAGICIAN	INT + 3
+	II_WEA_STA_LEAFGALE	Bâton Leagal	13	39	JOB_MAGICIAN	INT + 3
+	II_WEA_SWO_SEPAL	Epée Sépale	13	40	JOB_MERCENARY	
+	II_WEA_SWO_CYLOS	Epée Cylos	13	40	JOB_MERCENARY	
+	II_WEA_AXE_CORIN	Hache Corin	13	40	JOB_MERCENARY	
+	II_WEA_AXE_CROW	Hache du Corbeau	13	40	JOB_MERCENARY	
+	II_WEA_CHEE_FLURY	Sceptre Fury	13	40	JOB_ASSIST	Touché + 15%
+	II_WEA_CHEE_NINEGALE	Sceptre Ninegale	13	40	JOB_ASSIST	Touché + 15%
+	II_WEA_KNU_RIGOR	Poing Rigeur	13	40	JOB_ASSIST	
+	II_WEA_KNU_RAMPART	Poing Rampart	13	40	JOB_ASSIST	
+	II_WEA_WAN_POLY	Baguette Poly	13	40	JOB_MAGICIAN	
+	II_WEA_WAN_MEKERHILL	Baguette Meker	13	40	JOB_MAGICIAN	
+	II_WEA_STA_IGNIS	Bâton Ignis	13	40	JOB_MAGICIAN	Touché + 15%
+	II_WEA_STA_TEBA	Bâton Kadjar	13	40	JOB_MAGICIAN	Touché + 15%
+	II_WEA_YOY_MIRAGL	Yo-yo Miracle	13	40	JOB_ACROBAT	
+	II_WEA_YOY_RIDENE	Yo-yo Ridenor	13	40	JOB_ACROBAT	
+	II_WEA_BOW_IRUN	Arc en Acier	13	40	JOB_ACROBAT	
+	II_WEA_BOW_REFOME	Arc Reformé	13	40	JOB_ACROBAT	
+	II_ARM_ARM_SHI_VORTEX	Bouclier Vortex	14	42	JOB_VAGRANT	
+	II_WEA_SWO_SWD45	Epée Argent	15	45	JOB_MERCENARY	Vit Atq + 100%;Touché + 10%
+	II_WEA_SWO_FLAM	Epée Flam	15	45	JOB_MERCENARY	FOR + 2
+	II_WEA_AXE_AXE45	Trancheur Redoutable	15	45	JOB_MERCENARY	Critique + 3%;FOR + 5
+	II_WEA_AXE_DRAKHAN	Hache Drakhan	15	45	JOB_MERCENARY	FOR + 2
+	II_WEA_CHEE_CHE45	Sceptre Roritoren	15	45	JOB_ASSIST	INT + 5;Réduction de la consommation de PM + 10%
+	II_WEA_CHEE_BAREM	Sceptre Barem	15	45	JOB_ASSIST	Touché + 20%;INT + 2
+	II_WEA_KNU_KNU45	Poing Vengeur	15	45	JOB_ASSIST	FOR + 5;Renvoi des dégâts + 10%
+	II_WEA_KNU_PAIPOL	Poing Paipol	15	45	JOB_ASSIST	END + 2
+	II_WEA_WAN_WAN45	Branche de Rhisis	15	45	JOB_MAGICIAN	INT + 4;Maîtrise du Feu + 10%
+	II_WEA_WAN_FIRE	Baguette Pyro	15	45	JOB_MAGICIAN	INT + 2
+	II_WEA_STA_STA45	Bâton Vel Parpone	15	45	JOB_MAGICIAN	Réduction de la consommation de PM + 10%;Vitesse d'incantation + 10%
+	II_WEA_STA_FLAM	Bâton Flam	15	45	JOB_MAGICIAN	INT + 2;Touché + 20%
+	II_WEA_YOY_YOY45	Poulie de Clockworks	15	45	JOB_ACROBAT	Augmentation de la force + 3;Critique + 1%
+	II_WEA_BOW_BOW45	Arc Flamboyant	15	45	JOB_ACROBAT	Dégâts des coups critiques + 20%;Critique + 3%
+	II_ARM_ARM_SHI_AVALON	Bouclier Avalon	15	45	JOB_VAGRANT	
+	II_WEA_SWO_INVADER	Epée Barbare	15	47	JOB_MERCENARY	
+	II_WEA_SWO_STITCH	Epée Sith	15	47	JOB_MERCENARY	
+	II_WEA_AXE_RAPTOR	Hache du Raptor	15	47	JOB_MERCENARY	
+	II_WEA_AXE_BERK	Hache Furie	15	47	JOB_MERCENARY	
+	II_WEA_CHEE_MIRTH	Sceptre Mirth	15	47	JOB_ASSIST	Touché + 15%
+	II_WEA_CHEE_SIZZLE	Sceptre Sizzle	15	47	JOB_ASSIST	Touché + 15%
+	II_WEA_KNU_REVENANT	Poing Revenant	15	47	JOB_ASSIST	
+	II_WEA_KNU_MARVEL	Poing Marvel	15	47	JOB_ASSIST	
+	II_WEA_WAN_NAZ	Baguette Nax	15	47	JOB_MAGICIAN	
+	II_WEA_WAN_ZEREM	Baguette Zerem	15	47	JOB_MAGICIAN	
+	II_WEA_STA_SLINE	Bâton Sline	15	47	JOB_MAGICIAN	Touché + 15%
+	II_WEA_STA_STARWHEEL	Bâton Cosmique	15	47	JOB_MAGICIAN	Touché + 15%
+	II_WEA_YOY_FIREE	Yo-yo Firo	15	47	JOB_ACROBAT	
+	II_WEA_YOY_IMMOTE	Yo-yo Immote	15	47	JOB_ACROBAT	
+	II_WEA_BOW_CURUSI	Arc Croisé	15	47	JOB_ACROBAT	
+	II_WEA_BOW_SIGGER	Arc Siggers	15	47	JOB_ACROBAT	
+	II_ARM_ARM_SHI_PLUS	Bouclier Plus	15	47	JOB_VAGRANT	
+	II_WEA_SWO_KARMEL	Epée Karmel	17	51	JOB_MERCENARY	FOR + 3
+	II_WEA_AXE_FRENETIC	Hache Frenetic	17	51	JOB_MERCENARY	FOR + 3
+	II_WEA_CHEE_BOSL	Sceptre Bosl	17	51	JOB_ASSIST	PV max. + 100;PM max. + 100
+	II_WEA_KNU_APPEL	Poing Pom	17	51	JOB_ASSIST	PV max. + 100;PF max. + 100
+	II_WEA_WAN_SAINT	Baguette Sainte	17	51	JOB_MAGICIAN	INT + 3
+	II_WEA_STA_VENHILL	Bâton Venhill	17	51	JOB_MAGICIAN	INT + 3
+	II_ARM_ARM_SHI_PLATE	Bouclier Plaque	17	52	JOB_VAGRANT	
+	II_WEA_SWO_MULTIBLADE	Epée Multilame	18	55	JOB_MERCENARY	
+	II_WEA_SWO_PANGGRIL	Epée Pangril	18	55	JOB_MERCENARY	
+	II_WEA_AXE_ARDALIN	Hache Ardalin	18	55	JOB_MERCENARY	
+	II_WEA_AXE_DOLPHIN	Hache du Dauphin	18	55	JOB_MERCENARY	
+	II_WEA_CHEE_SEALINE	Sceptre Horizon	18	55	JOB_ASSIST	Touché + 15%
+	II_WEA_CHEE_PINACLE	Sceptre Pinacle	18	55	JOB_ASSIST	Touché + 15%
+	II_WEA_KNU_OVERPASS	Poing Surpass	18	55	JOB_ASSIST	
+	II_WEA_KNU_GRAVITY	Poing Gravité	18	55	JOB_ASSIST	
+	II_WEA_WAN_BLUEBOW	Baguette Azura	18	55	JOB_MAGICIAN	
+	II_WEA_WAN_SPLHAIL	Baguette Spahail	18	55	JOB_MAGICIAN	
+	II_WEA_STA_KARZAM	Bâton Karzam	18	55	JOB_MAGICIAN	Touché + 15%
+	II_WEA_STA_ASTROL	Bâton Astral	18	55	JOB_MAGICIAN	Touché + 15%
+	II_WEA_YOY_STENCI	Yo-yo Stencil	18	55	JOB_ACROBAT	
+	II_WEA_YOY_REPOYI	Yo-yo Repoyit	18	55	JOB_ACROBAT	
+	II_WEA_BOW_FULLAR	Arc Faucheur	18	55	JOB_ACROBAT	
+	II_WEA_BOW_SETIEN	Arc Setien	18	55	JOB_ACROBAT	
+	II_WEA_SWO_SPARKLING	Epée Sparkling	19	57	JOB_MERCENARY	Touché + 20%;FOR + 3
+	II_WEA_AXE_CRITIN	Hache Critin	19	57	JOB_MERCENARY	FOR + 3
+	II_WEA_CHEE_HYPER	Sceptre Hyper	19	57	JOB_ASSIST	INT + 3
+	II_WEA_KNU_ZIKMOON	Poing Zikmoon	19	57	JOB_ASSIST	END + 3
+	II_WEA_WAN_RUNE	Baguette Runique	19	57	JOB_MAGICIAN	INT + 3
+	II_WEA_STA_SEGE	Bâton Sege	19	57	JOB_MAGICIAN	INT + 3;Touché + 20%
+	II_ARM_ARM_SHI_ANCIENT	Bouclier Ancien	19	57	JOB_VAGRANT	
+	II_ARM_ARM_SHI_KITE	Bouclier Robuste	19	58	JOB_VAGRANT	
+	II_WEA_SWT_BASTAR	Epée Destin	20	60	JOB_KNIGHT	
+	II_WEA_SWO_SET01	Epée Dretra	20	60	JOB_MERCENARY	Touché + 20%;Vit Atq + 100%
+	II_WEA_SWO_SUHO	Epée du Gardien	20	60	JOB_MERCENARY	Vit Atq + 240%;Critique + 6%;Dégâts des coups critiques + 10%;Renvoi des dégâts + 1%;Touché + 10%
+	II_WEA_SWT_SUHO	Espadon du Gardien	20	60	JOB_KNIGHT	Vit Atq + 340%;Critique + 17%;Dégâts des coups critiques + 32%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_SWO_SUHOUM	Epée du Gardien X	20	60	JOB_MERCENARY	Vit Atq + 240%;Critique + 6%;Dégâts des coups critiques + 10%;Renvoi des dégâts + 3%;Touché + 10%
+x	II_WEA_SWT_SUHOUM	Espadon du Gardien X	20	60	JOB_KNIGHT	Vit Atq + 340%;Critique + 17%;Dégâts des coups critiques + 32%;Renvoi des dégâts + 3%;Touché + 10%
+x	II_WEA_SWT_PREBASTAR	Epée Pre-Destin	20	60	JOB_KNIGHT	
+	II_WEA_SWO_PRESHYER	Epée Pre-Shyer	20	60	JOB_MERCENARY	
+x	II_WEA_SWO_PERIODUSU07	Epée Historique (7 jours)	20	60	JOB_MERCENARY	Vit Atq + 260%;Critique + 7%;Dégâts des coups critiques + 11%;END + 2;Touché + 10%
+x	II_WEA_SWT_PERIODUSU07	Espadon Historique (7 jours)	20	60	JOB_KNIGHT	Vit Atq + 380%;Critique + 19%;Dégâts des coups critiques + 35%;END + 2;Touché + 10%
+x	II_WEA_SWO_PERIODUSU30	Epée Historique (30 jours)	20	60	JOB_MERCENARY	Vit Atq + 260%;Critique + 7%;Dégâts des coups critiques + 11%;END + 2;Touché + 10%
+x	II_WEA_SWT_PERIODUSU30	Espadon Historique (30 jours)	20	60	JOB_KNIGHT	Vit Atq + 380%;Critique + 19%;Dégâts des coups critiques + 35%;END + 2;Touché + 10%
+x	II_WEA_SWO_RENTAL02	Epée à Une Main de Vétéran (Location)	20	60	JOB_VAGRANT	
+x	II_WEA_SWT_RENTAL02	Epée à Deux Mains de Vétéran (Location)	20	60	JOB_KNIGHT	
+x	II_WEA_SWO_RENTAL03	Epée à Une Main Premium (Location)	20	60	JOB_VAGRANT	Touché + 10%;Vit Atq + 200%;Critique + 5%
+x	II_WEA_SWT_RENTAL03	Epée à Deux Mains Premium (Location)	20	60	JOB_KNIGHT	Blocage à distance + 10%;Vit Atq + 200%;Défense + 5%
+	II_WEA_AXT_TWOHAN	Hache à deux mains	20	60	JOB_KNIGHT	
+	II_WEA_AXE_SET01	Hache Taytra	20	60	JOB_MERCENARY	Touché + 20%;DEF + 20
+	II_WEA_AXE_SUHO	Hache du Gardien	20	60	JOB_MERCENARY	Vit Atq + 120%;Critique + 15%;Dégâts des coups critiques + 6%;Renvoi des dégâts + 1%;Touché + 10%
+	II_WEA_AXT_SUHO	Doloire du Gardien	20	60	JOB_KNIGHT	PV max. + 9%;Défense + 10%;Blocage en mêlée + 8%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_AXE_SUHOUM	Hache du Gardien X	20	60	JOB_MERCENARY	Vit Atq + 120%;Critique + 15%;Dégâts des coups critiques + 6%;Renvoi des dégâts + 3%;Touché + 10%
+x	II_WEA_AXT_SUHOUM	Doloire du Gardien X	20	60	JOB_KNIGHT	PV max. + 9%;Défense + 10%;Blocage en mêlée + 8%;Renvoi des dégâts + 3%;Touché + 10%
+x	II_WEA_AXE_PERIODUSU07	Hache Historique (7 jours)	20	60	JOB_MERCENARY	Vit Atq + 140%;Critique + 17%;Dégâts des coups critiques + 7%;END + 2;Touché + 10%
+x	II_WEA_AXT_PERIODUSU07	Doloire Historique (7 jours)	20	60	JOB_KNIGHT	PV max. + 10%;Défense + 11%;Blocage en mêlée + 9%;END + 2;Touché + 10%
+x	II_WEA_AXE_PERIODUSU30	Hache Historique (30 jours)	20	60	JOB_MERCENARY	Vit Atq + 140%;Critique + 17%;Dégâts des coups critiques + 7%;END + 2;Touché + 10%
+x	II_WEA_AXT_PERIODUSU30	Doloire Historique (30 jours)	20	60	JOB_KNIGHT	PV max. + 10%;Défense + 11%;Blocage en mêlée + 9%;END + 2;Touché + 10%
+x	II_WEA_AXE_RENTAL02	Hache de Vétéran (Location)	20	60	JOB_VAGRANT	
+x	II_WEA_AXT_RENTAL02	Hache à Deux Mains de Vétéran (Location)	20	60	JOB_KNIGHT	
+x	II_WEA_AXE_RENTAL03	Hache Premium (Location)	20	60	JOB_VAGRANT	Touché + 10%;Critique + 10%
+x	II_WEA_AXT_RENTAL03	Hache à Deux Mains Premium (Location)	20	60	JOB_KNIGHT	Blocage à distance + 10%;Blocage en mêlée + 10%;PV max. + 10
+	II_WEA_CHE_SET01	Sceptre Yakshadain	20	60	JOB_ASSIST	PM max. + 200;INT + 4
+	II_WEA_CHE_SUHO	Sceptre du Gardien	20	60	JOB_ASSIST	Vitesse d'incantation + 10%;Attaque + 10%;INT + 10;Renvoi des dégâts + 1%;Touché + 10%
+	II_WEA_CHE_SUHOUM	Sceptre du Gardien X	20	60	JOB_ASSIST	Vitesse d'incantation + 10%;Attaque + 10%;INT + 10;Renvoi des dégâts + 3%;Touché + 10%
+	II_WEA_CHEE_PRESHABERE	Sceptre Pre-Shabere	20	60	JOB_ASSIST	Touché + 10%
+x	II_WEA_CHE_PERIODUSU07	Sceptre Historique (7 jours)	20	60	JOB_ASSIST	Vitesse d'incantation + 11%;Attaque + 11%;INT + 11;END + 2;Touché + 10%
+x	II_WEA_CHE_PERIODUSU30	Sceptre Historique (30 jours)	20	60	JOB_ASSIST	Vitesse d'incantation + 11%;Attaque + 11%;INT + 11;END + 2;Touché + 10%
+x	II_WEA_CHE_RENTAL02	Sceptre de Vétéran (Location)	20	60	JOB_ASSIST	
+x	II_WEA_CHE_RENTAL03	Sceptre Premium (Location)	20	60	JOB_ASSIST	INT + 10;Vitesse d'incantation + 10%;PM max. + 10
+	II_WEA_KNU_SET01	Poing Yakadain	20	60	JOB_ASSIST	FOR + 5;Touché + 20%
+	II_WEA_KNU_SUHO	Poing du Gardien	20	60	JOB_ASSIST	Critique + 6%;Vit Atq + 60%;Dégâts des coups critiques + 23%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_KNU_SUHOUM	Poing du Gardien X	20	60	JOB_ASSIST	Critique + 6%;Vit Atq + 60%;Dégâts des coups critiques + 23%;Renvoi des dégâts + 3%;Touché + 10%
+	II_WEA_KNU_PRENECRYNZI	Poing Pre-Nécrose	20	60	JOB_ASSIST	
+x	II_WEA_KNU_PERIODUSU07	Poing Historique (7 jours)	20	60	JOB_ASSIST	Critique + 7%;Vit Atq + 80%;Dégâts des coups critiques + 25%;END + 2;Touché + 10%
+x	II_WEA_KNU_PERIODUSU30	Poing Historique (30 jours)	20	60	JOB_ASSIST	Critique + 7%;Vit Atq + 80%;Dégâts des coups critiques + 25%;END + 2;Touché + 10%
+x	II_WEA_KNU_RENTAL02	Poing de Vétéran (Location)	20	60	JOB_ASSIST	
+x	II_WEA_KNU_RENTAL03	Poing Premium (Location)	20	60	JOB_ASSIST	Critique + 10%;Dégâts des coups critiques + 10%
+	II_WEA_WAN_SET01	Baguette Cirael	20	60	JOB_MAGICIAN	PM max. + 200;INT + 4
+	II_WEA_WAN_SUHO	Baguette du Gardien	20	60	JOB_MAGICIAN	Vitesse d'incantation + 10%;Attaque + 9%;INT + 10;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_WAN_SUHOUM	Baguette du Gardien X	20	60	JOB_MAGICIAN	Vitesse d'incantation + 10%;Attaque + 9%;INT + 10;Renvoi des dégâts + 3%;Touché + 10%
+	II_WEA_WAN_PRENEPLUS	Baguette Pre-Neplus	20	60	JOB_MAGICIAN	
+x	II_WEA_WAN_PERIODUSU07	Baguette Historique (7 jours)	20	60	JOB_MAGICIAN	Vitesse d'incantation + 11%;Attaque + 10%;INT + 11;END + 2;Touché + 10%
+x	II_WEA_WAN_PERIODUSU30	Baguette Historique (30 jours)	20	60	JOB_MAGICIAN	Vitesse d'incantation + 11%;Attaque + 10%;INT + 11;END + 2;Touché + 10%
+x	II_WEA_WAN_RENTAL02	Baguette de Vétéran (Location)	20	60	JOB_MAGICIAN	
+x	II_WEA_WAN_RENTAL03	Baguette Premium (Location)	20	60	JOB_MAGICIAN	INT + 10;Vitesse d'incantation + 10%;PM max. + 10
+	II_WEA_STA_SET01	Bâton Shamerel	20	60	JOB_MAGICIAN	PM max. + 200;INT + 4
+	II_WEA_STA_SUHO	Bâton du Gardien	20	60	JOB_MAGICIAN	Vitesse d'incantation + 10%;Attaque + 12%;INT + 12;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_STA_SUHOUM	Bâton du Gardien X	20	60	JOB_MAGICIAN	Vitesse d'incantation + 10%;Attaque + 12%;INT + 12;Renvoi des dégâts + 3%;Touché + 10%
+	II_WEA_STA_PREBIRDIN	Bâton Pre-Birdin	20	60	JOB_MAGICIAN	Touché + 15%
+x	II_WEA_STA_PERIODUSU07	Bâton Historique (7 jours)	20	60	JOB_MAGICIAN	Vitesse d'incantation + 11%;Attaque + 14%;INT + 13;END + 2;Touché + 10%
+x	II_WEA_STA_PERIODUSU30	Bâton Historique (30 jours)	20	60	JOB_MAGICIAN	Vitesse d'incantation + 11%;Attaque + 14%;INT + 13;END + 2;Touché + 10%
+x	II_WEA_STA_RENTAL02	Bâton de Vétéran (Location)	20	60	JOB_MAGICIAN	
+x	II_WEA_STA_RENTAL03	Bâton Premium (Location)	20	60	JOB_MAGICIAN	INT + 10;Vitesse d'incantation + 10%;Attaque + 5%
+	II_WEA_YOY_SUHO	Yo-yo du Gardien	20	60	JOB_ACROBAT	Vit Atq + 300%;Attaque + 5%;Dégâts des coups critiques + 28%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_YOY_SUHOUM	Yo-yo du Gardien X	20	60	JOB_JESTER	Vit Atq + 300%;Attaque + 5%;Dégâts des coups critiques + 28%;Renvoi des dégâts + 3%;Touché + 10%
+x	II_WEA_YOY_PERIODUSU07	Yo-yo Historique (7 jours)	20	60	JOB_ACROBAT	Vit Atq + 340%;Attaque + 6%;Dégâts des coups critiques + 31%;END + 2;Touché + 10%
+x	II_WEA_YOY_PERIODUSU30	Yo-yo Historique (30 jours)	20	60	JOB_ACROBAT	Vit Atq + 340%;Attaque + 6%;Dégâts des coups critiques + 31%;END + 2;Touché + 10%
+x	II_WEA_YOY_RENTAL02	Yo-yo de Vétéran (Location)	20	60	JOB_ACROBAT	
+x	II_WEA_YOY_RENTAL03	Yo-yo Premium (Location)	20	60	JOB_ACROBAT	Critique + 10%;Vit Atq + 200%
+	II_WEA_BOW_SUHO	Arc du Gardien	20	60	JOB_ACROBAT	Critique + 15%;Attaque + 9%;Dégâts des coups critiques + 21%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_BOW_SUHOUM	Arc du Gardien X	20	60	JOB_RANGER	Critique + 15%;Attaque + 9%;Dégâts des coups critiques + 21%;Renvoi des dégâts + 3%;Touché + 10%
+x	II_WEA_BOW_PERIODUSU07	Arc Historique (7 jours)	20	60	JOB_ACROBAT	Critique + 17%;Attaque + 10%;Dégâts des coups critiques + 23%;END + 2;Touché + 10%
+x	II_WEA_BOW_PERIODUSU30	Arc Historique (30 jours)	20	60	JOB_ACROBAT	Critique + 17%;Attaque + 10%;Dégâts des coups critiques + 23%;END + 2;Touché + 10%
+x	II_WEA_BOW_RENTAL02	Arbalète de Vétéran (Location)	20	60	JOB_ACROBAT	
+x	II_WEA_BOW_RENTAL03	Arbalète Premium (Location)	20	60	JOB_ACROBAT	Touché + 10%;Vit Atq + 200%;DEX + 10
+x	II_ARM_ARM_SHI_RENTAL02	Bouclier de Vétéran (Location)	20	60	JOB_VAGRANT	
+x	II_ARM_ARM_SHI_RENTAL03	Bouclier Premium (Location)	20	60	JOB_VAGRANT	Blocage à distance + 10%;Blocage en mêlée + 10%
+	II_ARM_ARM_SHI_ASTER	Bouclier Astral	23	63	JOB_VAGRANT	
+	II_WEA_SWO_CARNAGE	Epée Carnage	24	64	JOB_MERCENARY	
+	II_WEA_AXE_BONEBAR	Hache Squeletique	24	64	JOB_MERCENARY	
+	II_WEA_CHEE_RAVE	Sceptre Rave	24	64	JOB_ASSIST	Touché + 15%
+	II_WEA_KNU_COREAN	Poing Hanbok	24	64	JOB_ASSIST	
+	II_WEA_WAN_MIRAGE	Baguette Mirage	24	64	JOB_MAGICIAN	
+	II_WEA_STA_SHEIKANE	Bâton Sheikane	24	64	JOB_MAGICIAN	Touché + 15%
+	II_WEA_YOY_GELOND	Yo-yo Gelonde	24	64	JOB_ACROBAT	
+	II_WEA_BOW_VARIFE	Arc Varife	24	64	JOB_ACROBAT	
+	II_WEA_SWT_TWOHAN	Epée Ambidextre	25	65	JOB_KNIGHT	
+	II_WEA_AXT_GREATA	Tomahawk	25	65	JOB_KNIGHT	
+	II_WEA_SWO_JANITOR	Epée Janitor	30	70	JOB_MERCENARY	
+	II_WEA_SWT_DARKON	Darkonizer	30	70	JOB_KNIGHT	
+	II_WEA_SWO_IBLLINESS	Epée Ivillines	30	70	JOB_MERCENARY	Toutes les stats + 2
+	II_WEA_SWT_IBLLINESS	Espadon Ivillines	30	70	JOB_KNIGHT	Toutes les stats + 3
+	II_WEA_AXE_LUXIOR	Hache Luxor	30	70	JOB_MERCENARY	
+	II_WEA_AXT_KERGNI	Kergnition	30	70	JOB_KNIGHT	
+	II_WEA_AXE_IBLLINESS	Hache Ivillines	30	70	JOB_MERCENARY	Toutes les stats + 2
+	II_WEA_AXT_IBLLINESS	Doloire Ivillines	30	70	JOB_KNIGHT	Toutes les stats + 3
+	II_WEA_CHEE_FANTA	Sceptre Fanto	30	70	JOB_ASSIST	Touché + 15%
+	II_WEA_CHE_IBLLINESS	Sceptre Ivillines	30	70	JOB_ASSIST	Toutes les stats + 3
+	II_WEA_KNU_FISTOMBER	Poing Fisto	30	70	JOB_ASSIST	
+	II_WEA_KNU_IBLLINESS	Poing Ivillines	30	70	JOB_ASSIST	Toutes les stats + 2
+	II_WEA_WAN_ARIS	Baguette Aris	30	70	JOB_MAGICIAN	
+	II_WEA_WAN_IBLLINESS	Baguette Ivillines	30	70	JOB_MAGICIAN	Toutes les stats + 2
+	II_WEA_STA_TWENKEEN	Bâton Tweken	30	70	JOB_MAGICIAN	Touché + 15%
+	II_WEA_STA_IBLLINESS	Bâton Ivillines	30	70	JOB_MAGICIAN	Toutes les stats + 3
+	II_WEA_YOY_WINGFU	Yo-yo Ailé	30	70	JOB_ACROBAT	
+	II_WEA_YOY_IBLLINESS	Yo-yo Ivillines	30	70	JOB_ACROBAT	Toutes les stats + 3
+	II_WEA_BOW_DEFNAN	Arc Defnan	30	70	JOB_ACROBAT	
+	II_WEA_BOW_IBLLINESS	Arc Ivillines	30	70	JOB_ACROBAT	Toutes les stats + 3
+	II_ARM_ARM_SHI_COMET	Bouclier Cosmic	30	70	JOB_VAGRANT	
+	II_ARM_ARM_SHI_CONTRA	Bouclier Ivillines	30	70	JOB_VAGRANT	Toutes les stats + 1
+x	II_ARM_ARM_SHI_CONTRA_FLYFF	Bouclier Ivillines du pingouin rouge	30	70	JOB_VAGRANT	Toutes les stats + 1
+	II_WEA_SWO_BLUEJADE	Epée Jade	35	75	JOB_MERCENARY	
+	II_WEA_SWT_ADAPTI	Adaptizer	35	75	JOB_KNIGHT	
+	II_WEA_SWO_USU	Epée Historique	35	75	JOB_MERCENARY	Vit Atq + 260%;Critique + 7%;Dégâts des coups critiques + 11%;END + 2;Touché + 10%
+	II_WEA_SWT_USU	Espadon Historique	35	75	JOB_KNIGHT	Vit Atq + 380%;Critique + 19%;Dégâts des coups critiques + 35%;END + 2;Touché + 10%
+x	II_WEA_SWO_USUUM	Epée Historique X	35	75	JOB_MERCENARY	Vit Atq + 260%;Critique + 7%;Dégâts des coups critiques + 11%;END + 5;Touché + 10%
+x	II_WEA_SWT_USUUM	Espadon Historique X	35	75	JOB_KNIGHT	Vit Atq + 380%;Critique + 19%;Dégâts des coups critiques + 35%;END + 5;Touché + 10%
+	II_WEA_SWO_LUZA	Epée de Luzaka	35	75	JOB_MERCENARY	Vit Atq + 380%;Critique + 20%;Dégâts des coups critiques + 43%;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 3;Touché + 10%
+	II_WEA_SWT_LUZA	Espadon de Luzaka	35	75	JOB_KNIGHT	Vit Atq + 500%;Critique + 25%;Dégâts des coups critiques + 83%;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 3;Touché + 10%
+	II_WEA_SWO_LUZAM	Epée cristalline de Luzaka	35	75	JOB_BLADE	Vit Atq + 520%;Critique + 29%;Dégâts des coups critiques + 52%;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 7;Touché + 10%
+	II_WEA_SWT_LUZAM	Espadon cristallin de Luzaka	35	75	JOB_KNIGHT	Vit Atq + 680%;Critique + 34%;Dégâts des coups critiques + 92%;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 7;Touché + 10%
+	II_WEA_SWO_COLOGRADE_1	Epée du Coliseum (Débutant)	35	75	JOB_MERCENARY	Vit Atq + 180%;Critique + 4%;Dégâts des coups critiques + 8%;Renvoi des dégâts + 1%;Touché + 10%
+	II_WEA_SWT_COLOGRADE_1	Espadon du Coliseum (Débutant)	35	75	JOB_KNIGHT	Vit Atq + 260%;Critique + 13%;Dégâts des coups critiques + 25%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_SWO_COLOGRADE_1_UM	Epée du Coliseum X (Débutant)	35	75	JOB_MERCENARY	Vit Atq + 180%;Critique + 4%;Dégâts des coups critiques + 8%;Renvoi des dégâts + 3%;Touché + 10%
+x	II_WEA_SWT_COLOGRADE_1_UM	Espadon du Coliseum X (Débutant)	35	75	JOB_KNIGHT	Vit Atq + 260%;Critique + 13%;Dégâts des coups critiques + 25%;Renvoi des dégâts + 3%;Touché + 10%
+	II_WEA_AXE_EXHOUST	Hache Tornade	35	75	JOB_MERCENARY	
+	II_WEA_AXT_LURKNI	Lurknition	35	75	JOB_KNIGHT	
+	II_WEA_AXE_USU	Hache Historique	35	75	JOB_MERCENARY	Vit Atq + 140%;Critique + 17%;Dégâts des coups critiques + 7%;END + 2;Touché + 10%
+	II_WEA_AXT_USU	Doloire Historique	35	75	JOB_KNIGHT	PV max. + 10%;Défense + 11%;Blocage en mêlée + 9%;END + 2;Touché + 10%
+x	II_WEA_AXE_USUUM	Hache Historique X	35	75	JOB_MERCENARY	Vit Atq + 140%;Critique + 17%;Dégâts des coups critiques + 7%;END + 5;Touché + 10%
+x	II_WEA_AXT_USUUM	Doloire Historique X	35	75	JOB_KNIGHT	PV max. + 10%;Défense + 11%;Blocage en mêlée + 9%;END + 5;Touché + 10%
+	II_WEA_AXE_LUZA	Hache de Luzaka	35	75	JOB_MERCENARY	Vit Atq + 200%;Critique + 25%;Dégâts des coups critiques + 43%;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 3;Touché + 10%
+	II_WEA_AXT_LUZA	Doloire de Luzaka	35	75	JOB_KNIGHT	PV max. + 12%;Défense + 15%;Blocage en mêlée + 11%;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 3;Touché + 10%
+	II_WEA_AXE_LUZAM	Hache cristalline de Luzaka	35	75	JOB_BLADE	Vit Atq + 280%;Critique + 34%;Dégâts des coups critiques + 52%;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 7;Touché + 10%
+	II_WEA_AXT_LUZAM	Doloire cristalline de Luzaka	35	75	JOB_KNIGHT	PV max. + 18%;Défense + 22%;Blocage en mêlée + 16%;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 7;Touché + 10%
+	II_WEA_AXE_COLOGRADE_1	Hache du Coliseum (Débutant)	35	75	JOB_MERCENARY	Vit Atq + 80%;Critique + 12%;Dégâts des coups critiques + 4%;Renvoi des dégâts + 1%;Touché + 10%
+	II_WEA_AXT_COLOGRADE_1	Doloire du Coliseum (Débutant)	35	75	JOB_KNIGHT	PV max. + 7%;Défense + 8%;Blocage en mêlée + 6%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_AXE_COLOGRADE_1_UM	Hache du Coliseum X (Débutant)	35	75	JOB_MERCENARY	Vit Atq + 80%;Critique + 12%;Dégâts des coups critiques + 4%;Renvoi des dégâts + 3%;Touché + 10%
+x	II_WEA_AXT_COLOGRADE_1_UM	Doloire du Coliseum X (Débutant)	35	75	JOB_KNIGHT	PV max. + 7%;Défense + 8%;Blocage en mêlée + 6%;Renvoi des dégâts + 3%;Touché + 10%
+	II_WEA_CHEE_MORALEMINE	Sceptre Moral	35	75	JOB_ASSIST	Touché + 15%
+	II_WEA_CHE_USU	Sceptre Historique	35	75	JOB_ASSIST	Vitesse d'incantation + 11%;Attaque + 11%;INT + 11;END + 2;Touché + 10%
+x	II_WEA_CHE_USUUM	Sceptre Historique X	35	75	JOB_ASSIST	Vitesse d'incantation + 11%;Attaque + 11%;INT + 11;END + 5;Touché + 10%
+	II_WEA_CHE_LUZA	Sceptre de Luzaka	35	75	JOB_ASSIST	Vitesse d'incantation + 14%;Attaque + 15%;INT + 14;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 3;Touché + 10%
+	II_WEA_CHE_LUZAM	Sceptre cristallin de Luzaka	35	75	JOB_RINGMASTER	Vitesse d'incantation + 21%;Attaque + 22%;INT + 21;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 7;Touché + 10%
+	II_WEA_CHE_COLOGRADE_1	Sceptre du Coliseum (Débutant)	35	75	JOB_ASSIST	Vitesse d'incantation + 8%;Attaque + 8%;INT + 8;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_CHE_COLOGRADE_1_UM	Sceptre du Coliseum X (Débutant)	35	75	JOB_ASSIST	Vitesse d'incantation + 8%;Attaque + 8%;INT + 8;Renvoi des dégâts + 3%;Touché + 10%
+	II_WEA_KNU_EDOREN	Poing Edoren	35	75	JOB_ASSIST	
+	II_WEA_KNU_USU	Poing Historique	35	75	JOB_ASSIST	Critique + 7%;Vit Atq + 80%;Dégâts des coups critiques + 25%;END + 2;Touché + 10%
+x	II_WEA_KNU_USUUM	Poing Historique X	35	75	JOB_ASSIST	Critique + 7%;Vit Atq + 80%;Dégâts des coups critiques + 25%;END + 5;Touché + 10%
+	II_WEA_KNU_LUZA	Poing de Luzaka	35	75	JOB_ASSIST	Critique + 10%;Vit Atq + 120%;Dégâts des coups critiques + 63%;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 3;Touché + 10%
+	II_WEA_KNU_LUZAM	Poing cristallin de Luzaka	35	75	JOB_BILLPOSTER	Critique + 14%;Vit Atq + 200%;Dégâts des coups critiques + 72%;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 7;Touché + 10%
+	II_WEA_KNU_COLOGRADE_1	Poing du Coliseum (Débutant)	35	75	JOB_ASSIST	Critique + 4%;Vit Atq + 40%;Dégâts des coups critiques + 18%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_KNU_COLOGRADE_1_UM	Poing du Coliseum X (Débutant)	35	75	JOB_ASSIST	Critique + 4%;Vit Atq + 40%;Dégâts des coups critiques + 18%;Renvoi des dégâts + 3%;Touché + 10%
+	II_WEA_WAN_MOIRA	Baguette Moira	35	75	JOB_MAGICIAN	
+	II_WEA_WAN_USU	Baguette Historique	35	75	JOB_MAGICIAN	Vitesse d'incantation + 11%;Attaque + 10%;INT + 11;END + 2;Touché + 10%
+x	II_WEA_WAN_USUUM	Baguette Historique X	35	75	JOB_MAGICIAN	Vitesse d'incantation + 11%;Attaque + 10%;INT + 11;END + 5;Touché + 10%
+	II_WEA_WAN_LUZA	Baguette de Luzaka	35	75	JOB_MAGICIAN	Vitesse d'incantation + 14%;Attaque + 13%;INT + 14;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 3;Touché + 10%
+	II_WEA_WAN_LUZAM	Baguette cristalline de Luzaka	35	75	JOB_PSYCHIKEEPER	Vitesse d'incantation + 21%;Attaque + 19%;INT + 20;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 7;Touché + 10%
+	II_WEA_WAN_COLOGRADE_1	Baguette du Coliseum (Débutant)	35	75	JOB_MAGICIAN	Vitesse d'incantation + 8%;Attaque + 7%;INT + 8;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_WAN_COLOGRADE_1_UM	Baguette du Coliseum X (Débutant)	35	75	JOB_MAGICIAN	Vitesse d'incantation + 8%;Attaque + 7%;INT + 8;Renvoi des dégâts + 3%;Touché + 10%
+	II_WEA_STA_RUOFL	Bâton Fluor	35	75	JOB_MAGICIAN	Touché + 15%
+	II_WEA_STA_USU	Bâton Historique	35	75	JOB_MAGICIAN	Vitesse d'incantation + 11%;Attaque + 14%;INT + 13;END + 2;Touché + 10%
+x	II_WEA_STA_USUUM	Bâton Historique X	35	75	JOB_MAGICIAN	Vitesse d'incantation + 11%;Attaque + 14%;INT + 13;END + 5;Touché + 10%
+	II_WEA_STA_LUZA	Bâton de Luzaka	35	75	JOB_MAGICIAN	Vitesse d'incantation + 14%;Attaque + 20%;INT + 19;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 3;Touché + 10%
+	II_WEA_STA_LUZAM	Bâton cristallin de Luzaka	35	75	JOB_ELEMENTOR	Vitesse d'incantation + 21%;Attaque + 27%;INT + 26;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 7;Touché + 10%
+	II_WEA_STA_COLOGRADE_1	Bâton du Coliseum (Débutant)	35	75	JOB_MAGICIAN	Vitesse d'incantation + 8%;Attaque + 9%;INT + 9;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_STA_COLOGRADE_1_UM	Bâton du Coliseum X (Débutant)	35	75	JOB_MAGICIAN	Vitesse d'incantation + 8%;Attaque + 9%;INT + 9;Renvoi des dégâts + 3%;Touché + 10%
+	II_WEA_YOY_ANAKUN	Yo-yo Anakun	35	75	JOB_ACROBAT	
+	II_WEA_YOY_USU	Yo-yo Historique	35	75	JOB_ACROBAT	Vit Atq + 340%;Attaque + 6%;Dégâts des coups critiques + 31%;END + 2;Touché + 10%
+x	II_WEA_YOY_USUUM	Yo-yo Historique X	35	75	JOB_JESTER	Vit Atq + 340%;Attaque + 6%;Dégâts des coups critiques + 31%;END + 5;Touché + 10%
+	II_WEA_YOY_LUZA	Yo-yo de Luzaka	35	75	JOB_ACROBAT	Vit Atq + 460%;Attaque + 13%;Dégâts des coups critiques + 73%;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 3;Touché + 10%
+	II_WEA_YOY_LUZAM	Yo-yo cristallin de Luzaka	35	75	JOB_JESTER	Vit Atq + 620%;Attaque + 13%;Dégâts des coups critiques + 82%;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 7;Touché + 10%
+	II_WEA_YOY_COLOGRADE_1	Yoyo du Coliseum (Débutant)	35	75	JOB_ACROBAT	Vit Atq + 240%;Attaque + 4%;Dégâts des coups critiques + 22%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_YOY_COLOGRADE_1_UM	Yoyo du Coliseum X (Débutant)	35	75	JOB_JESTER	Vit Atq + 240%;Attaque + 4%;Dégâts des coups critiques + 22%;Renvoi des dégâts + 3%;Touché + 10%
+	II_WEA_BOW_HYDRON	Arc Hydron	35	75	JOB_ACROBAT	
+	II_WEA_BOW_USU	Arc Historique	35	75	JOB_ACROBAT	Critique + 17%;Attaque + 10%;Dégâts des coups critiques + 23%;END + 2;Touché + 10%
+x	II_WEA_BOW_USUUM	Arc Historique X	35	75	JOB_RANGER	Critique + 17%;Attaque + 10%;Dégâts des coups critiques + 23%;END + 5;Touché + 10%
+	II_WEA_BOW_LUZA	Arc de Luzaka	35	75	JOB_ACROBAT	Critique + 23%;Attaque + 16%;Dégâts des coups critiques + 63%;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 3;Touché + 10%
+	II_WEA_BOW_LUZAM	Arc cristallin de Luzaka	35	75	JOB_RANGER	Critique + 31%;Attaque + 18%;Dégâts des coups critiques + 72%;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 7;Touché + 10%
+	II_WEA_BOW_COLOGRADE_1	Arc du Coliseum (Débutant)	35	75	JOB_ACROBAT	Critique + 12%;Attaque + 7%;Dégâts des coups critiques + 16%;Renvoi des dégâts + 1%;Touché + 10%
+x	II_WEA_BOW_COLOGRADE_1_UM	Arc du Coliseum X (Débutant)	35	75	JOB_RANGER	Critique + 12%;Attaque + 7%;Dégâts des coups critiques + 16%;Renvoi des dégâts + 3%;Touché + 10%
+	II_ARM_ARM_SHI_ICICLE	Bouclier Icicle	35	75	JOB_VAGRANT	
+	II_WEA_SWO_ZEROTH	Epée Zeroth	40	80	JOB_MERCENARY	
+	II_WEA_SWT_ZWEIGA	Zweigazer	40	80	JOB_KNIGHT	
+	II_WEA_SWO_ENTANESS	Epée Euphrasienne	40	80	JOB_MERCENARY	Vit Atq + 400%;Critique + 21%;Dégâts des coups critiques + 44%;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 3;Touché + 10%
+	II_WEA_SWT_ENTANESS	Espadon Euphrasien	40	80	JOB_KNIGHT	Vit Atq + 520%;Critique + 26%;Dégâts des coups critiques + 84%;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 3;Touché + 10%
+x	II_WEA_SWO_ENTANESSUM	Epée Euphrasienne (M)	40	80	JOB_BLADE	Vit Atq + 540%;Critique + 30%;Dégâts des coups critiques + 53%;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 7;Touché + 10%
+x	II_WEA_SWT_ENTANESSUM	Espadon Euphrasien (M)	40	80	JOB_KNIGHT	Vit Atq + 700%;Critique + 35%;Dégâts des coups critiques + 93%;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 7;Touché + 10%
+	II_WEA_AXE_SHAKYFIN	Hache Shakyfin	40	80	JOB_MERCENARY	
+	II_WEA_AXT_AVNITI	Avnition	40	80	JOB_KNIGHT	
+	II_WEA_AXE_ENTANESS	Hache Euphrasienne	40	80	JOB_MERCENARY	Vit Atq + 220%;Critique + 26%;Dégâts des coups critiques + 44%;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 3;Touché + 10%
+	II_WEA_AXT_ENTANESS	Doloire Euphrasienne	40	80	JOB_KNIGHT	PV max. + 13%;Défense + 16%;Blocage en mêlée + 12%;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 3;Touché + 10%
+x	II_WEA_AXE_ENTANESSUM	Hache Euphrasienne (M)	40	80	JOB_BLADE	Vit Atq + 300%;Critique + 35%;Dégâts des coups critiques + 53%;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 7;Touché + 10%
+x	II_WEA_AXT_ENTANESSUM	Doloire Euphrasienne (M)	40	80	JOB_KNIGHT	PV max. + 19%;Défense + 23%;Blocage en mêlée + 17%;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 7;Touché + 10%
+	II_WEA_CHEE_SHINEWING	Sceptre Séraphin	40	80	JOB_ASSIST	Touché + 15%
+	II_WEA_CHE_ENTANESS	Sceptre Euphrasien	40	80	JOB_ASSIST	Vitesse d'incantation + 15%;Attaque + 16%;INT + 15;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 3;Touché + 10%
+x	II_WEA_CHE_ENTANESSUM	Sceptre Euphrasien (M)	40	80	JOB_RINGMASTER	Vitesse d'incantation + 22%;Attaque + 23%;INT + 22;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 7;Touché + 10%
+	II_WEA_KNU_SKELLOCK	Poing Skellock	40	80	JOB_ASSIST	
+	II_WEA_KNU_ENTANESS	Poing Euphrasien	40	80	JOB_ASSIST	Critique + 11%;Vit Atq + 140%;Dégâts des coups critiques + 64%;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 3;Touché + 10%
+x	II_WEA_KNU_ENTANESSUM	Poing Euphrasien (M)	40	80	JOB_BILLPOSTER	Critique + 15%;Vit Atq + 220%;Dégâts des coups critiques + 73%;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 7;Touché + 10%
+	II_WEA_WAN_ARCADIA	Baguette Arcadia	40	80	JOB_MAGICIAN	
+	II_WEA_WAN_ENTANESS	Baguette Euphrasienne	40	80	JOB_MAGICIAN	Vitesse d'incantation + 15%;Attaque + 14%;INT + 15;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 3;Touché + 10%
+x	II_WEA_WAN_ENTANESSUM	Baguette Euphrasienne (M)	40	80	JOB_PSYCHIKEEPER	Vitesse d'incantation + 22%;Attaque + 20%;INT + 21;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 7;Touché + 10%
+	II_WEA_STA_FEATHERWING	Bâton Plume	40	80	JOB_MAGICIAN	Touché + 15%
+	II_WEA_STA_ENTANESS	Bâton Euphrasien	40	80	JOB_MAGICIAN	Vitesse d'incantation + 15%;Attaque + 21%;INT + 20;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 3;Touché + 10%
+x	II_WEA_STA_ENTANESSUM	Bâton Euphrasien (M)	40	80	JOB_ELEMENTOR	Vitesse d'incantation + 22%;Attaque + 28%;INT + 27;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 7;Touché + 10%
+	II_WEA_YOY_CIRCER	Yo-yo Circern	40	80	JOB_ACROBAT	
+	II_WEA_YOY_ENTANESS	Yoyo Euphrasien	40	80	JOB_JESTER	Vit Atq + 480%;Attaque + 13%;Dégâts des coups critiques + 74%;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 3;Touché + 10%
+x	II_WEA_YOY_ENTANESSUM	Yoyo Euphrasien (M)	40	80	JOB_JESTER	Vit Atq + 640%;Attaque + 14%;Dégâts des coups critiques + 83%;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 7;Touché + 10%
+	II_WEA_BOW_CENATI	Arc Cenatin	40	80	JOB_ACROBAT	
+	II_WEA_BOW_ENTANESS	Arc Euphrasien	40	80	JOB_RANGER	Critique + 24%;Attaque + 16%;Dégâts des coups critiques + 64%;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 3;Touché + 10%
+x	II_WEA_BOW_ENTANESSUM	Arc Euphrasien (M)	40	80	JOB_RANGER	Critique + 32%;Attaque + 19%;Dégâts des coups critiques + 73%;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 7;Touché + 10%
+	II_ARM_ARM_SHI_HILEITINE	Bouclier Hileitine	42	82	JOB_VAGRANT	
+x	II_ARM_ARM_SHI_HILEITINE_FLYFF	Bouclier Hileitine du pingouin rouge	42	82	JOB_VAGRANT	
+	II_WEA_SWO_EMERYL	Epée Emeryl	45	85	JOB_MERCENARY	
+	II_WEA_SWT_KALEON	Kaleonizer	45	85	JOB_KNIGHT	
+	II_WEA_SWT_QURION	Epée Qurion	45	85	JOB_KNIGHT	Vit Atq + 70%
+	II_WEA_AXE_HITCH	Hache Souci	45	85	JOB_MERCENARY	
+	II_WEA_AXT_KANAIN	Kanainition	45	85	JOB_KNIGHT	
+	II_WEA_AXE_QURION	Hache Qurion	45	85	JOB_MERCENARY	Vit Atq + 70%
+	II_WEA_CHEE_SHALOW	Sceptre Shalow	45	85	JOB_ASSIST	Touché + 15%
+	II_WEA_CHEE_QURION	Sceptre Qurion	45	85	JOB_ASSIST	Vit Atq + 70%
+	II_WEA_KNU_GOLDROSS	Poing Oross	45	85	JOB_ASSIST	
+	II_WEA_KNU_QURION	Poing Qurion	45	85	JOB_ASSIST	Vit Atq + 70%
+	II_WEA_WAN_TARIS	Baguette Taris	45	85	JOB_MAGICIAN	
+	II_WEA_WAN_QURION	Baguette Qurion	45	85	JOB_MAGICIAN	INT + 3
+	II_WEA_STA_HOLYOUS	Bâton Holyous	45	85	JOB_MAGICIAN	Touché + 15%
+	II_WEA_STA_QURION	Bâton Qurion	45	85	JOB_MAGICIAN	INT + 3
+	II_WEA_YOY_MISHEN	Yo-yo Mishend	45	85	JOB_ACROBAT	
+	II_WEA_YOY_QURION	Yo-yo Qurion	45	85	JOB_ACROBAT	Vit Atq + 70%
+	II_WEA_BOW_CYRON	Arc Cyron	45	85	JOB_ACROBAT	
+	II_WEA_BOW_QURION	Arc Qurion	45	85	JOB_ACROBAT	Vit Atq + 70%
+	II_ARM_ARM_SHI_COIEN	Bouclier Coien	49	89	JOB_VAGRANT	
+x	II_ARM_ARM_SHI_COIEN_FLYFF	Bouclier Coien du pingouin rouge	49	89	JOB_VAGRANT	
+	II_WEA_SWO_CHAINSING	Epée Chainsing	50	90	JOB_MERCENARY	
+	II_WEA_SWT_GOOTNI	Gootnizer	50	90	JOB_KNIGHT	
+	II_WEA_SWO_ANGEL	Epée Céleste	50	90	JOB_MERCENARY	Vit Atq + 300%;Critique + 8%;Dégâts des coups critiques + 12%;PV max. + 100;Touché + 10%
+	II_WEA_SWT_ANGEL	Espadon Céleste	50	90	JOB_KNIGHT	Vit Atq + 420%;Critique + 21%;Dégâts des coups critiques + 38%;PV max. + 100;Touché + 10%
+x	II_WEA_SWO_ANGELUM	Epée Céleste X	50	90	JOB_MERCENARY	Vit Atq + 300%;Critique + 8%;Dégâts des coups critiques + 12%;PV max. + 500;Touché + 10%
+x	II_WEA_SWT_ANGELUM	Espadon Céleste X	50	90	JOB_KNIGHT	Vit Atq + 420%;Critique + 21%;Dégâts des coups critiques + 38%;PV max. + 500;Touché + 10%
+	II_WEA_SWO_COLOGRADE_2	Epée du Coliseum (Vétéran)	50	90	JOB_MERCENARY	Vit Atq + 240%;Critique + 12%;Dégâts des coups critiques + 28%;PV max. + 100;Touché + 10%
+	II_WEA_SWT_COLOGRADE_2	Espadon du Coliseum (Vétéran)	50	90	JOB_KNIGHT	Vit Atq + 320%;Critique + 16%;Dégâts des coups critiques + 56%;PV max. + 100;Touché + 10%
+x	II_WEA_SWO_COLOGRADE_2_UM	Epée du Coliseum X (Vétéran)	50	90	JOB_MERCENARY	Vit Atq + 240%;Critique + 12%;Dégâts des coups critiques + 28%;PV max. + 500;Touché + 10%
+x	II_WEA_SWT_COLOGRADE_2_UM	Espadon du Coliseum X (Vétéran)	50	90	JOB_KNIGHT	Vit Atq + 320%;Critique + 16%;Dégâts des coups critiques + 56%;PV max. + 500;Touché + 10%
+	II_WEA_AXE_CATCHY	Hache Captive	50	90	JOB_MERCENARY	
+	II_WEA_AXT_ORCANI	Orcanition	50	90	JOB_KNIGHT	
+	II_WEA_AXE_ANGEL	Hache Céleste	50	90	JOB_MERCENARY	Vit Atq + 160%;Critique + 19%;Dégâts des coups critiques + 8%;PV max. + 100;Touché + 10%
+	II_WEA_AXT_ANGEL	Doloire Céleste	50	90	JOB_KNIGHT	PV max. + 11%;Défense + 12%;Blocage en mêlée + 10%;PV max. + 100;Touché + 10%
+x	II_WEA_AXE_ANGELUM	Hache Céleste X	50	90	JOB_MERCENARY	Vit Atq + 160%;Critique + 19%;Dégâts des coups critiques + 8%;PV max. + 500;Touché + 10%
+x	II_WEA_AXT_ANGELUM	Doloire Céleste X	50	90	JOB_KNIGHT	PV max. + 11%;Défense + 12%;Blocage en mêlée + 10%;PV max. + 500;Touché + 10%
+	II_WEA_AXE_COLOGRADE_2	Hache du Coliseum (Vétéran)	50	90	JOB_MERCENARY	Vit Atq + 120%;Critique + 15%;Dégâts des coups critiques + 28%;PV max. + 100;Touché + 10%
+	II_WEA_AXT_COLOGRADE_2	Doloire du Coliseum (Vétéran)	50	90	JOB_KNIGHT	PV max. + 8%;Défense + 10%;Blocage en mêlée + 8%;PV max. + 100;Touché + 10%
+x	II_WEA_AXE_COLOGRADE_2_UM	Hache du Coliseum X (Vétéran)	50	90	JOB_MERCENARY	Vit Atq + 120%;Critique + 15%;Dégâts des coups critiques + 28%;PV max. + 500;Touché + 10%
+x	II_WEA_AXT_COLOGRADE_2_UM	Doloire du Coliseum X (Vétéran)	50	90	JOB_KNIGHT	PV max. + 8%;Défense + 10%;Blocage en mêlée + 8%;PV max. + 500;Touché + 10%
+	II_WEA_CHEE_PREDE	Sceptre Prade	50	90	JOB_ASSIST	Touché + 15%
+	II_WEA_CHE_ANGEL	Sceptre Céleste	50	90	JOB_ASSIST	Vitesse d'incantation + 12%;Attaque + 12%;INT + 12;PV max. + 100;Touché + 10%
+	II_WEA_CHE_ANGELUM	Sceptre Céleste X	50	90	JOB_ASSIST	Vitesse d'incantation + 12%;Attaque + 12%;INT + 12;PV max. + 500;Touché + 10%
+	II_WEA_CHE_COLOGRADE_2	Sceptre du Coliseum (Vétéran)	50	90	JOB_ASSIST	Vitesse d'incantation + 9%;Attaque + 10%;INT + 9;PV max. + 100;Touché + 10%
+x	II_WEA_CHE_COLOGRADE_2_UM	Sceptre du Coliseum X (Vétéran)	50	90	JOB_ASSIST	Vitesse d'incantation + 9%;Attaque + 10%;INT + 9;PV max. + 500;Touché + 10%
+	II_WEA_KNU_BLESEVER	Poing Blesever	50	90	JOB_ASSIST	
+	II_WEA_KNU_ANGEL	Poing Céleste	50	90	JOB_ASSIST	Critique + 8%;Vit Atq + 100%;Dégâts des coups critiques + 28%;PV max. + 100;Touché + 10%
+x	II_WEA_KNU_ANGELUM	Gants Céleste X	50	90	JOB_ASSIST	Critique + 8%;Vit Atq + 100%;Dégâts des coups critiques + 28%;PV max. + 500;Touché + 10%
+	II_WEA_KNU_COLOGRADE_2	Poing du Coliseum (Vétéran)	50	90	JOB_ASSIST	Critique + 6%;Vit Atq + 80%;Dégâts des coups critiques + 42%;PV max. + 100;Touché + 10%
+x	II_WEA_KNU_COLOGRADE_2_UM	Poing du Coliseum X (Vétéran)	50	90	JOB_ASSIST	Critique + 6%;Vit Atq + 80%;Dégâts des coups critiques + 42%;PV max. + 500;Touché + 10%
+	II_WEA_WAN_JALATE	Baguette Jalate	50	90	JOB_MAGICIAN	
+	II_WEA_WAN_ANGEL	Baguette Céleste	50	90	JOB_MAGICIAN	Vitesse d'incantation + 12%;Attaque + 11%;INT + 12;PV max. + 100;Touché + 10%
+x	II_WEA_WAN_ANGELUM	Baguette Céleste X	50	90	JOB_MAGICIAN	Vitesse d'incantation + 12%;Attaque + 11%;INT + 12;PV max. + 500;Touché + 10%
+	II_WEA_WAN_COLOGRADE_2	Baguette du Coliseum (Vétéran)	50	90	JOB_MAGICIAN	Vitesse d'incantation + 9%;Attaque + 8%;INT + 9;PV max. + 100;Touché + 10%
+x	II_WEA_WAN_COLOGRADE_2_UM	Baguette du Coliseum X (Vétéran)	50	90	JOB_MAGICIAN	Vitesse d'incantation + 9%;Attaque + 8%;INT + 9;PV max. + 500;Touché + 10%
+	II_WEA_STA_PORTEL	Bâton Portail	50	90	JOB_MAGICIAN	Touché + 15%
+	II_WEA_STA_ANGEL	Bâton Céleste	50	90	JOB_MAGICIAN	Vitesse d'incantation + 12%;Attaque + 16%;INT + 15;PV max. + 100;Touché + 10%
+x	II_WEA_STA_ANGELUM	Bâton Céleste X	50	90	JOB_MAGICIAN	Vitesse d'incantation + 12%;Attaque + 16%;INT + 15;PV max. + 500;Touché + 10%
+	II_WEA_STA_COLOGRADE_2	Bâton du Coliseum (Vétéran)	50	90	JOB_MAGICIAN	Vitesse d'incantation + 9%;Attaque + 13%;INT + 12;PV max. + 100;Touché + 10%
+x	II_WEA_STA_COLOGRADE_2_UM	Bâton du Coliseum X (Vétéran)	50	90	JOB_MAGICIAN	Vitesse d'incantation + 9%;Attaque + 13%;INT + 12;PV max. + 500;Touché + 10%
+	II_WEA_YOY_SLINFE	Yo-yo Slinfes	50	90	JOB_ACROBAT	
+	II_WEA_YOY_ANGEL	Yo-yo Céleste	50	90	JOB_ACROBAT	Vit Atq + 380%;Attaque + 7%;Dégâts des coups critiques + 34%;PV max. + 100;Touché + 10%
+x	II_WEA_YOY_ANGELUM	Yo-yo Céleste X	50	90	JOB_JESTER	Vit Atq + 380%;Attaque + 7%;Dégâts des coups critiques + 34%;PV max. + 500;Touché + 10%
+	II_WEA_YOY_COLOGRADE_2	Yoyo du Coliseum (Vétéran)	50	90	JOB_ACROBAT	Vit Atq + 300%;Attaque + 8%;Dégâts des coups critiques + 49%;PV max. + 100;Touché + 10%
+x	II_WEA_YOY_COLOGRADE_2_UM	Yoyo du Coliseum X (Vétéran)	50	90	JOB_JESTER	Vit Atq + 300%;Attaque + 8%;Dégâts des coups critiques + 49%;PV max. + 500;Touché + 10%
+	II_WEA_BOW_SIONIC	Arc Sionic	50	90	JOB_ACROBAT	
+	II_WEA_BOW_ANGEL	Arc Céleste	50	90	JOB_ACROBAT	Critique + 19%;Attaque + 11%;Dégâts des coups critiques + 25%;PV max. + 100;Touché + 10%
+x	II_WEA_BOW_ANGELUM	Arc Céleste X	50	90	JOB_RANGER	Critique + 19%;Attaque + 11%;Dégâts des coups critiques + 25%;PV max. + 500;Touché + 10%
+	II_WEA_BOW_COLOGRADE_2	Arc du Coliseum (Vétéran)	50	90	JOB_ACROBAT	Critique + 15%;Attaque + 11%;Dégâts des coups critiques + 42%;PV max. + 100;Touché + 10%
+x	II_WEA_BOW_COLOGRADE_2_UM	Arc du Coliseum X (Vétéran)	50	90	JOB_RANGER	Critique + 15%;Attaque + 11%;Dégâts des coups critiques + 42%;PV max. + 500;Touché + 10%
+	II_WEA_SWO_HARPION	Epée Harpion	55	95	JOB_MERCENARY	
+	II_WEA_SWT_HAUNTI	Hantizer	55	95	JOB_KNIGHT	
+	II_WEA_SWO_HERNES	Epée Hernea	55	95	JOB_MERCENARY	Vit Atq + 440%;Critique + 24%;Dégâts des coups critiques + 47%;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 3;Touché + 10%
+	II_WEA_SWT_HERNES	Espadon Hernea	55	95	JOB_KNIGHT	Vit Atq + 580%;Critique + 29%;Dégâts des coups critiques + 87%;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 3;Touché + 10%
+x	II_WEA_SWO_HERNESUM	Epée Hernea (M)	55	95	JOB_BLADE	Vit Atq + 600%;Critique + 33%;Dégâts des coups critiques + 56%;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 7;Touché + 10%
+x	II_WEA_SWT_HERNESUM	Espadon Hernea (M)	55	95	JOB_KNIGHT	Vit Atq + 760%;Critique + 38%;Dégâts des coups critiques + 96%;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 7;Touché + 10%
+	II_WEA_AXE_FELLPEED	Hache Pistombe	55	95	JOB_MERCENARY	
+	II_WEA_AXT_LINITI	Linition	55	95	JOB_KNIGHT	
+	II_WEA_AXE_HERNES	Hache Hernea	55	95	JOB_MERCENARY	Vit Atq + 240%;Critique + 29%;Dégâts des coups critiques + 47%;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 3;Touché + 10%
+	II_WEA_AXT_HERNES	Doloire Hernea	55	95	JOB_KNIGHT	PV max. + 15%;Défense + 18%;Blocage en mêlée + 13%;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 3;Touché + 10%
+x	II_WEA_AXE_HERNESUM	Hache Hernea (M)	55	95	JOB_BLADE	Vit Atq + 340%;Critique + 38%;Dégâts des coups critiques + 56%;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 7;Touché + 10%
+x	II_WEA_AXT_HERNESUM	Doloire Hernea (M)	55	95	JOB_KNIGHT	PV max. + 21%;Défense + 25%;Blocage en mêlée + 19%;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 7;Touché + 10%
+	II_WEA_CHEE_LEOSS	Sceptre Leoss	55	95	JOB_ASSIST	Touché + 15%
+	II_WEA_CHE_HERNES	Sceptre Hernea	55	95	JOB_ASSIST	Vitesse d'incantation + 17%;Attaque + 18%;INT + 17;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 3;Touché + 10%
+x	II_WEA_CHE_HERNESUM	Sceptre Hernea (M)	55	95	JOB_RINGMASTER	Vitesse d'incantation + 24%;Attaque + 25%;INT + 24;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 7;Touché + 10%
+	II_WEA_KNU_MUNCUTO	Poing Muncuto	55	95	JOB_ASSIST	
+	II_WEA_KNU_HERNES	Poing Hernea	55	95	JOB_ASSIST	Critique + 12%;Vit Atq + 160%;Dégâts des coups critiques + 67%;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 3;Touché + 10%
+x	II_WEA_KNU_HERNESUM	Poing Hernea (M)	55	95	JOB_BILLPOSTER	Critique + 17%;Vit Atq + 240%;Dégâts des coups critiques + 76%;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 7;Touché + 10%
+	II_WEA_WAN_KRORIL	Baguette Kroril	55	95	JOB_MAGICIAN	
+	II_WEA_WAN_HERNES	Baguette Hernea	55	95	JOB_MAGICIAN	Vitesse d'incantation + 17%;Attaque + 16%;INT + 17;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 3;Touché + 10%
+x	II_WEA_WAN_HERNESUM	Baguette Hernea (M)	55	95	JOB_PSYCHIKEEPER	Vitesse d'incantation + 24%;Attaque + 22%;INT + 23;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 7;Touché + 10%
+	II_WEA_STA_MARINER	Bâton Marin	55	95	JOB_MAGICIAN	Touché + 15%
+	II_WEA_STA_HERNES	Bâton Hernea	55	95	JOB_MAGICIAN	Vitesse d'incantation + 17%;Attaque + 23%;INT + 22;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 3;Touché + 10%
+x	II_WEA_STA_HERNESUM	Bâton Hernea (M)	55	95	JOB_ELEMENTOR	Vitesse d'incantation + 24%;Attaque + 31%;INT + 30;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 7;Touché + 10%
+	II_WEA_YOY_AKANE	Yo-yo Akane	55	95	JOB_ACROBAT	
+	II_WEA_YOY_HERNES	Yoyo Hernea	55	95	JOB_JESTER	Vit Atq + 520%;Attaque + 13%;Dégâts des coups critiques + 77%;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 3;Touché + 10%
+x	II_WEA_YOY_HERNESUM	Yoyo Hernea (M)	55	95	JOB_JESTER	Vit Atq + 700%;Attaque + 15%;Dégâts des coups critiques + 86%;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 7;Touché + 10%
+	II_WEA_BOW_REGEN	Arc Regen	55	95	JOB_ACROBAT	
+	II_WEA_BOW_HERNES	Arc Hernea	55	95	JOB_RANGER	Critique + 26%;Attaque + 16%;Dégâts des coups critiques + 67%;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 3;Touché + 10%
+x	II_WEA_BOW_HERNESUM	Arc Hernea (M)	55	95	JOB_RANGER	Critique + 35%;Attaque + 21%;Dégâts des coups critiques + 76%;DST_GIVE_PVE_DMG_ELEMENT_WATER_RATE + 7;Touché + 10%
+	II_ARM_ARM_SHI_RUKENSHIA	Bouclier Rukenshia	57	97	JOB_VAGRANT	
+x	II_ARM_ARM_SHI_RUKENSHIA_FLYFF	Bouclier Rukenshia du pingouin rouge	57	97	JOB_VAGRANT	
+	II_WEA_SWO_SMITER	Epée Smiter	60	100	JOB_MERCENARY	
+	II_WEA_SWT_CLOCKS	Slayer	60	100	JOB_KNIGHT	
+x	II_WEA_SWO_RENTAL04	Epée à Une Main Premium de Luxe (Location)	60	100	JOB_VAGRANT	Touché + 15%;Vit Atq + 300%;Critique + 10%
+x	II_WEA_SWT_RENTAL04	Epée à Deux Mains Premium de Luxe (Location)	60	100	JOB_KNIGHT	Blocage à distance + 15%;Vit Atq + 300%;Défense + 10%
+	II_WEA_AXE_DARCRO	Hache Darcro	60	100	JOB_MERCENARY	
+	II_WEA_AXE_HARDIN	Hardinition	60	100	JOB_KNIGHT	
+x	II_WEA_AXE_RENTAL04	Hache Premium de Luxe (Location)	60	100	JOB_VAGRANT	Touché + 15%;Critique + 15%
+x	II_WEA_AXT_RENTAL04	Hache à Deux Mains Premium de Luxe (Location)	60	100	JOB_KNIGHT	Blocage à distance + 15%;Blocage en mêlée + 15%;PV max. + 18
+	II_WEA_CHEE_FORLAS	Sceptre Forlas	60	100	JOB_ASSIST	Touché + 15%
+x	II_WEA_CHE_RENTAL04	Sceptre Premium de Luxe (Location)	60	100	JOB_ASSIST	INT + 15;Vitesse d'incantation + 15%;PM max. + 15
+	II_WEA_KNU_FEDERHOM	Poing Federhorn	60	100	JOB_ASSIST	
+x	II_WEA_KNU_RENTAL04	Poing Premium de Luxe (Location)	60	100	JOB_ASSIST	Critique + 15%;Dégâts des coups critiques + 15%
+	II_WEA_WAN_REKIS	Baguette Rekis	60	100	JOB_MAGICIAN	
+x	II_WEA_WAN_RENTAL04	Baguette Premium de Luxe (Location)	60	100	JOB_MAGICIAN	INT + 15;Vitesse d'incantation + 15%;PM max. + 15
+	II_WEA_STA_REMODIC	Bâton Remodic	60	100	JOB_MAGICIAN	Touché + 15%
+x	II_WEA_STA_RENTAL04	Bâton Premium de Luxe (Location)	60	100	JOB_MAGICIAN	INT + 15;Vitesse d'incantation + 15%;Attaque + 10%
+	II_WEA_YOY_CLANTO	Yo-yo Clantob	60	100	JOB_ACROBAT	
+x	II_WEA_YOY_RENTAL04	Yo-yo Premium de Luxe (Location)	60	100	JOB_ACROBAT	Critique + 15%;Vit Atq + 300%
+	II_WEA_BOW_FIONT	Arc Fint	60	100	JOB_ACROBAT	
+x	II_WEA_BOW_RENTAL04	Arbalète Premium de Luxe (Location)	60	100	JOB_ACROBAT	Touché + 15%;Vit Atq + 300%;DEX + 15
+x	II_ARM_ARM_SHI_RENTAL04	Bouclier Premium de Luxe (Location)	60	100	JOB_VAGRANT	Blocage à distance + 15%;Blocage en mêlée + 15%
+	II_WEA_SWO_LEAGENDG	Epée Légendaire	65	105	JOB_MERCENARY	Vitesse d'attaque + 100%
+	II_WEA_SWT_LEAGENDG	Espadon Légendaire	65	105	JOB_KNIGHT	Vit Atq + 460%;Critique + 23%;Dégâts des coups critiques + 80%;Blocage à distance + 2%;Touché + 10%
+x	II_WEA_SWO_LEAGENDGUM	Epée Légendaire X	65	105	JOB_MERCENARY	Vit Atq + 340%;Critique + 17%;Dégâts des coups critiques + 40%;Blocage à distance + 5%;Touché + 10%
+x	II_WEA_SWT_LEAGENDGUM	Espadon Légendaire X	65	105	JOB_KNIGHT	Vit Atq + 460%;Critique + 23%;Dégâts des coups critiques + 80%;Blocage à distance + 5%;Touché + 10%
+x	II_WEA_SWO_LEAGENDG1	Epée légendaire (liée)	65	105	JOB_MERCENARY	Vit Atq + 300%;Critique + 8%;Dégâts des coups critiques + 12%;PV max. + 100
+x	II_WEA_SWT_LEAGENDG1	Espadon Légendaire (lié)	65	105	JOB_KNIGHT	Vit Atq + 420%;Critique + 21%;Dégâts des coups critiques + 38%;PV max. + 100
+	II_WEA_AXE_LEAGENDG	Hache Légendaire	65	105	JOB_MERCENARY	Vit Atq + 180%;Critique + 22%;Dégâts des coups critiques + 40%;Blocage à distance + 2%;Touché + 10%
+	II_WEA_AXT_LEAGENDG	Doloire Légendaire	65	105	JOB_KNIGHT	PV max. + 12%;Défense + 14%;Blocage en mêlée + 11%;Blocage à distance + 2%;Touché + 10%
+x	II_WEA_AXE_LEAGENDGUM	Hache Légendaire X	65	105	JOB_MERCENARY	Vit Atq + 180%;Critique + 22%;Dégâts des coups critiques + 40%;Blocage à distance + 5%;Touché + 10%
+x	II_WEA_AXT_LEAGENDGUM	Doloire Légendaire X	65	105	JOB_KNIGHT	PV max. + 12%;Défense + 14%;Blocage en mêlée + 11%;Blocage à distance + 5%;Touché + 10%
+x	II_WEA_AXE_LEAGENDG1	Hache Légendaire (liée)	65	105	JOB_MERCENARY	Vit Atq + 160%;Critique + 19%;Dégâts des coups critiques + 8%;PV max. + 100
+x	II_WEA_AXT_LEAGENDG1	Doloire Légendaire (liée)	65	105	JOB_KNIGHT	PV max. + 11%;Défense + 12%;Blocage en mêlée + 10%;PV max. + 100
+	II_WEA_CHE_LEAGENDG	Sceptre Légendaire	65	105	JOB_ASSIST	Vitesse d'incantation + 13%;Attaque + 14%;INT + 13;Blocage à distance + 2%;Touché + 10%
+x	II_WEA_CHE_LEAGENDGUM	Sceptre Légendaire X	65	105	JOB_ASSIST	Vitesse d'incantation + 13%;Attaque + 14%;INT + 13;Blocage à distance + 5%;Touché + 10%
+x	II_WEA_CHE_LEAGENDG1	Sceptre Légendaire (lié)	65	105	JOB_ASSIST	Vitesse d'incantation + 12%;Attaque + 12%;INT + 12;PV max. + 100
+	II_WEA_KNU_LEAGENDG	Poing Légendaire	65	105	JOB_ASSIST	Critique + 9%;Vit Atq + 120%;Dégâts des coups critiques + 60%;Blocage à distance + 2%;Touché + 10%
+x	II_WEA_KNU_LEAGENDGUM	Poing Légendaire X	65	105	JOB_ASSIST	Critique + 9%;Vit Atq + 120%;Dégâts des coups critiques + 60%;Blocage à distance + 5%;Touché + 10%
+x	II_WEA_KNU_LEAGENDG1	Poing Légendaire (lié)	65	105	JOB_ASSIST	Critique + 8%;Vit Atq + 100%;Dégâts des coups critiques + 28%;PV max. + 100
+	II_WEA_WAN_LEAGENDG	Baguette Légendaire	65	105	JOB_MAGICIAN	Vitesse d'incantation + 13%;Attaque + 12%;INT + 13;Blocage à distance + 2%;Touché + 10%
+x	II_WEA_WAN_LEAGENDGUM	Baguette Légendaire X	65	105	JOB_MAGICIAN	Vitesse d'incantation + 13%;Attaque + 12%;INT + 13;Blocage à distance + 5%;Touché + 10%
+x	II_WEA_WAN_LEAGENDG1	Baguette Légenraire (liée)	65	105	JOB_MAGICIAN	Vitesse d'incantation + 12%;Attaque + 11%;INT + 12;PV max. + 100
+	II_WEA_STA_LEAGENDG	Bâton Légendaire	65	105	JOB_MAGICIAN	Vitesse d'incantation + 13%;Attaque + 18%;INT + 17;Blocage à distance + 2%;Touché + 10%
+x	II_WEA_STA_LEAGENDGUM	Bâton Légendaire X	65	105	JOB_MAGICIAN	Vitesse d'incantation + 13%;Attaque + 18%;INT + 17;Blocage à distance + 5%;Touché + 10%
+x	II_WEA_STA_LEAGENDG1	Bâton Légendaire (lié)	65	105	JOB_MAGICIAN	Vitesse d'incantation + 12%;Attaque + 16%;INT + 15;PV max. + 100
+	II_WEA_YOY_LEAGENDG	Yo-yo Légendaire	65	105	JOB_ACROBAT	Vit Atq + 420%;Attaque + 12%;Dégâts des coups critiques + 70%;Blocage à distance + 2%;Touché + 10%
+x	II_WEA_YOY_LEAGENDGUM	Yo-yo Légendaire X	65	105	JOB_JESTER	Vit Atq + 420%;Attaque + 12%;Dégâts des coups critiques + 70%;Blocage à distance + 5%;Touché + 10%
+x	II_WEA_YOY_LEAGENDG1	Yo-yo Légendaire (lié)	65	105	JOB_ACROBAT	Vit Atq + 380%;Attaque + 7%;Dégâts des coups critiques + 34%;PV max. + 100
+	II_WEA_BOW_LEAGENDG	Arc Légendaire	65	105	JOB_ACROBAT	Critique + 21%;Attaque + 15%;Dégâts des coups critiques + 60%;Blocage à distance + 2%;Touché + 10%
+x	II_WEA_BOW_LEAGENDGUM	Arc Légendaire X	65	105	JOB_RANGER	Critique + 21%;Attaque + 15%;Dégâts des coups critiques + 60%;Blocage à distance + 5%;Touché + 10%
+x	II_WEA_BOW_LEAGENDG1	Arc Légendaire (lié)	65	105	JOB_ACROBAT	Critique + 19%;Attaque + 11%;Dégâts des coups critiques + 25%;PV max. + 100
+	II_ARM_ARM_SHI_TOEFFIN	Bouclier Toeffin	65	105	JOB_VAGRANT	
+x	II_ARM_ARM_SHI_TOEFFIN_FLYFF	Bouclier Toeffin du pingouin rouge	65	105	JOB_VAGRANT	
+	II_WEA_SWO_SHADEVING	Epée Ombre	70	110	JOB_MERCENARY	
+	II_WEA_SWT_PEACE	Pieceslayer	70	110	JOB_KNIGHT	
+	II_WEA_SWO_ROYAL	Epée Darkonienne	70	110	JOB_MERCENARY	Vit Atq + 480%;Critique + 27%;Dégâts des coups critiques + 50%;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 3;Touché + 10%
+	II_WEA_SWT_ROYAL	Espadon Darkonien	70	110	JOB_KNIGHT	Vit Atq + 640%;Critique + 32%;Dégâts des coups critiques + 90%;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 3;Touché + 10%
+x	II_WEA_SWO_ROYALUM	Epée Darkonienne (M)	70	110	JOB_BLADE	Vit Atq + 660%;Critique + 36%;Dégâts des coups critiques + 59%;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 7;Touché + 10%
+x	II_WEA_SWT_ROYALUM	Espadon Darkonien (M)	70	110	JOB_KNIGHT	Vit Atq + 840%;Critique + 42%;Dégâts des coups critiques + 99%;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 7;Touché + 10%
+	II_WEA_AXE_WATURAN	Hache Waturan	70	110	JOB_MERCENARY	
+	II_WEA_AXT_PEACE	Piecenition	70	110	JOB_KNIGHT	
+	II_WEA_AXE_ROYAL	Masse Darkonienne	70	110	JOB_MERCENARY	Vit Atq + 260%;Critique + 32%;Dégâts des coups critiques + 50%;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 3;Touché + 10%
+	II_WEA_AXT_ROYAL	Marteau Darkonien	70	110	JOB_KNIGHT	PV max. + 17%;Défense + 20%;Blocage en mêlée + 15%;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 3;Touché + 10%
+x	II_WEA_AXE_ROYALUM	Masse Darkonienne (M)	70	110	JOB_BLADE	Vit Atq + 380%;Critique + 41%;Dégâts des coups critiques + 59%;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 7;Touché + 10%
+x	II_WEA_AXT_ROYALUM	Marteau Darkonien (M)	70	110	JOB_KNIGHT	PV max. + 23%;Défense + 28%;Blocage en mêlée + 21%;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 7;Touché + 10%
+	II_WEA_CHEE_SHAIT	Sceptre Shait	70	110	JOB_ASSIST	Touché + 15%
+	II_WEA_CHE_ROYAL	Sceptre Darkonien	70	110	JOB_ASSIST	Vitesse d'incantation + 19%;Attaque + 20%;INT + 19;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 3;Touché + 10%
+x	II_WEA_CHE_ROYALUM	Sceptre Darkonien (M)	70	110	JOB_RINGMASTER	Vitesse d'incantation + 26%;Attaque + 28%;INT + 26;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 7;Touché + 10%
+	II_WEA_KNU_KNIGHTEEL	Poing Templier	70	110	JOB_ASSIST	
+	II_WEA_KNU_ROYAL	Poing Darkonien	70	110	JOB_ASSIST	Critique + 13%;Vit Atq + 180%;Dégâts des coups critiques + 70%;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 3;Touché + 10%
+x	II_WEA_KNU_ROYALUM	Poing Darkonien (M)	70	110	JOB_BILLPOSTER	Critique + 19%;Vit Atq + 280%;Dégâts des coups critiques + 79%;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 7;Touché + 10%
+	II_WEA_WAN_DARIS	Baguette Daris	70	110	JOB_MAGICIAN	
+	II_WEA_WAN_ROYAL	Baguette Darkonienne	70	110	JOB_MAGICIAN	Vitesse d'incantation + 19%;Attaque + 18%;INT + 19;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 3;Touché + 10%
+x	II_WEA_WAN_ROYALUM	Baguette Darkonienne (M)	70	110	JOB_PSYCHIKEEPER	Vitesse d'incantation + 27%;Attaque + 24%;INT + 25;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 7;Touché + 10%
+	II_WEA_STA_ELFYREN	Bâton Elfyren	70	110	JOB_MAGICIAN	Touché + 15%
+	II_WEA_STA_ROYAL	Bâton Darkonien	70	110	JOB_MAGICIAN	Vitesse d'incantation + 19%;Attaque + 25%;INT + 24;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 3;Touché + 10%
+x	II_WEA_STA_ROYALUM	Bâton Darkonien (M)	70	110	JOB_ELEMENTOR	Vitesse d'incantation + 27%;Attaque + 34%;INT + 33;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 7;Touché + 10%
+	II_WEA_YOY_ENAPHO	Yo-yo Enaphoon	70	110	JOB_ACROBAT	
+	II_WEA_YOY_ROYAL	Yoyo Darkonien	70	110	JOB_JESTER	Vit Atq + 580%;Attaque + 13%;Dégâts des coups critiques + 80%;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 3;Touché + 10%
+x	II_WEA_YOY_ROYALUM	Yoyo Darkonien (M)	70	110	JOB_JESTER	Vit Atq + 760%;Attaque + 17%;Dégâts des coups critiques + 89%;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 7;Touché + 10%
+	II_WEA_BOW_BROUTO	Arc Brouton	70	110	JOB_ACROBAT	
+	II_WEA_BOW_ROYAL	Arc Darkonien	70	110	JOB_RANGER	Critique + 29%;Attaque + 17%;Dégâts des coups critiques + 70%;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 3;Touché + 10%
+x	II_WEA_BOW_ROYALUM	Arc Darkonien (M)	70	110	JOB_RANGER	Critique + 38%;Attaque + 23%;Dégâts des coups critiques + 79%;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 7;Touché + 10%
+	II_ARM_ARM_SHI_CATEPO	Bouclier Catepo	73	113	JOB_VAGRANT	
+x	II_ARM_ARM_SHI_CATEPO_FLYFF	Bouclier Catepo du pingouin rouge	73	113	JOB_VAGRANT	
+	II_WEA_SWO_HOTTER	Epée Brûlante	80	120	JOB_MERCENARY	
+	II_WEA_SWO_BLOODY	Epée Sanguinaire	80	120	JOB_MERCENARY	Vitesse d'attaque + 10%;Critique + 20%;Dégâts des coups critiques + 40%;Puissance d'attaque de la hache + 500;Touché + 20%
+	II_WEA_SWT_BLOODY	Espadon Sanguinaire	80	120	JOB_KNIGHT	Vit Atq + 500%;Critique + 25%;Dégâts des coups critiques + 83%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+	II_WEA_SWO_ANCIENT	Epée Ancestrale	80	120	JOB_BLADE	Vit Atq + 700%;Critique + 38%;Dégâts des coups critiques + 61%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+	II_WEA_SWT_ANCIENT	Espadon Ancestral	80	120	JOB_KNIGHT	Vit Atq + 900%;Critique + 45%;Dégâts des coups critiques + 101%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+	II_WEA_SWO_VEMPIRE	Epée Vampirique	80	120	JOB_BLADE	Vit Atq + 520%;Critique + 29%;Dégâts des coups critiques + 52%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 3;Touché + 10%
+	II_WEA_SWT_VEMPIRE	Espadon Vampirique	80	120	JOB_KNIGHT	Vit Atq + 680%;Critique + 34%;Dégâts des coups critiques + 92%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 3;Touché + 10%
+x	II_WEA_SWO_BLOODYUM	Epée Sanguinaire X	80	120	JOB_MERCENARY	Vit Atq + 380%;Critique + 20%;Dégâts des coups critiques + 43%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 5;Touché + 10%
+x	II_WEA_SWT_BLOODYUM	Espadon Sanguinaire X	80	120	JOB_KNIGHT	Vit Atq + 500%;Critique + 25%;Dégâts des coups critiques + 83%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 5;Touché + 10%
+	II_WEA_SWT_LASTER	Lasterslayer	80	120	JOB_KNIGHT	
+	II_WEA_SWO_COLOGRADE_3	Epée du Coliseum (Champion)	80	120	JOB_MERCENARY	Vit Atq + 300%;Critique + 14%;Dégâts des coups critiques + 30%;Dégâts PvP + 10%;Touché + 10%
+	II_WEA_SWT_COLOGRADE_3	Espadon du Coliseum (Champion)	80	120	JOB_KNIGHT	Vit Atq + 400%;Critique + 20%;Dégâts des coups critiques + 58%;Dégâts PvP + 10%;Touché + 10%
+x	II_WEA_SWO_COLOGRADE_3_UM	Epée du Coliseum X (Champion)	80	120	JOB_MERCENARY	Vit Atq + 300%;Critique + 14%;Dégâts des coups critiques + 30%;Dégâts PvP + 10%;Touché + 10%
+x	II_WEA_SWT_COLOGRADE_3_UM	Espadon du Coliseum X (Champion)	80	120	JOB_KNIGHT	Vit Atq + 400%;Critique + 20%;Dégâts des coups critiques + 58%;Dégâts PvP + 10%;Touché + 10%
+x	II_TESTITEM1	IDS_PROPITEM_TXT_015815	80	120	=	DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 100;DST_GIVE_PVE_DMG_ELEMENT_WIND_RATE + 100;DST_GIVE_PVE_DMG_ELEMENT_EARTH_RATE + 100
+x	II_TESTITEM2	IDS_PROPITEM_TXT_015817	80	120	=	DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 100;DST_GIVE_DMG_RATE_ENEMY_STUN + 100;DST_GIVE_DMG_RATE_ENEMY_DARK + 100;DST_GIVE_DMG_RATE_ENEMY_POISON + 100;DST_GIVE_DMG_RATE_ENEMY_SLOW + 100
+x	II_TESTITEM3	IDS_PROPITEM_TXT_015819	80	120	=	PV max. + 100;PV max. + 100;PV max. + 100;PM max. + 100;PM max. + 100;PM max. + 100
+x	II_TESTITEM4	IDS_PROPITEM_TXT_015821	80	120	=	DST_GIVE_PVE_DMG_ELEMENT_FIRE_RATE + 100
+x	II_TESTITEM5	IDS_PROPITEM_TXT_015823	80	120	=	PV max. + 100;PV max. + 100;PV max. + 100;PF max. + 100;PF max. + 100;PF max. + 100
+x	II_WEA_SWO_BLOODY_30	Epée Sanguinaire (N)	80	120	JOB_MERCENARY	Vit Atq + 380%;Critique + 20%;Dégâts des coups critiques + 43%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+x	II_WEA_SWT_BLOODY_30	Espadon Sanguinaire (N)	80	120	JOB_KNIGHT	Vit Atq + 500%;Critique + 25%;Dégâts des coups critiques + 83%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+x	II_WEA_SWO_ANCIENT_EVENT	Epée Ancestrale	80	120	JOB_BLADE	Vit Atq + 700%;Critique + 38%;Dégâts des coups critiques + 61%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+x	II_WEA_SWT_ANCIENT_EVENT	Espadon Ancestral	80	120	JOB_KNIGHT	Vit Atq + 900%;Critique + 45%;Dégâts des coups critiques + 101%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+	II_WEA_AXE_LICHIKY	Hache Lichiky	80	120	JOB_MERCENARY	
+	II_WEA_AXE_BLOODY	Hache Sanguinaire	80	120	JOB_MERCENARY	Vit Atq + 200%;Critique + 25%;Dégâts des coups critiques + 43%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+	II_WEA_AXT_BLOODY	Doloire Sanguinaire	80	120	JOB_KNIGHT	PV max. + 13%;Défense + 16%;Blocage en mêlée + 12%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+	II_WEA_AXE_ANCIENT	Hache Ancestrale	80	120	JOB_BLADE	Vit Atq + 400%;Critique + 43%;Dégâts des coups critiques + 61%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+	II_WEA_AXT_ANCIENT	Doloire Ancestrale	80	120	JOB_KNIGHT	PV max. + 25%;Défense + 30%;Blocage en mêlée + 23%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+	II_WEA_AXE_VEMPIRE	Hache Vampirique	80	120	JOB_BLADE	Vit Atq + 280%;Critique + 34%;Dégâts des coups critiques + 52%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 3;Touché + 10%
+	II_WEA_AXT_VEMPIRE	Doloire Vampirique	80	120	JOB_KNIGHT	PV max. + 18%;Défense + 22%;Blocage en mêlée + 16%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 3;Touché + 10%
+x	II_WEA_AXE_BLOODYUM	Hache Sanguinaire X	80	120	JOB_MERCENARY	Vit Atq + 200%;Critique + 25%;Dégâts des coups critiques + 43%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 5;Touché + 10%
+x	II_WEA_AXT_BLOODYUM	Doloire Sanguinaire X	80	120	JOB_KNIGHT	PV max. + 13%;Défense + 16%;Blocage en mêlée + 12%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 5;Touché + 10%
+	II_WEA_AXT_LASTER	Lasternition	80	120	JOB_KNIGHT	
+	II_WEA_AXE_COLOGRADE_3	Hache du Coliseum (Champion)	80	120	JOB_MERCENARY	Vit Atq + 160%;Critique + 18%;Dégâts des coups critiques + 30%;Dégâts PvP + 10%;Touché + 10%
+	II_WEA_AXT_COLOGRADE_3	Doloire du Coliseum (Champion)	80	120	JOB_KNIGHT	PV max. + 10%;Défense + 12%;Blocage en mêlée + 9%;Dégâts PvP + 10%;Touché + 10%
+x	II_WEA_AXE_COLOGRADE_3_UM	Hache du Coliseum X (Champion)	80	120	JOB_MERCENARY	Vit Atq + 160%;Critique + 18%;Dégâts des coups critiques + 30%;Dégâts PvP + 10%;Touché + 10%
+x	II_WEA_AXT_COLOGRADE_3_UM	Doloire du Coliseum X (Champion)	80	120	JOB_KNIGHT	PV max. + 10%;Défense + 12%;Blocage en mêlée + 9%;Dégâts PvP + 10%;Touché + 10%
+x	II_WEA_AXE_BLOODY_30	Hache Sanguinaire (N)	80	120	JOB_MERCENARY	Vit Atq + 200%;Critique + 25%;Dégâts des coups critiques + 43%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+x	II_WEA_AXT_BLOODY_30	Doloire Sanguinaire (N)	80	120	JOB_KNIGHT	PV max. + 13%;Défense + 16%;Blocage en mêlée + 12%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+x	II_WEA_AXE_ANCIENT_EVENT	Hache Ancestrale	80	120	JOB_BLADE	Vit Atq + 400%;Critique + 43%;Dégâts des coups critiques + 61%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+x	II_WEA_AXT_ANCIENT_EVENT	Doloire Ancestrale	80	120	JOB_KNIGHT	PV max. + 25%;Défense + 30%;Blocage en mêlée + 23%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+	II_WEA_CHEE_GARLAIN	Sceptre Garlain	80	120	JOB_ASSIST	Touché + 15%
+	II_WEA_CHE_BLOODY	Sceptre Sanguinaire	80	120	JOB_ASSIST	Vitesse d'incantation + 15%;Attaque + 16%;INT + 15;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+	II_WEA_CHE_ANCIENT	Sceptre Ancestral	80	120	JOB_RINGMASTER	Vitesse d'incantation + 28%;Attaque + 30%;INT + 28;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+	II_WEA_CHE_VEMPIRE	Sceptre Vampirique	80	120	JOB_RINGMASTER	Vitesse d'incantation + 21%;Attaque + 22%;INT + 21;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 3;Touché + 10%
+x	II_WEA_CHE_BLOODYUM	Sceptre Sanguinaire X	80	120	JOB_ASSIST	Vitesse d'incantation + 15%;Attaque + 16%;INT + 15;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 5;Touché + 10%
+	II_WEA_CHE_COLOGRADE_3	Sceptre du Coliseum (Champion)	80	120	JOB_ASSIST	Vitesse d'incantation + 12%;Attaque + 12%;INT + 12;Dégâts PvP + 10%;Touché + 10%
+x	II_WEA_CHE_COLOGRADE_3_UM	Sceptre du Coliseum X (Champion)	80	120	JOB_ASSIST	Vitesse d'incantation + 12%;Attaque + 12%;INT + 12;Dégâts PvP + 10%;Touché + 10%
+x	II_WEA_CHE_BLOODY_30	Sceptre Sanguinaire (N)	80	120	JOB_ASSIST	Vitesse d'incantation + 15%;Attaque + 16%;INT + 15;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+x	II_WEA_CHE_ANCIENT_EVENT	Sceptre Ancestral	80	120	JOB_RINGMASTER	Vitesse d'incantation + 28%;Attaque + 30%;INT + 28;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+	II_WEA_KNU_LORDORBL	Poing Lordor	80	120	JOB_ASSIST	
+	II_WEA_KNU_BLOODY	Poing Sanguinaire	80	120	JOB_ASSIST	Critique + 10%;Vit Atq + 140%;Dégâts des coups critiques + 63%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+	II_WEA_KNU_ANCIENT	Poing Ancestral	80	120	JOB_BILLPOSTER	Critique + 20%;Vit Atq + 300%;Dégâts des coups critiques + 81%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+	II_WEA_KNU_VEMPIRE	Poing Vampirique	80	120	JOB_BILLPOSTER	Critique + 14%;Vit Atq + 200%;Dégâts des coups critiques + 72%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 3;Touché + 10%
+x	II_WEA_KNU_BLOODYUM	Poing Sanguinaire X	80	120	JOB_ASSIST	Critique + 10%;Vit Atq + 140%;Dégâts des coups critiques + 63%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 5;Touché + 10%
+	II_WEA_KNU_COLOGRADE_3	Poing du Coliseum (Champion)	80	120	JOB_ASSIST	Critique + 8%;Vit Atq + 100%;Dégâts des coups critiques + 44%;Dégâts PvP + 10%;Touché + 10%
+x	II_WEA_KNU_COLOGRADE_3_UM	Poing du Coliseum X (Champion)	80	120	JOB_ASSIST	Critique + 8%;Vit Atq + 100%;Dégâts des coups critiques + 44%;Dégâts PvP + 10%;Touché + 10%
+x	II_WEA_KNU_BLOODY_30	Poing Sanguinaire (N)	80	120	JOB_ASSIST	Critique + 10%;Vit Atq + 140%;Dégâts des coups critiques + 63%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+x	II_WEA_KNU_ANCIENT_EVENT	Poing Ancestral	80	120	JOB_BILLPOSTER	Critique + 20%;Vit Atq + 300%;Dégâts des coups critiques + 81%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+	II_WEA_WAN_LORAI	Baguette Lorai	80	120	JOB_MAGICIAN	
+	II_WEA_WAN_BLOODY2	Baguette Sanguinaire	80	120	JOB_MAGICIAN	Vitesse d'incantation + 15%;Attaque + 14%;INT + 15;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+	II_WEA_WAN_ANCIENT	Baguette Ancestrale	80	120	JOB_PSYCHIKEEPER	Vitesse d'incantation + 29%;Attaque + 26%;INT + 27;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+	II_WEA_WAN_VEMPIRE	Baguette Vampirique	80	120	JOB_PSYCHIKEEPER	Vitesse d'incantation + 21%;Attaque + 19%;INT + 20;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 3;Touché + 10%
+x	II_WEA_WAN_BLOODY2UM	Baguette Sanguinaire X	80	120	JOB_MAGICIAN	Vitesse d'incantation + 15%;Attaque + 14%;INT + 15;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 5;Touché + 10%
+	II_WEA_WAN_COLOGRADE_3	Baguette du Coliseum (Champion)	80	120	JOB_MAGICIAN	Vitesse d'incantation + 12%;Attaque + 11%;INT + 12;Dégâts PvP + 10%;Touché + 10%
+x	II_WEA_WAN_COLOGRADE_3_UM	Baguette du Coliseum X (Champion)	80	120	JOB_MAGICIAN	Vitesse d'incantation + 12%;Attaque + 11%;INT + 12;Dégâts PvP + 10%;Touché + 10%
+x	II_WEA_WAN_BLOODY2_30	Baguette Sanguinaire (N)	80	120	JOB_MAGICIAN	Vitesse d'incantation + 15%;Attaque + 14%;INT + 15;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+x	II_WEA_WAN_ANCIENT_EVENT	Baguette Ancestrale	80	120	JOB_PSYCHIKEEPER	Vitesse d'incantation + 29%;Attaque + 26%;INT + 27;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+	II_WEA_STA_FOSHARPEN	Bâton Aiguisé	80	120	JOB_MAGICIAN	Touché + 15%
+	II_WEA_STA_BLOODY	Bâton Sanguinaire	80	120	JOB_MAGICIAN	Vitesse d'incantation + 15%;Attaque + 20%;INT + 19;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+	II_WEA_STA_ANCIENT	Bâton Ancestral	80	120	JOB_ELEMENTOR	Vitesse d'incantation + 29%;Attaque + 36%;INT + 35;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+	II_WEA_STA_VEMPIRE	Bâton Vampirique	80	120	JOB_ELEMENTOR	Vitesse d'incantation + 21%;Attaque + 27%;INT + 26;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 3;Touché + 10%
+x	II_WEA_STA_BLOODYUM	Bâton Sanguinaire X	80	120	JOB_MAGICIAN	Vitesse d'incantation + 15%;Attaque + 20%;INT + 19;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 5;Touché + 10%
+	II_WEA_STA_COLOGRADE_3	Bâton du Coliseum (Champion)	80	120	JOB_MAGICIAN	Vitesse d'incantation + 12%;Attaque + 16%;INT + 15;Dégâts PvP + 10%;Touché + 10%
+x	II_WEA_STA_COLOGRADE_3_UM	Bâton du Coliseum X (Champion)	80	120	JOB_MAGICIAN	Vitesse d'incantation + 12%;Attaque + 16%;INT + 15;Dégâts PvP + 10%;Touché + 10%
+x	II_WEA_STA_BLOODY_30	Bâton Sanguinaire (N)	80	120	JOB_MAGICIAN	Vitesse d'incantation + 15%;Attaque + 20%;INT + 19;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+x	II_WEA_STA_ANCIENT_EVENT	Bâton Ancestral	80	120	JOB_ELEMENTOR	Vitesse d'incantation + 29%;Attaque + 36%;INT + 35;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+	II_WEA_YOY_CORONE	Yo-yo Coroner	80	120	JOB_ACROBAT	
+	II_WEA_YOY_BLOODY	Yo-yo Sanguinaire	80	120	JOB_ACROBAT	Vit Atq + 460%;Attaque + 13%;Dégâts des coups critiques + 73%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+	II_WEA_YOY_ANCIENT	Yo-yo Ancestral	80	120	JOB_JESTER	Vit Atq + 800%;Attaque + 18%;Dégâts des coups critiques + 91%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+	II_WEA_YOY_VEMPIRE	Yo-yo Vampirique	80	120	JOB_JESTER	Vit Atq + 620%;Attaque + 13%;Dégâts des coups critiques + 82%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 3;Touché + 10%
+x	II_WEA_YOY_BLOODYUM	Yo-yo Sanguinaire X	80	120	JOB_JESTER	Vit Atq + 460%;Attaque + 13%;Dégâts des coups critiques + 73%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 5;Touché + 10%
+	II_WEA_YOY_COLOGRADE_3	Yoyo du Coliseum (Champion)	80	120	JOB_ACROBAT	Vit Atq + 360%;Attaque + 9%;Dégâts des coups critiques + 51%;Dégâts PvP + 10%;Touché + 10%
+x	II_WEA_YOY_COLOGRADE_3_UM	Yoyo du Coliseum X (Champion)	80	120	JOB_JESTER	Vit Atq + 360%;Attaque + 9%;Dégâts des coups critiques + 51%;Dégâts PvP + 10%;Touché + 10%
+x	II_WEA_YOY_BLOODY_30	Yo-yo Sanguinaire (N)	80	120	JOB_ACROBAT	Vit Atq + 460%;Attaque + 13%;Dégâts des coups critiques + 73%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+x	II_WEA_YOY_ANCIENT_EVENT	Yo-yo Ancestral	80	120	JOB_JESTER	Vit Atq + 800%;Attaque + 18%;Dégâts des coups critiques + 91%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+	II_WEA_BOW_SEVOY	Arc Sevoy	80	120	JOB_ACROBAT	
+	II_WEA_BOW_BLOODY	Arc Sanguinaire	80	120	JOB_ACROBAT	Critique + 23%;Attaque + 16%;Dégâts des coups critiques + 63%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+	II_WEA_BOW_ANCIENT	Arc Ancestral	80	120	JOB_RANGER	Critique + 40%;Attaque + 25%;Dégâts des coups critiques + 81%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+	II_WEA_BOW_VEMPIRE	Arc Vampirique	80	120	JOB_RANGER	Critique + 31%;Attaque + 18%;Dégâts des coups critiques + 72%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 3;Touché + 10%
+x	II_WEA_BOW_BLOODYUM	Arc Sanguinaire X	80	120	JOB_RANGER	Critique + 23%;Attaque + 16%;Dégâts des coups critiques + 63%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 5;Touché + 10%
+	II_WEA_BOW_COLOGRADE_3	Arc du Coliseum (Champion)	80	120	JOB_ACROBAT	Critique + 18%;Attaque + 11%;Dégâts des coups critiques + 44%;Dégâts PvP + 10%;Touché + 10%
+x	II_WEA_BOW_COLOGRADE_3_UM	Arc du Coliseum X (Champion)	80	120	JOB_RANGER	Critique + 18%;Attaque + 11%;Dégâts des coups critiques + 44%;Dégâts PvP + 10%;Touché + 10%
+x	II_WEA_BOW_BLOODY_30	Arc Sanguinaire (N)	80	120	JOB_ACROBAT	Critique + 23%;Attaque + 16%;Dégâts des coups critiques + 63%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 2;Touché + 10%
+x	II_WEA_BOW_ANCIENT_EVENT	Arc Ancestral	80	120	JOB_RANGER	Critique + 40%;Attaque + 25%;Dégâts des coups critiques + 81%;DST_GIVE_DMG_RATE_ENEMY_BLEEDING + 7;Touché + 10%
+	II_WEA_SWO_SWDSOUL	Latte Muranne	100	130	JOB_KNIGHT	DST_CHR_CHANCECRITICAL  + 15;DST_CRITICAL_BONUS  + 25;DST_ATTACKSPEED  + 300
+	II_ARM_ARM_SHI_SHESOUL	Pavois Muran	100	130	JOB_KNIGHT	PV max. + 10%;Blocage à distance + 10%;Blocage en mêlée + 10%
+	II_WEA_BOOK_BOKROMAIN	Grimoire Muran	100	130	JOB_PSYCHIKEEPER	
+	II_ARM_ARM_SHI_BOKSOUL	Grimoire Usé	100	130	JOB_PSYCHIKEEPER	INT + 10;Vitesse d'incantation + 10%;Attaque + 10%
+	II_ARM_ARM_SHI_ZEMBATO	Targe Martiale	100	130	JOB_BILLPOSTER	
+	II_ARM_ARM_SHI_ZEMSOUL	Targe Muranne	100	130	JOB_BILLPOSTER	INT + 10;PV max. + 10%;Blocage en mêlée + 10%
+	II_WEA_SWO_BEHEONEHANDSWORD	Epée Bahamuth	100	135	JOB_BLADE	PV max. + 40%;Critique + 100%;Vitesse d'attaque + 20%;Touché + 100%
+	II_WEA_SWT_BEHETWOSWORD	Espadon Bahamuth	100	135	JOB_KNIGHT	Vit Atq + 960%;Critique + 48%;Dégâts des coups critiques + 105%;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 8;Touché + 10%
+	II_WEA_SWO_BEHESWORD	Curtana	100	135	JOB_KNIGHT	Attaque + 20%;Critique + 60%;Dégâts des coups critiques + 60%;Touché + 20%
+	II_WEA_AXE_BEHEONEHANDAXE	Boucherie	100	135	JOB_BLADE	
+	II_WEA_AXT_BEHETWOAXE	Doloire Bahamuth	100	135	JOB_KNIGHT	PV max. + 26%;Défense + 32%;Blocage en mêlée + 24%;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 8;Touché + 10%
+	II_WEA_CHE_BEHESTICK	Oracle	100	135	JOB_RINGMASTER	
+	II_WEA_KNU_BEHENUCLE	Poing Bahamuth	100	135	JOB_BILLPOSTER	Critique + 21%;Vit Atq + 320%;Dégâts des coups critiques + 81%;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 8;Touché + 10%
+	II_WEA_WAN_BEHEWAND	Anarchie	100	135	JOB_PSYCHIKEEPER	Critique + 40%;Dégâts des coups critiques + 50%;Attaque + 20%
+	II_WEA_STA_BEHESTAFF	Bâton Bahamuth	100	135	JOB_ELEMENTOR	Vitesse d'incantation + 31%;Attaque + 38%;INT + 37;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 8;Touché + 10%
+	II_WEA_YOY_BEHEYOYO	Yo-yo Bahamuth	100	135	JOB_JESTER	Vit Atq + 860%;Attaque + 19%;Dégâts des coups critiques + 91%;DST_GIVE_PVE_DMG_ELEMENT_ELECT_RATE + 8;Touché + 10%
+	II_WEA_BOW_BEHECROSSBOW	Pluie du Dragon	100	135	JOB_RANGER	
+	II_ARM_ARM_SHI_BEHESHILD	Pavois Bahamuth	100	135	JOB_KNIGHT	PV max. + 30%;Blocage à distance + 30%;Blocage en mêlée + 30%
+	II_ARM_ARM_SHI_BEHEMAGICBOOK	Grimoire Bahamuth	100	135	JOB_PSYCHIKEEPER	INT + 20;PM max. + 20%;Blocage en mêlée + 20%
+	II_ARM_ARM_SHI_BEHEFORCEZEM	Targe Bahamuth	100	135	JOB_BILLPOSTER	INT + 20;PV max. + 20%;Blocage en mêlée + 20%
+x	II_WEA_SWO_YGGDRASILL	Epée à Une Main en Yggdrasil Purifié	100	155	JOB_BLADE	Vit Atq + 880%;Critique + 50%;Dégâts des coups critiques + 88%;Dégâts PvP + 10%;Touché + 13%
+	II_WEA_SWT_YGGDRASILL	Espadon en Yggdrasil Purifié	100	155	JOB_KNIGHT	Vit Atq + 1120%;Critique + 56%;Dégâts des coups critiques + 113%;Dégâts PvP + 10%;Touché + 13%
+	II_WEA_SWOT_YGGDRASILL	Epée en Yggdrasil Purifié	100	155	JOB_KNIGHT	Vit Atq + 880%;Critique + 50%;Dégâts des coups critiques + 88%;Dégâts PvP + 10%;Touché + 13%
+	II_WEA_AXE_YGGDRASILL	Hache en Yggdrasil Purifié	100	155	JOB_BLADE	Vit Atq + 580%;Critique + 55%;Dégâts des coups critiques + 73%;Dégâts PvP + 10%;Touché + 13%
+	II_WEA_AXT_YGGDRASILL	Doloire en Yggdrasil Purifié	100	155	JOB_KNIGHT	PV max. + 34%;Défense + 40%;Blocage en mêlée + 32%;Dégâts PvP + 10%;Touché + 13%
+	II_WEA_CHE_YGGDRASILL	Sceptre en Yggdrasil Purifié	100	155	JOB_RINGMASTER	Vitesse d'incantation + 38%;Attaque + 40%;INT + 43;Dégâts PvP + 10%;Touché + 13%
+	II_WEA_KNU_YGGDRASILL	Poing en Yggdrasil Purifié	100	155	JOB_BILLPOSTER	Critique + 29%;Vit Atq + 480%;Dégâts des coups critiques + 89%;Dégâts PvP + 10%;Touché + 13%
+	II_WEA_WAN_YGGDRASILL	Baguette en Yggdrasil Purifié	100	155	JOB_PSYCHIKEEPER	Vitesse d'incantation + 39%;Attaque + 35%;INT + 40;Dégâts PvP + 10%;Touché + 13%
+	II_WEA_STA_YGGDRASILL	Bâton en Yggdrasil Purifié	100	155	JOB_ELEMENTOR	Vitesse d'incantation + 39%;Attaque + 46%;INT + 46;Dégâts PvP + 10%;Touché + 13%
+	II_WEA_YOY_YGGDRASILL	Yo-yo en Yggdrasil Purifié	100	155	JOB_JESTER	Vit Atq + 1020%;Attaque + 27%;Dégâts des coups critiques + 99%;Dégâts PvP + 10%;Touché + 13%
+	II_WEA_BOW_YGGDRASILL	Arbalète en Yggdrasil Purifié	100	155	JOB_RANGER	Critique + 51%;Attaque + 34%;Dégâts des coups critiques + 89%;Dégâts PvP + 10%;Touché + 13%
+	II_ARM_ARM_SHI_YGGDRASILL	Bouclier en Yggdrasil Purifié	100	155	JOB_KNIGHT	PV max. + 38%;Blocage à distance + 38%;Blocage en mêlée + 38%
+	II_WEA_BOOK_YGG	Grimoire en Yggdrasil Purifié	100	155	JOB_PSYCHIKEEPER	PM max. + 2000;Blocage à distance + 15%;Blocage en mêlée + 15%

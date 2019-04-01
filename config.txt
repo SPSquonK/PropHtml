@@ -1,0 +1,10 @@
+// Path to FlyFF Folder
+path = 
+// Name of the PropItem file
+propItem = 
+// Number of bonuses supported 
+propItemParameters = 6
+// If True, when propItem is rewritten, it will be modifed in place (the original will be gone). If set to anything else, will write the new file in the same repertory as the script
+modifyInPlace = True
+// Set this to False for your own project
+legendaryemeraldvolcanoterrasunzeroflyff = True
