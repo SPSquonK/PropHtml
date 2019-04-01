@@ -96,7 +96,7 @@ def load_configuration():
             
     # Normalize configuration
     default_values = {
-        "path": "..\\..\\FlyFF-VS17\\Resource\\",
+        "path": "..\\FlyFF-VS17\\Resource\\",
         "propItem": "propItem.txt",
         "propItemParameters": 6,
         "modifyInPlace": True,
