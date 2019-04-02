@@ -372,3 +372,44 @@ def read_prop_item_etc(data, on_syntax_sugar, on_receive_set_id, on_receive_item
                 state = auto_next_state[state]
 
     return data
+
+
+def rewrite_prop_item(prop_item_file, rewrite_function):
+    """
+    Rewrites a prop item by providing a list with every line in the rewritten function
+
+    :param prop_item_file: The file to read
+    :param rewrite_function: A function that takes a line and a split line and return the line to write or None
+    :return: A list with the new content
+    """
+    new_content = []
+
+    item_manager = get_item_manager()
+
+    with open(prop_item_file, encoding="ansi") as f:
+        for line in f.readlines():
+            line = line.replace(str(chr(10)), "").replace("\r", "").strip()
+
+            if line is None or line.startswith("//"):
+                new_content.append(line)
+                continue
+
+            parameters_list = line.split("\t")
+
+            if len(line) == 0:
+                new_content.append("")
+                continue
+
+            if len(parameters_list) != item_manager['EXPECTED_LENGTH']:
+                if item_manager['DEFAULT_ON_EXP_LENGTH']:
+                    print("propItem is not well formed at line : " + line + " " + str(len(line)))
+                    exit(0)
+                else:
+                    item_manager['DEFAULT_ON_EXP_LENGTH'] = True
+                    item_manager['EXPECTED_LENGTH'] = len(parameters_list)
+
+            rewritten_line = rewrite_function(line, parameters_list)
+            if rewrite_function is not None:
+                new_content.append(rewritten_line)
+
+    return new_content

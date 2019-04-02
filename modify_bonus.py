@@ -16,8 +16,7 @@ with open(items_manager.THIS_DIR + "changed_bonus.txt") as f:
         id = splitted[0]
         
         new_bonus = []
-        
-        
+
         for i in range(items_manager.nb_param()):
             bonus_type = splitted[1 + i * 2]
             bonus_value = splitted[1 + i * 2 + 1]
@@ -33,45 +32,21 @@ with open(items_manager.THIS_DIR + "changed_bonus.txt") as f:
         modified_items[id] = new_bonus
         
 
+def rewrite_function(line, parameters_list):
+    if parameters_list[item_manager['ID']] not in modified_items:
+        return line
 
-new_propItemContent = []
+    id = parameters_list[item_manager['ID']]
+    rewritten_bonus = modified_items[id]
 
-with open(items_manager.getPropItemPath(), encoding="ansi") as f:
-    for line in f.readlines():    
-        origline = line
-        line = line.replace(str(chr(10)), "").replace("\r", "").strip()
-        
-        if line is None or line.startswith("//"):
-            new_propItemContent.append(line)
-            continue
-        
-        parameters_list = line.split("\t")
-        
-        if len(line) == 0:
-            new_propItemContent.append("")
-            continue
-        
-        if len(parameters_list) != item_manager['EXPECTED_LENGTH']:
-            if item_manager['DEFAULT_ON_EXP_LENGTH']:
-                print("propItem is not well formed at line : " + line + " " + str(len(line)))
-                exit(0)
-            else:
-                item_manager['DEFAULT_ON_EXP_LENGTH'] = True
-                item_manager['EXPECTED_LENGTH'] = len(parameters_list)
-        
-        if parameters_list[item_manager['ID']] not in modified_items:
-            new_propItemContent.append(line)
-            continue
-        
-        id = parameters_list[item_manager['ID']]
-        rewritten_bonus = modified_items[id]
-        
-        for i in range(items_manager.nb_param()):
-            parameters_list[i + item_manager['START_DW_PARAM']] = rewritten_bonus[i][0]
-            parameters_list[i + item_manager['START_ADJ_PARAM']] = rewritten_bonus[i][1]
-        
-        new_propItemContent.append("\t".join(parameters_list))
+    for i in range(items_manager.nb_param()):
+        parameters_list[i + item_manager['START_DW_PARAM']] = rewritten_bonus[i][0]
+        parameters_list[i + item_manager['START_ADJ_PARAM']] = rewritten_bonus[i][1]
 
+    return "\t".join(parameters_list)
+
+
+new_propItemContent = items_manager.rewrite_prop_item(items_manager.getPropItemPath(), rewrite_function)
 
 f = open(items_manager.modifiedPropItem(), "w+", encoding="ansi")
 f.write("\n".join(new_propItemContent))

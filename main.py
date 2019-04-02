@@ -496,7 +496,7 @@ def read_raw_data_set():
     def on_receive_set_id(_line, d, set_id, set_etc):
         d[set_etc] = {'parts': [], 'bonus': [], 'set_id': set_id}
 
-    def on_receive_item_id(_line, d, _last_id, last_etc, item_id, part_id):
+    def on_receive_item_id(_line, d, _last_id, last_etc, item_id, _part_id):
         d[last_etc]['parts'].append(item_id)
 
     def on_receive_bonus(_line, d, _last_id, last_etc, bonus_dst, bonus_value, number_of_parts):

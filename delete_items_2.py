@@ -35,45 +35,24 @@ for item_to_remove in items_to_remove:
         bonus.extend(item_list[item_to_remove[0]]['Bonus'])
         rewritten_bonus[item_to_remove[1]] = bonus
 
-new_propItemContent = []
 
-with open(items_manager.modifiedPropItem(), encoding="ansi") as f:
-    for line in f.readlines():    
-        origline = line
-        line = line.replace(str(chr(10)), "").replace("\r", "").strip()
-        
-        if line is None or line.startswith("//"):
-            new_propItemContent.append(line)
-            continue
-        
-        parameters_list = line.split("\t")
-        
-        if len(line) == 0:
-            new_propItemContent.append("")
-            continue
-        
-        if item_manager['DEFAULT_ON_EXP_LENGTH']:
-            print("propItem is not well formed at line : " + line + " " + str(len(line)))
-            exit(0)
-        else:
-            item_manager['DEFAULT_ON_EXP_LENGTH'] = True
-            item_manager['EXPECTED_LENGTH'] = len(parameters_list)
-            
-        if parameters_list[item_manager['ID']] in delete_items:
-            continue
-            
-        if parameters_list[item_manager['ID']] not in rewritten_bonus:
-            new_propItemContent.append(line)
-            continue
-        
-        id = parameters_list[item_manager['ID']]
-        
-        for i in range(min(len(rewritten_bonus[id]), item_manager['LEN_DW_PARAM'])):
-            parameters_list[i + item_manager['START_DW_PARAM']] = rewritten_bonus[id][i][0]
-            parameters_list[i + item_manager['START_ADJ_PARAM']] = rewritten_bonus[id][i][1]
-        
-        new_propItemContent.append("\t".join(parameters_list))
+def rewrite_function(line, parameters_list):
+    if parameters_list[item_manager['ID']] in delete_items:
+        return None
 
+    if parameters_list[item_manager['ID']] not in rewritten_bonus:
+        return line
+
+    id = parameters_list[item_manager['ID']]
+
+    for i in range(min(len(rewritten_bonus[id]), item_manager['LEN_DW_PARAM'])):
+        parameters_list[i + item_manager['START_DW_PARAM']] = rewritten_bonus[id][i][0]
+        parameters_list[i + item_manager['START_ADJ_PARAM']] = rewritten_bonus[id][i][1]
+
+    return "\t".join(parameters_list)
+
+
+new_propItemContent = items_manager.rewrite_prop_item(items_manager.getPropItemPath(), rewrite_function)
 
 f = open(items_manager.modifiedPropItem(), "w+", encoding="ansi")
 f.write("\n".join(new_propItemContent))
