@@ -192,7 +192,7 @@ def decrypt_item(line, item_manager=ITEM_MANAGER):
     }
 
 
-# Gives an ordered dictionnary with every items in propItem
+# Gives an ordered dictionary with every items in propItem
 def get_item_list(propItem_path=None, item_manager=ITEM_MANAGER):
     if item_manager is None:
         load_configuration()
@@ -216,7 +216,7 @@ def get_item_list(propItem_path=None, item_manager=ITEM_MANAGER):
 def read_text_file(file, replacement_function, encoding="utf-16-le"):
     with open(file, encoding=encoding) as f:
         for line in f.readlines():
-            # TODO : Use a regex
+            # TODO : Use a regex  ([A-Za-z0-9_]*)\\s*(.*)$
             line.replace(chr(10), " ")
             index = line.find(" ")
             indextab = line.find("\t")

@@ -73,7 +73,7 @@ class ProcessedFormBonus:
 
     @staticmethod
     def load_template(j2_env):
-        ProcessedFormBonus.html_template = j2_env.get_template('template_form_bonus.htm')
+        ProcessedFormBonus.html_template = j2_env.get_template('bonus_edit.htm')
 
     def template(self, bonus_kinds):
         if ProcessedFormBonus.html_template is None:
@@ -318,12 +318,15 @@ def filter_jobs(item_list, jobs):
 
 # ======================================================================================================================
 # ======================================================================================================================
-# -- HTML PAGE TEMPLATING  -- HTML PAGE TEMPLATING  -- HTML PAGE TEMPLATING  -- HTML PAGE TEMPLATING
+# -- WEAPONS  -- WEAPONS  -- WEAPONS  -- WEAPONS  -- WEAPONS  -- WEAPONS  -- WEAPONS  -- WEAPONS  -- WEAPONS  -- WEAPONS
+
+
+# == Page generating
 
 
 def write_page(j2_env, html_content, page_name='item_list.htm'):
-    content = j2_env.get_template('general_template.htm').render(html_content=html_content)
-    f = open(items_manager.THIS_DIR + page_name, "w+")
+    content = j2_env.get_template('weapon_page.htm').render(html_content=html_content)
+    f = open(items_manager.THIS_DIR + "/generated/" + page_name, "w+")
     f.write(content)
     f.close()
 
@@ -351,9 +354,7 @@ def generate_html_edit(j2_env, template_page, classified_serialization):
         write_page(j2_env, html_content, "item_list_" + classification['Name'] + ".htm")
 
 
-# ======================================================================================================================
-# ======================================================================================================================
-# -- WEAPONS  -- WEAPONS  -- WEAPONS  -- WEAPONS  -- WEAPONS  -- WEAPONS  -- WEAPONS  -- WEAPONS  -- WEAPONS  -- WEAPONS
+# == Weapon processing
 
 
 def classify(serialization: Dict[str, ProcessedItem], item_kinds_3):
@@ -393,10 +394,10 @@ def finish_processing_weapon(j2_env, serialization, item_kinds_3, args_result):
     classified_serialization = classify(serialization, item_kinds_3)
 
     # Page Generation
-    generate_html(j2_env, 'template.htm', classified_serialization)
+    generate_html(j2_env, 'weapon_category.htm', classified_serialization)
 
     if args_result.edit:
-        generate_html_edit(j2_env, 'template_js.htm', classified_serialization)
+        generate_html_edit(j2_env, 'weapon_category_edit.htm', classified_serialization)
 
 
 # ======================================================================================================================
@@ -739,7 +740,7 @@ def normalize_armors(j2_env, set_groups, build_bonus_form):
     # Template bonus
     for group in global_d:
         if group['bonus'] != '':
-            group['bonus'] = j2_env.get_template('template_armors_setbonus.htm').render(bonus=group['bonus'])
+            group['bonus'] = j2_env.get_template('armor_set_bonus.htm').render(bonus=group['bonus'])
 
     return sorted(global_d, key=group_comparator)
 
@@ -763,9 +764,9 @@ def finish_processing_armors(j2_env, serialization, args_result, bonus_types, bo
 
     print(args_result.edit)
 
-    code = j2_env.get_template('template_armors.htm').render(groups=normalized_armors, bonus_types=bonus_types,
+    code = j2_env.get_template('armor_page.htm').render(groups=normalized_armors, bonus_types=bonus_types,
                                                              edit_mode=args_result.edit)
-    f = open(items_manager.THIS_DIR + "armor_list.html", "w+")
+    f = open(items_manager.THIS_DIR + "/generated/armor_list.html", "w+")
     f.write(code)
     f.close()
 
@@ -826,7 +827,7 @@ def main():
     job_list = read_jobs()
 
     bonus_types_js = make_bonus_list(bonus_types, bonus_types_rate)
-    j2_env = Environment(loader=FileSystemLoader(items_manager.THIS_DIR), trim_blocks=True)
+    j2_env = Environment(loader=FileSystemLoader(items_manager.THIS_DIR + "/template/"), trim_blocks=True)
     ProcessedFormBonus.load_template(j2_env)
 
     serialization_class = serialize_items(item_list, job_list, bonus_types_js, args_result.edit)
