@@ -36,6 +36,8 @@ for item_to_remove in items_to_remove:
         bonus.extend(item_list[item_to_remove[0]]['Bonus'])
         rewritten_bonus[item_to_remove[1]] = bonus
         replacement_for_set[item_to_remove[0]] = item_to_remove[1]
+    else:
+        replacement_for_set[item_to_remove[0]] = None
 
 
 def rewrite_function(line, parameters_list):
@@ -62,7 +64,7 @@ f.write(new_propItemContent)
 f.close()
 
 # Set replacement
-if len(replacement_for_set) != 0:
+if len(replacement_for_set) != 0:  # Which should always be true is this is started
     def copy(line, data):
         data.append(line)
 
@@ -71,12 +73,14 @@ if len(replacement_for_set) != 0:
             data.append(line)
             return
 
+        if replacement_for_set[item_id] is None:
+            return
+
         new_line = "\t\t" + replacement_for_set[item_id] + "\t" + part_item + "\n"
         data.append(new_line)
 
     new_content = items_manager.read_prop_item_etc([], copy, on_receive_item_id=on_receive_item_id)
 
-    #print(new_content)
     f = open(items_manager.modifiedPropItemEtc(), "w+", encoding="utf-16-le")
     f.write("".join(new_content))
     f.close()
