@@ -1,26 +1,40 @@
-# propItem to HTML
+# PropHtml
 
-"I should probably gives this folder its own repo, and replace the dictionnary abuse with class."
+aka "I have no idea about how to call a group of python script that enables conversion between propItem.txt and cie files and html files"
 
 ## Goal
 
 ### main.py
 
-Generate a nice html file with the list of icons, id, weapon name, required job, required level and given bonus.
+This script builds html page from your propItem.txt file and some other files.
 
-It uses the propItem.txt file and some other files (including some .c file) so your Source is expected to not be too much differently organized from a regular v15 source.
+Some example :
+- http://sflyff.fr/items/
+- http://sflyff.fr/items/armor_list.html
 
-An example generated file can be seen here http://sflyff.fr/items/
+It also enables to build page suitable for editing bonus. (see modify_bonus to learn about how to use the textarea section)
 
-You need to convert yourself the .dss images in a .png format and put them in the Item folder in the same folder as the generated html file.
-
-
-It uses the configuration file found as "config.txt" to determine the project parameters.
-
-It also uses args parameters. Just type `python3 main.py -h` to get a cool arg list as I just learned about argparse.
+- http://sflyff.fr/items/item_list_IK3_ZEMBARUNA.htm
 
 
-## delete_items_2.py
+#### Usage
+
+`python3 main.py -h`
+
+#### Warnings
+
+- Jinja2 is used to generate the pages : `pip install Jinja2`
+
+- You need to convert yourself the .dss images in a .png format and put them in the generated/Item/ folder.
+
+- It uses the propItem.txt file and some other files (including some .c file) so your Source is expected to not be too much differently organized from a regular v15 source.
+
+- It uses the configuration file found as "config.txt" to determine the project parameters.
+
+
+## The place where readme content that needs to be rewriten go
+
+### delete_items_2.py
 
 Reads `items_to_remove.txt`
 
@@ -36,10 +50,9 @@ A weapon can only receive bonus from one other weapon per pass. Order is not imp
 
 This system should also work with other items
 
-The new propItem will be written as a file named `newPropItem.txt``
 
 
-## modify_bonus.py
+### modify_bonus.py
 
 Reads changed_bonus.txt and apply its change to propItem
 
@@ -52,7 +65,7 @@ The results is a new propItem.txt file is this directory which is the same as th
 
 It makes easier to modify bonus without the hassle of remembering DST names and modifying weapons dissiminated in a file.
 
-## Usage
+### Usage
 
 `python main.py /path/to/resource/folder NameOfYourPropItemFile NumberOfParameters(3 by default)`
 
@@ -60,12 +73,12 @@ Check the first lines of the py file to modify the base values.
 
 By using JS as the first argument of `python main.py`, it will generate html files for every 
 
-## Requirements
 
-Jinja2 is used to generate the pages : `pip install Jinja2`
 
 ## Licence
 
-This subproject includes JQuery 3.3.1 which is distributed under the MIT Licence. You can read its licence here : https://jquery.org/license
+The whole project is distributed under the MIT Licence.
 
-The project itself is also distributed under the MIT Licence.
+jQuery is used and included, but conveniently, jQuery 3.3.1 is also licenced under the MIT Licence : https://jquery.org/license
+
+If you are bothered with the MIT Licence, [you can find one version under the WTFPL licence except for the jQuery part](https://github.com/SPSquonK/FlyFFPythonTransform/tree/c6767443912141a399a50d82223a9bd6bb228fe1/propItemToHtml).
