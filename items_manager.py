@@ -284,7 +284,10 @@ if __name__ == '__main__':
     print(get_item_list())
 
 
-def read_prop_item_etc(data, on_syntax_sugar, on_receive_set_id, on_receive_item_id, on_receive_bonus,
+def read_prop_item_etc(data, on_syntax_sugar,
+                       on_receive_set_id=None,
+                       on_receive_item_id=None,
+                       on_receive_bonus=None,
                        on_start_bonus=None):
     """
         This function uses a pseudo automata to read the propItemEtc.inc file.
@@ -305,6 +308,19 @@ def read_prop_item_etc(data, on_syntax_sugar, on_receive_set_id, on_receive_item
           An action that is called  when a line like "DST_STR 7 2" is seen that means
           "this set gives 7 str with 2 parts"
     """
+
+    # None acceptance
+    if on_receive_set_id is None:
+        def on_receive_set_id(l, d, _a, _b):
+            on_syntax_sugar(l, d)
+
+    if on_receive_item_id is None:
+        def on_receive_item_id(l, d, _a, _b, _c, _d):
+            on_syntax_sugar(l, d)
+
+    if on_receive_bonus is None:
+        def on_receive_bonus(l, d, _a, _b, _c, _d, _e):
+            on_syntax_sugar(l, d)
 
     # It's basically a bad automata but I'm too lazy to find one or properly develop one
     # states = ['SetItem', '/*', 'SetItem{', 'ElemOrAvail', 'Elem{', 'InElem', 'Avail{', 'InAvail']
@@ -420,7 +436,7 @@ def rewrite_prop_item(prop_item_file, rewrite_function):
                     item_manager['EXPECTED_LENGTH'] = len(parameters_list)
 
             rewritten_line = rewrite_function(line, parameters_list)
-            if rewrite_function is not None:
+            if rewritten_line is not None:
                 new_content.append(rewritten_line)
 
     return new_content

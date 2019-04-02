@@ -41,8 +41,6 @@ with open(items_manager.THIS_DIR + "changed_bonus.txt") as f:
             parts_nb = split[3]
             modified_sets[(int(male_id), int(parts_nb))] = new_bonus
             modified_sets[(int(female_id), int(parts_nb))] = new_bonus
-
-            print("Set detected : " + str(split))
         else:
             composed_item = id.find("__II_ARM")
             if composed_item == -1:

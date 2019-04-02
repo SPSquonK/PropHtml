@@ -24,6 +24,7 @@ with open(items_manager.THIS_DIR + "items_to_remove.txt") as f:
 
 delete_items = []
 rewritten_bonus = {}
+replacement_for_set = {}
         
 for item_to_remove in items_to_remove:
     delete_items.append(item_to_remove[0])
@@ -34,6 +35,7 @@ for item_to_remove in items_to_remove:
         bonus.extend(item_list[item_to_remove[1]]['Bonus'])
         bonus.extend(item_list[item_to_remove[0]]['Bonus'])
         rewritten_bonus[item_to_remove[1]] = bonus
+        replacement_for_set[item_to_remove[0]] = item_to_remove[1]
 
 
 def rewrite_function(line, parameters_list):
@@ -53,9 +55,28 @@ def rewrite_function(line, parameters_list):
 
 
 new_propItemContent = items_manager.rewrite_prop_item(items_manager.getPropItemPath(), rewrite_function)
+new_propItemContent = "\n".join(new_propItemContent)
 
 f = open(items_manager.modifiedPropItem(), "w+", encoding="ansi")
-f.write("\n".join(new_propItemContent))
+f.write(new_propItemContent)
 f.close()
 
-# TODO : deleted item with replacement have to also be rewritten in propItemEtc
+# Set replacement
+if len(replacement_for_set) != 0:
+    def copy(line, data):
+        data.append(line)
+
+    def on_receive_item_id(line, data, _set_id, _a, item_id, part_item):
+        if item_id not in replacement_for_set:
+            data.append(line)
+            return
+
+        new_line = "\t\t" + replacement_for_set[item_id] + "\t" + part_item + "\n"
+        data.append(new_line)
+
+    new_content = items_manager.read_prop_item_etc([], copy, on_receive_item_id=on_receive_item_id)
+
+    #print(new_content)
+    f = open(items_manager.modifiedPropItemEtc(), "w+", encoding="utf-16-le")
+    f.write("".join(new_content))
+    f.close()
