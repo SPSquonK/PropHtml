@@ -56,6 +56,14 @@ def modifiedPropItem():
     return getPropItemPath() if configuration['modifyInPlace'] else THIS_DIR + configuration['propItem']
 
 
+def modifiedPropItemEtc():
+    global configuration
+    load_configuration()
+
+    base_path = path() if configuration['modifyInPlace'] else THIS_DIR
+    return base_path + "propItemEtc.inc"
+
+
 def adjustForLEVTSZF():
     global configuration
     load_configuration()
@@ -276,7 +284,8 @@ if __name__ == '__main__':
     print(get_item_list())
 
 
-def read_prop_item_etc(data, on_syntax_sugar, on_receive_set_id, on_receive_item_id, on_receive_bonus):
+def read_prop_item_etc(data, on_syntax_sugar, on_receive_set_id, on_receive_item_id, on_receive_bonus,
+                       on_start_bonus=None):
     """
         This function uses a pseudo automata to read the propItemEtc.inc file.
         Its purpose is to bind set related lines to action.
@@ -370,6 +379,8 @@ def read_prop_item_etc(data, on_syntax_sugar, on_receive_set_id, on_receive_item
             else:
                 on_syntax_sugar(line, data)
                 state = auto_next_state[state]
+                if state == 'InAvail' and on_start_bonus is not None:
+                    on_start_bonus(data, last_seen_id, last_seen_etc)
 
     return data
 

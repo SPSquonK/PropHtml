@@ -33,26 +33,26 @@ with open(items_manager.THIS_DIR + "changed_bonus.txt") as f:
         while len(new_bonus) != items_manager.nb_param():
             new_bonus.append(("=", "="))
 
-        composed_item = id.find("__II_ARM")
-        is_a_set = id.startswith("SET_")
-        if composed_item == -1:
-            modified_items[id] = new_bonus
-        elif is_a_set:
+        if id.startswith("SET_"):
             split = id.split("_")
             assert(len(split) == 4)
             male_id = split[1]
             female_id = split[2]
             parts_nb = split[3]
-            modified_sets[(male_id, female_id, parts_nb)] = new_bonus
+            modified_sets[(int(male_id), int(parts_nb))] = new_bonus
+            modified_sets[(int(female_id), int(parts_nb))] = new_bonus
+
+            print("Set detected : " + str(split))
         else:
-            male_id = id[0:composed_item]
-            female_id = id[composed_item + 2:]
+            composed_item = id.find("__II_ARM")
+            if composed_item == -1:
+                modified_items[id] = new_bonus
+            else:
+                male_id = id[0:composed_item]
+                female_id = id[composed_item + 2:]
 
-            print(composed_item + " is " + male_id + " + " + female_id)
-            exit(0)
-
-            modified_items[male_id] = new_bonus
-            modified_items[female_id] = new_bonus
+                modified_items[male_id] = new_bonus
+                modified_items[female_id] = new_bonus
 
 
 if len(modified_items) != 0:
@@ -78,9 +78,33 @@ if len(modified_items) != 0:
 
 
 if len(modified_sets) != 0:
-    # TODO : finish this
-    pass
+    def copy(line, data):
+        data.append(line)
 
+    def copy_4arg(line, data, _a, _b):
+        copy(line, data)
 
+    def copy_6arg(line, data, _a, _b, _c, _d):
+        copy(line, data)
 
+    def on_start_bonus(data, last_seen_id, _last_seen_etc):
+        for nb_part in [2, 3, 4]:
+            if (int(last_seen_id), nb_part) in modified_sets:
+                for bonus in modified_sets[int(last_seen_id), nb_part]:
+                    if bonus[0] == "=":
+                        continue
 
+                    line = "\t\t" + str(bonus[0]) + "\t" + str(bonus[1]) + "\t" + str(nb_part) + "\n"
+                    data.append(line)
+
+    def on_receive_bonus(line, data, last_seen_id, _a, _dst, _value, required_parts):
+        if (int(last_seen_id), required_parts) in modified_sets:
+            pass
+        else:
+            data.append(line)
+
+    rewritten_file = items_manager.read_prop_item_etc([], copy, copy_4arg, copy_6arg, on_receive_bonus, on_start_bonus)
+
+    f = open(items_manager.modifiedPropItemEtc(), "w+", encoding="utf-16-le")
+    f.write("".join(rewritten_file))
+    f.close()
