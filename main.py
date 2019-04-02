@@ -551,6 +551,109 @@ def read_raw_data_set():
     return d
 
 
+# on_syntax_sugar is called at every line where another function is not called
+# on_syntax_sugar : line
+# on_receive_set_id : line, int (set id), str (set name)
+# on_receive_item_id : line, str (item name), str (part name)
+# on_receive_bonus : line, str (dst), int (quantity), int (number of needed parts)
+def rrds(data, on_syntax_sugar, on_receive_set_id, on_receive_item_id, on_receive_bonus):
+    # It's basically a bad automata but I'm too lazy to find one or properly develop one
+    # states = ['SetItem', '/*', 'SetItem{', 'ElemOrAvail', 'Elem{', 'InElem', 'Avail{', 'InAvail']
+    d = {}
+    state = 'SetItem'
+
+    auto_next_state = {
+        'SetItem{': 'ElemOrAvail',
+        'Elem{': 'InElem',
+        'Avail{': 'InAvail',
+    }
+
+    last_seen_id = ''
+    last_seen_etc = ''
+
+    with open(items_manager.path() + "propItemEtc.inc", encoding="utf-16-le") as f:
+        for line in f.readlines():
+            if state == 'SetItem':
+                if line.startswith('/*'):
+                    on_syntax_sugar(line)
+                    state = '/*'
+                else:
+                    m = re.findall("\\s*SetItem\\s*([0-9]*)\\s*([A-Z0-9_a-z]*)(\\s*.*)?", line)
+                    if m is not None and len(m) > 0:
+                        on_receive_set_id(line, data, m[0][0], m[0][1])
+                        last_seen_id = m[0][0]
+                        last_seen_etc = m[0][1]
+                        state = 'SetItem{'
+                    else:
+                        on_syntax_sugar(line)
+            elif state == '/*':
+                on_syntax_sugar(line)
+                if line.find('*/') != -1:
+                    state = 'SetItem'
+            elif state == 'ElemOrAvail':
+                on_syntax_sugar(line)
+                if line.find('Elem') != -1:
+                    state = 'Elem{'
+                elif line.find('Avail') != -1:
+                    state = 'Avail{'
+                elif line.find('}') != -1:
+                    state = 'SetItem'
+                else:
+                    print("LINE = [" + line + "]")
+                    raise Exception('Unexpected line in state ' + state)
+            elif state == 'InElem':
+                if line.find('}') != -1:
+                    on_syntax_sugar(line)
+                    state = 'ElemOrAvail'
+                else:
+                    r = '([A-Za-z_0-9]+)'
+                    r = r + "\\s*" + r
+                    m = re.findall(r, line)
+
+                    if m is not None and len(m) > 0:
+                        on_receive_item_id(line, data, last_seen_id, last_seen_etc, m[0][0], m[0][1])
+                    else:
+                        on_syntax_sugar(line)
+            elif state == 'InAvail':
+                if line.find('}') != -1:
+                    state = 'ElemOrAvail'
+                    on_syntax_sugar(line)
+                else:
+                    regex = '([A-Za-z_0-9]*)\\s*([0-9]*)\\s*([0-9])'
+                    result = re.findall(regex, line)
+
+                    if result is not None and len(result) > 0:
+                        on_receive_bonus(line, data, last_seen_id, last_seen_etc,
+                                         result[0][0], result[0][1], int(result[0][2]))
+                    else:
+                        on_syntax_sugar(line)
+
+            else:
+                on_syntax_sugar(line)
+                state = auto_next_state[state]
+
+    return d
+
+def read_raw_data_set2():
+    data = {}
+
+    def on_syntax_sugar(line):
+        pass
+
+    def on_receive_set_id(line, d, set_id, set_etc):
+        d[set_etc] = {'parts': [], 'bonus': [], 'set_id': set_id}
+
+    def on_receive_item_id(line, d, last_id, last_etc, item_id, part_id):
+        d[last_etc]['parts'].append(item_id)
+
+    def on_receive_bonus(line, d, last_id, last_etc, bonus_dst, bonus_value, number_of_parts):
+        d[last_etc]['bonus'].append((int(number_of_parts), bonus_dst, bonus_value))
+
+    rrds(data, on_syntax_sugar, on_receive_set_id, on_receive_item_id, on_receive_bonus)
+
+    return data
+
+
 def write_set_name(raw_data):
     def replacement(identifier, value):
         if identifier in raw_data:
@@ -570,7 +673,7 @@ def serialize_bonus(raw_data, bonus_types, bonus_types_rate):
 
 
 def read_existing_sets(bonus_types, bonus_types_rate):
-    raw_data = read_raw_data_set()
+    raw_data = read_raw_data_set2()
     write_set_name(raw_data)
     serialize_bonus(raw_data, bonus_types, bonus_types_rate)
 
