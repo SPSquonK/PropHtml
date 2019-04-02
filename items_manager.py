@@ -274,3 +274,101 @@ def value_of_job(job_name):
 if __name__ == '__main__':
     load_configuration()
     print(get_item_list())
+
+
+def read_prop_item_etc(data, on_syntax_sugar, on_receive_set_id, on_receive_item_id, on_receive_bonus):
+    """
+        This function uses a pseudo automata to read the propItemEtc.inc file.
+        Its purpose is to bind set related lines to action.
+
+        The args function are not required to return anything. The used data is the object passed as an argument of this
+        function. It can be anything that makes sense to solve your problem.
+
+        Returns the given data parameter
+
+        on_syntax_sugar(line, data) :
+          An action that is called on every line that doesn't action other actionner
+        on_receive_set_id(line, data, set_id, set_etc) :
+          An action that is called when a line like "SetItem set_id set_etc" is read
+        on_receive_item_id(line, data, last_seen_id, last_seen_etc, item_id, part_name) :
+          An action that is called when in a SetItem block, a line like "II_ARM_ARMOR_ID PART_UPPER" is read
+        on_receive_bonus(line, data, last_seen_id, last_seen_etc, dst, value, required_parts) :
+          An action that is called  when a line like "DST_STR 7 2" is seen that means
+          "this set gives 7 str with 2 parts"
+    """
+
+    # It's basically a bad automata but I'm too lazy to find one or properly develop one
+    # states = ['SetItem', '/*', 'SetItem{', 'ElemOrAvail', 'Elem{', 'InElem', 'Avail{', 'InAvail']
+    state = 'SetItem'
+
+    auto_next_state = {
+        'SetItem{': 'ElemOrAvail',
+        'Elem{': 'InElem',
+        'Avail{': 'InAvail',
+    }
+
+    last_seen_id = ''
+    last_seen_etc = ''
+
+    with open(path() + "propItemEtc.inc", encoding="utf-16-le") as f:
+        for line in f.readlines():
+            if state == 'SetItem':
+                if line.startswith('/*'):
+                    on_syntax_sugar(line, data)
+                    state = '/*'
+                else:
+                    m = re.findall("\\s*SetItem\\s*([0-9]*)\\s*([A-Z0-9_a-z]*)(\\s*.*)?", line)
+                    if m is not None and len(m) > 0:
+                        on_receive_set_id(line, data, m[0][0], m[0][1])
+                        last_seen_id = m[0][0]
+                        last_seen_etc = m[0][1]
+                        state = 'SetItem{'
+                    else:
+                        on_syntax_sugar(line, data)
+            elif state == '/*':
+                on_syntax_sugar(line, data)
+                if line.find('*/') != -1:
+                    state = 'SetItem'
+            elif state == 'ElemOrAvail':
+                on_syntax_sugar(line, data)
+                if line.find('Elem') != -1:
+                    state = 'Elem{'
+                elif line.find('Avail') != -1:
+                    state = 'Avail{'
+                elif line.find('}') != -1:
+                    state = 'SetItem'
+                else:
+                    print("LINE = [" + line + "]")
+                    raise Exception('Unexpected line in state ' + state)
+            elif state == 'InElem':
+                if line.find('}') != -1:
+                    on_syntax_sugar(line, data)
+                    state = 'ElemOrAvail'
+                else:
+                    r = '([A-Za-z_0-9]+)'
+                    r = r + "\\s*" + r
+                    m = re.findall(r, line)
+
+                    if m is not None and len(m) > 0:
+                        on_receive_item_id(line, data, last_seen_id, last_seen_etc, m[0][0], m[0][1])
+                    else:
+                        on_syntax_sugar(line, data)
+            elif state == 'InAvail':
+                if line.find('}') != -1:
+                    state = 'ElemOrAvail'
+                    on_syntax_sugar(line, data)
+                else:
+                    regex = '([A-Za-z_0-9]*)\\s*([0-9]*)\\s*([0-9])'
+                    result = re.findall(regex, line)
+
+                    if result is not None and len(result) > 0:
+                        on_receive_bonus(line, data, last_seen_id, last_seen_etc,
+                                         result[0][0], result[0][1], int(result[0][2]))
+                    else:
+                        on_syntax_sugar(line, data)
+
+            else:
+                on_syntax_sugar(line, data)
+                state = auto_next_state[state]
+
+    return data
