@@ -57,3 +57,5 @@ new_propItemContent = items_manager.rewrite_prop_item(items_manager.getPropItemP
 f = open(items_manager.modifiedPropItem(), "w+", encoding="ansi")
 f.write("\n".join(new_propItemContent))
 f.close()
+
+# TODO : deleted item with replacement have to also be rewritten in propItemEtc
