@@ -19,8 +19,17 @@ with open(items_manager.THIS_DIR + "items_to_remove.txt") as f:
         m = re.findall(items_manager.ITEM_REGEX, line)
         
         if len(m) != 0:
-            items_to_remove.append(m)
+            if m[0].startswith("II_ARM_X_"):
+                def replace(new_prefix, read_list):
+                    new_list = read_list[:]
+                    for i in range(len(new_list)):
+                        new_list[i] = new_prefix + new_list[i][len("II_ARM_X_"):]
+                    return new_list
 
+                items_to_remove.append(replace("II_ARM_M_", m))
+                items_to_remove.append(replace("II_ARM_F_", m))
+            else:
+                items_to_remove.append(m)
 
 delete_items = []
 rewritten_bonus = {}
