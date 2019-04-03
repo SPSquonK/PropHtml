@@ -2,6 +2,10 @@ import re
 import items_manager
 
 
+# SPECIAL CASE :
+# II_ARM_M_ELE_$05 -> will remove every II_ARM_(M|F)_(HELMET|SUIT|GAUNTLET|BOOTS)05 item
+# II_ARM_M_MAG_$0101 II_ARM_M_ACR_$_SET_01 -> will replace with the corresponding acr set 01
+
 item_manager = items_manager.get_item_manager()
 item_list = items_manager.get_item_list()
 
@@ -16,18 +20,31 @@ with open(items_manager.THIS_DIR + "items_to_remove.txt") as f:
         if line is None or len(line) == 0:
             continue
         
-        m = re.findall(items_manager.ITEM_REGEX, line)
-        
-        if len(m) != 0:
-            if m[0].startswith("II_ARM_X_"):
-                def replace(new_prefix, read_list):
-                    new_list = read_list[:]
-                    for i in range(len(new_list)):
-                        new_list[i] = new_prefix + new_list[i][len("II_ARM_X_"):]
-                    return new_list
+        m = re.findall("([A-Za-z0-9$_]+)", line)
 
-                items_to_remove.append(replace("II_ARM_M_", m))
-                items_to_remove.append(replace("II_ARM_F_", m))
+        if len(m) != 0:
+            dollar_pos = m[0].find("$")
+
+            if dollar_pos != -1:
+                dollars = [x.find("$") for x in m]
+
+                sets = ["HELMET", "SUIT", "GAUNTLET", "BOOTS"]
+                prefix = ["II_ARM_M_", "II_ARM_F"]
+
+                def apply(match_content, part_name, prefix):
+                    content = []
+
+                    for i in range(len(match_content)):
+                        x = match_content[i]
+                        n = prefix + x[len(prefix):dollars[i]] + part_name + x[dollars[i] + 1:]
+                        content.append(n)
+
+                    print(content)
+                    return content
+
+                for s in sets:
+                    for p in prefix:
+                        items_to_remove.append(apply(m, s, p))
             else:
                 items_to_remove.append(m)
 
