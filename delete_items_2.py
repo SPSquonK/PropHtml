@@ -39,7 +39,7 @@ with open(items_manager.THIS_DIR + "items_to_remove.txt") as f:
                         n = prefix + x[len(prefix):dollars[i]] + part_name + x[dollars[i] + 1:]
                         content.append(n)
 
-                    print(content)
+                    print(content[0])
                     return content
 
                 for s in sets:
