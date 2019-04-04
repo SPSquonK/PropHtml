@@ -1,0 +1,42 @@
+II_ARM_M_VAG_$02	Tenue Ecaille	Tenue de Soie
+II_ARM_M_ASS_$0201 	Tenue Gale	Tenue Iris
+II_ARM_M_ACR_$0201	Tenue Vilet	Tenue Vaindiec
+II_ARM_M_MAG_$0201	Tenue Shuffle	Tenue Jay
+II_ARM_M_MER_$0201	Tenue Fortune	Tenue Puissance
+II_ARM_M_BLA_$02	Tenue Darkin	Tenue Darkomet
+II_ARM_M_KIN_$02	Tenue Keimay	Tenue Keriphis
+II_ARM_M_ELE_$02	Tenue Uon	Tenue Urante
+II_ARM_M_JST_$02	Tenue Henen	Tenue Heintis
+II_ARM_M_BIL_$02	Tenue Oriene	Tenue Orgon
+II_ARM_M_RIN_$02	Tenue Mectic	Tenue Mecarine
+II_ARM_M_RAG_$02	Tenue Grantus	Tenue Grentio
+II_ARM_M_PSY_$02	Tenue Rendaic	Tenue Rensylien
+II_ARM_M_ASS_$08	Tenue Beok	Tenue Sigel
+II_ARM_M_ASS_$10	Tenue Dian	Tenue Vin
+II_ARM_M_ACR_$08	Tenue Touflak	Tenue Touthyeto
+II_ARM_M_ACR_$10	Tenue Silven	Tenue Silusia
+II_ARM_M_MAG_$08	Tenue Hagal	Tenue Lune Bleue
+II_ARM_M_MAG_$10	Tenue Maclir	TEnue Idunn
+II_ARM_M_MER_$08	Tenue Koon	TEnue Prato
+II_ARM_M_MER_$10	Tenue Hodr	Tenue Shuema
+II_ARM_M_BLA_$08	Tenue Huedom	Tenue Huaris
+II_ARM_M_KIN_$08	Tenue Revantu	Tenue Ecarlate
+II_ARM_M_ELE_$08	Tenue Hyusein	Tenue Hyupirein
+II_ARM_M_JST_$08	Tenue Decasron	Tenue Merian
+II_ARM_M_BIL_$08	Tenue Snaic	Tenue Srehios
+II_ARM_M_RIN_$08	Tenue Lordyin	Tenue Lohendiff
+II_ARM_M_RAG_$08	Tenue Mithril	Tenue Rhenia
+II_ARM_M_PSY_$08	Tenue Kaharn	Tenue Kafoneka
+II_ARM_M_ASS_SET01$	Tenue Rashadain	Tenue Yuandain
+II_ARM_M_ACR_SET01$	Tenue Rorend	Tenue Rorient
+II_ARM_M_MAG_SET01$	Tenue Forgiel	Tenue Seidel
+II_ARM_M_MER_SET01$	Tenue Shamutra	Tenue Shaentra
+-- Include to Mythical
+II_ARM_M_BLA_$10
+II_ARM_M_KIN_$10
+II_ARM_M_ELE_$10
+II_ARM_M_JST_$10
+II_ARM_M_BIL_$10
+II_ARM_M_RIN_$10
+II_ARM_M_RAG_$10
+II_ARM_M_PSY_$10
