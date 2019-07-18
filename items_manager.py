@@ -383,7 +383,7 @@ def read_prop_item_etc(data, on_syntax_sugar,
                     state = 'ElemOrAvail'
                     on_syntax_sugar(line, data)
                 else:
-                    regex = '([A-Za-z_0-9]*)\\s*([0-9]*)\\s*([0-9])'
+                    regex = '([A-Za-z_0-9]*)\\s*(-?[0-9]*)\\s*(-?[0-9])'
                     result = re.findall(regex, line)
 
                     if result is not None and len(result) > 0:
