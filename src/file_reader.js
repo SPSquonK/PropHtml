@@ -1,6 +1,5 @@
 const fs = require('fs');
 var iconvlite = require('iconv-lite');
-const Papa = require('papaparse');
 
 function r(s) {
     let ss = s.replace('\x00', '').replace('\r', '').replace('\t', ' ');
@@ -121,9 +120,165 @@ function readItems(path) {
     return items;
 }
 
+function readDSTMapping(path) {
+    const DST_STRING = "static DST_STRING g_DstString[] =";
+    const DST_RATE = "static int nDstRate[] = {";
+
+    let where = "Nowhere";
+
+    let g_DstString = [];
+    let nDstRate = [];
+
+    for (const line_ of _readFile(path)) {
+        let line = line_.trim();
+
+        let comment = line.indexOf("//");
+        if (comment !== -1) line = line.substr(0, comment).trim();
+
+        if (line == "") continue;
+        if (line.startsWith("#")) continue;
+
+        if (where == "Nowhere") {
+            if (line == DST_STRING) {
+                where = "String";
+            } else if (line == DST_RATE) {
+                where = "Rate";
+            }
+        } else if (where == "String") {
+            if (line == "};") {
+                where = "Nowhere";
+            } else if (line == "{") {
+                // noop
+            } else {
+                line.split(",")
+                    .map(s => s.trim())
+                    .filter(x => x != '')
+                    .forEach(x => g_DstString.push(x));
+            }
+        } else if (where == "Rate") {
+            if (line == "};") {
+                where = "Nowhere";
+            } else {
+                line.split(",")
+                    .map(s => s.trim())
+                    .filter(x => x != '' && x != '0')
+                    .forEach(x => nDstRate.push(x));
+            }
+        }
+    }
+
+    return {
+        dstStrings: (() => {
+            let xs = {};
+            for (let i = 0 ; i < g_DstString.length - 1 ; i += 2) {
+                if (g_DstString[i] === '0' || g_DstString[i + 1] === '0') {
+                    continue;
+                }
+
+                xs[g_DstString[i]] = g_DstString[i + 1];
+            }
+            return xs;
+        })(),
+        dstRates: new Set(nDstRate)
+    };
+}
+
+function textClient(inc, txttxt) {
+    const mapping = readStrings(txttxt);
+
+    const scanner = new Scanner(_readFile(inc).join('\n'));
+
+    let result = {};
+
+    while (true) {
+        const tid = scanner.getString();
+
+        if (tid === null) break;
+
+        const color        = scanner.getString();
+        const openBracket  = scanner.getString();
+        const ids          = scanner.getString();
+        const closeBracket = scanner.getString();
+
+
+        if (openBracket !== '{' || closeBracket !== '}'
+            || ids === null || !ids.startsWith("IDS_")) {
+            
+            throw Error("Unexpected format near "
+            + `${tid} ${color} ${openBracket} ${ids} ${closeBracket}`);
+        }
+
+        const v = mapping[ids];
+        result[tid] = v !== undefined ? v : ids;
+    }
+    
+    return result;
+}
+
+
+class Scanner {
+    static readFile(path) {
+        return new Scanner(readFile(path).join("\n"));
+    }
+
+    constructor(content) {
+        this.tokens = content.split("\n")
+            .map(x => {
+                const comment = "//";
+                const commentIndex = x.indexOf(comment);
+                if (commentIndex == -1) return x;
+                return x.substr(0, commentIndex);
+            })
+            .filter(x => x != '')
+            .flatMap(tokenize);
+
+        // Remove weird character
+        if (this.tokens[0] == "ÿþ") {
+            this.tokens.splice(0, 1);
+        }
+
+        // Remove /* */ comments
+        let last = 0;
+        while (true) {
+            const open = this.tokens.indexOf("/*", last);
+            if (open === -1) break;
+
+            last = open;
+
+            const close = this.tokens.indexOf("*/", last);
+
+            if (close === -1) {
+                this.tokens.splice(open, this.tokens.length - open);
+            } else {
+                this.tokens.splice(open, close - open + 1);
+            }
+        }
+
+        this.i = 0;
+    }
+
+    all_tokens() {
+        return this.tokens;
+    }
+
+    getString() {
+        if (this.i == this.tokens.length) {
+            return null;
+        }
+
+        const token = this.tokens[this.i];
+        ++this.i;
+        return token;
+    }
+
+
+}
 
 module.exports = {
+    readFile: _readFile,
+    tokenize: tokenize,
     readStrings,
-    readItems
-
+    readItems,
+    readDSTMapping,
+    textClient
 }

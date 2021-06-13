@@ -16,5 +16,5 @@ table
       td #{weapon.name}
       td #{weapon.job}
       td #{weapon.level !== 0 ? weapon.level : ""}
-      td !{weapon.bonus.filter(x => x !== undefined).map(([dst, val]) => dst + " " + (val >= 0 ? "+" : "") + val).join("<br>")}
+      td !{weapon.bonus.filter(x => x !== undefined).map(bonusToString).join("<br>")}
     
