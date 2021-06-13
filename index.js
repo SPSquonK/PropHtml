@@ -1,10 +1,12 @@
 const conf = require('dotenv').config()
 const express = require('express');
+const fs = require('fs');
 const path = require('path');
 const pug = require('pug');
 const port = 3000;
 
 const FR = require('./src/file_reader');
+const itemPropFactory = require('./src/itemProp');
 
 function loadResources() {
     function p(file) {
@@ -28,43 +30,36 @@ const KnownIndexes = {
     'IK2': 6,
     'IK3': 7,
     'JOB': 8,
-    'ICON': 121,
-    'DESCRIPTION': 123
+    'HANDS': 16,
+    'RANK': 91,
+    'LEVEL': 116,
+    'ICON': 120,
+    'DESCRIPTION': 123,
+    parseBonuses: item => {
+        const pairs = [ [53, 56], [54, 57], [55, 58] ];
+
+        return pairs.map(
+            ([dst, value]) => {
+                if (item[dst] === "=" || item[value] === "=") {
+                    return undefined;
+                }
+
+                return [item[dst], parseInt(item[value])];
+            });
+    }
 };
 
+const items = itemPropFactory(resources, KnownIndexes);
+
 function extractWeapons(ik3) {
-    const result = {
+    return {
         weaponname: ik3,
-        weapons: []
+        weapons: items.filter(item => item.ik3 === ik3)
     };
-
-    //// To be able to better see the fields repartition
-    //for (const item of resources.items) {
-    //    if (item.indexOf(ik3) !== -1) {
-    //
-    //        for (const [index, value] of Object.entries(item)) {
-    //            console.log(`${index}: ${value}`);
-    //        }
-    //
-    //        break;
-    //    }
-    //}
-
-    resources.items.forEach(item => {
-        if (item[KnownIndexes.IK3] != ik3) return;
-
-        result.weapons.push({
-            icon: "???",
-            identifier: item[KnownIndexes.ID],
-            name: item[KnownIndexes.TID],
-            job_name: item[KnownIndexes.JOB],
-            level: "???",
-            bonus_serialization: "???"
-        });
-    });
-
-    return result;
 }
+
+
+/* ==== WEB SERVER ==== */
 
 const app = express();
 
@@ -76,7 +71,6 @@ app.get('/', (_, res) => {
     const weapon = pug.compileFile('pug/weapon.pug');
 
     let content = "";
-
     content += weapon(extractWeapons("IK3_SWD"));
 
     const mainPage = pug.compileFile('pug/index.pug');
