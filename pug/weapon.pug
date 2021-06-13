@@ -1,0 +1,19 @@
+h2 #{weaponname}
+
+table
+  tr
+    th Icone
+    th ID
+    th Nom
+    th Classe
+    th Niveau
+    th Bonus
+  each weapon in weapons
+    tr
+      td
+        img(src!=`icons/ ${weapon.icon}`)
+      td #{weapon.identifier}
+      td #{weapon.name}
+      td #{weapon.job_name}
+      td #{weapon.real_level}
+      td #{weapon.bonus_serialization}

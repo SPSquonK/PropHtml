@@ -1,0 +1,26 @@
+{
+  "name": "prophtml",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SPSquonK/PropHtml.git"
+  },
+  "author": "SP SquonK <sp@sqk.fr>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SPSquonK/PropHtml/issues"
+  },
+  "homepage": "https://github.com/SPSquonK/PropHtml#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "iconv-lite": "^0.4.24",
+    "papaparse": "^5.3.1",
+    "pug": "^3.0.2"
+  }
+}
