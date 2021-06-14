@@ -4,9 +4,12 @@ const fs = require('fs');
 const path = require('path');
 const pug = require('pug');
 const port = 3000;
+const { PNG } = require('pngjs');
 
 const FR = require('./src/file_reader');
 const itemPropFactory = require('./src/itemProp');
+
+const sdds = require('sdds');
 
 function loadResources() {
     function p(file) {
@@ -109,4 +112,38 @@ app.get('/', (_, res) => {
     const mainPage = pug.compileFile('pug/index.pug');
     const trueContent = mainPage({ content: content });
     return res.send(trueContent);
+});
+
+
+/**
+ * @param {string} pngImage 
+ */
+function loadConvertedImage(pngImage) {
+    const dds = fs.readFileSync(path.join(conf.parsed.flyff, "Item", pngImage + ".dds"));
+    return sdds(dds);
+}
+
+app.get('/dds/:path', (req, res) => {
+    const filename = req.params['path'];
+
+    if (!filename.endsWith('.png') && !filename.toLowerCase().endsWith('.dds')) {
+        return res.status(404).send("dds only contains png files");
+    }
+
+    const key = filename.substr(0, filename.length - '.png'.length);
+
+    const pngImage = loadConvertedImage(key);
+
+    if (pngImage == null) {
+        return res.status(404).send('no match');
+    } else {
+        let buffer = PNG.sync.write(pngImage);
+
+        res.writeHead(200, {
+            'Content-Type': 'image/png',
+            'Content-Length': buffer.length
+          });
+        
+        res.end(buffer);
+    }
 });
