@@ -103,23 +103,6 @@ function tokenize(str) {
     return result;
 }
 
-function readItems(path) {
-    let items = _readFile(path).map(tokenize);
-
-    let sizes = {};
-    items.map(i => i.length).forEach(i => sizes[i] = sizes[i] == undefined ? 1 : sizes[i] + 1);
-
-    if (Object.keys(sizes).length !== 1) {
-        console.error(sizes);
-
-        items.filter(i => i.length == 12).forEach(i => console.log(i));
-
-        throw Error('Bad parsing of itemProp.txt');
-    }
-
-    return items;
-}
-
 function readDSTMapping(path) {
     // Ugly file parsing
     const { g_DstString, nDstRate } = (() => {
@@ -300,7 +283,6 @@ module.exports = {
     readFile: _readFile,
     tokenize: tokenize,
     readStrings,
-    readItems,
     readDSTMapping,
     textClient
 }

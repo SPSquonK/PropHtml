@@ -14,7 +14,7 @@ table
         img(src!=`dds/${weapon.icon}`)
       td #{weapon.id}
       td #{weapon.name}
-      td #{weapon.job}
+      td #{weapon.jobName}
       td #{weapon.level !== 0 ? weapon.level : ""}
       td !{weapon.bonus.filter(x => x !== undefined).map(bonusToString).join("<br>")}
     

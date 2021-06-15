@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { ItemPropTxt } = require('../src/itemProp');
+const ItemPropTxt = require('../src/itemProp');
 const path = require('path');
 const iconvlite = require('iconv-lite');
 const fs = require('fs');

@@ -7,7 +7,7 @@ const port = 3000;
 const { PNG } = require('pngjs');
 
 const FR = require('./src/file_reader');
-const itemPropFactory = require('./src/itemProp');
+const PropItemTxt = require('./src/itemProp');
 
 const sdds = require('sdds');
 
@@ -19,7 +19,6 @@ function loadResources() {
     const content = {};
     
     content.itemNames = FR.readStrings(p("propItem.txt.txt"))
-    content.items = FR.readItems(p("propItem.txt"));
 
     if (conf.parsed.flyff_src) {
         const r = FR.readDSTMapping(path.join(conf.parsed.flyff_src, "_Interface", "WndManager.cpp"));
@@ -41,38 +40,14 @@ function loadResources() {
         path.join(conf.parsed.flyff, "textClient.txt.txt")
     );
 
+    content.propItems = PropItemTxt.loadFile(path.join(conf.parsed.flyff, "propItem.txt"), content);
+
     return content;
 }
 
 const resources = loadResources();
 
-const KnownIndexes = {
-    'ID': 1,
-    'TID': 2,
-    'IK1': 5,
-    'IK2': 6,
-    'IK3': 7,
-    'JOB': 8,
-    'HANDS': 16,
-    'RANK': 91,
-    'LEVEL': 116,
-    'ICON': 120,
-    'DESCRIPTION': 123,
-    parseBonuses: item => {
-        const pairs = [ [53, 56], [54, 57], [55, 58] ];
-
-        return pairs.map(
-            ([dst, value]) => {
-                if (item[dst] === "=" || item[value] === "=") {
-                    return undefined;
-                }
-
-                return [item[dst], parseInt(item[value])];
-            });
-    }
-};
-
-const items = itemPropFactory(resources, KnownIndexes);
+const items = [...resources.propItems];
 
 function extractWeapons(ik3) {
     return {

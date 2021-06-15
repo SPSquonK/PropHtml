@@ -1,5 +1,6 @@
 const fs = require('fs');
 const iconvlite = require('iconv-lite');
+const FR = require('./file_reader');
 
 /**
  * 
@@ -22,6 +23,33 @@ const iconvlite = require('iconv-lite');
 function stringContainsOneOf(str, symbols) {
     return symbols.find(symbol => str.indexOf(symbol) !== -1) !== undefined;
 }
+
+/** Positions of the fields in a clean v15 propItem.txt */
+const v15fields = {
+    'ID': 1,
+    'TID': 2,
+    'IK1': 5,
+    'IK2': 6,
+    'IK3': 7,
+    'JOB': 8,
+    'HANDS': 16,
+    'RANK': 91,
+    'LEVEL': 116,
+    'ICON': 120,
+    'DESCRIPTION': 123,
+    parseBonuses: item => {
+        const pairs = [ [53, 56], [54, 57], [55, 58] ];
+
+        return pairs.map(
+            ([dst, value]) => {
+                if (item[dst] === "=" || item[value] === "=") {
+                    return undefined;
+                }
+
+                return [item[dst], parseInt(item[value])];
+            });
+    }
+};
 
 class ItemPropTxt {
     static loadFile(path, context) {
@@ -57,7 +85,14 @@ class ItemPropTxt {
             } else if (testLine === '') {
                 this.lines.push(line);
             } else {
-                const item = new ItemProp(line, this);
+                let item;
+                if (context === undefined) {
+                    item = new ItemProp(line, v15fields);
+                } else {
+                    // TODO: pass whole context or modify itemNames to do more fun things
+                    item = new ItemPropInContext(line, v15fields, context.itemNames);
+                }
+
                 this.lines.push(item);
                 this.items.push(item);
             }
@@ -96,88 +131,69 @@ class ItemProp {
     /**
      * 
      * @param {string} line The line from the propItem.txt file
-     * @param {ItemPropTxt} itemPropTxt The ItemPropTxt instance that generated
-     * this ItemProp instance
+     * @param {*} fields Position of the fields
      */
-    constructor(line, itemPropTxt) {
-        this.line = line;
+    constructor(line, fields) {
+        this.content = FR.tokenize(line);
+        this.fields = fields;
 
+        if (this.content.length !== fields.DESCRIPTION + 1) {
+            throw Error(
+                "Item doesn't have " + (fields.DESCRIPTION + 1)
+                + " tokens but " + this.content.length
+            );
+        }
     }
 
     toPropItemString() {
-        return this.line;
+        return this.content.join("\t");
+    }
+
+    get id()    { return this.content[this.fields.ID]; }
+    get tid()   { return this.content[this.fields.TID]; }
+    get ik1()   { return this.content[this.fields.IK1]; }
+    get ik2()   { return this.content[this.fields.IK2]; }
+    get ik3()   { return this.content[this.fields.IK3]; }
+    get job()   { return this.content[this.fields.JOB]; }
+    get icon()  { return _removeQuotes(this.content[this.fields.ICON]); }
+    get bonus() { return this.fields.parseBonuses(this.content); }
+
+    get level() {
+        const rawLevel = this.content[this.fields.LEVEL];
+        if (rawLevel === "=") return 0;
+        return parseInt(rawLevel);
+    }
+
+    /** To be able to better see the fields repartition */
+    saveInNotes(path) {
+        fs.writeFileSync(path,
+            Object.entries(this.content).map(([index, value]) => `${index}: ${value}`).join("\n")
+        );
     }
 }
 
-
-class ItemPropFactory {
-    constructor(context, indexes) {
-        this.context = context;
-        this.indexes = indexes;
+class ItemPropInContext extends ItemProp {
+    constructor(line, fields, tidsToText) {
+        super(line, fields);
+        this.tidsToText = tidsToText;
     }
 
-    /**
-     * 
-     * @param {string[]} itemAsArray 
-     */
-    makeItemProp(itemAsArray) {
-        return {
-            id: itemAsArray[this.indexes.ID],
-            name: this.convertText(itemAsArray[this.indexes.TID], 'itemNames'),
-            ik1: itemAsArray[this.indexes.IK1],
-            ik2: itemAsArray[this.indexes.IK2],
-            ik3: itemAsArray[this.indexes.IK3],
-            job: this.toJobName(itemAsArray[this.indexes.JOB]),
-            level: this.convertLevel(itemAsArray[this.indexes.LEVEL]),
-            icon: _removeQuotes(itemAsArray[this.indexes.ICON]),
-            bonus: this.parseDst(itemAsArray, this.indexes.parseBonuses)
-        };
+    mapText(text) {
+        if (this.tidsToText[text] === undefined) return text;
+        return this.tidsToText[text];
     }
 
-    convertText(str, dictKey) {
-        const val = this.context[dictKey][str];
-        return val !== undefined ? val : str;
-    }
+    get name() { return this.mapText(this.tid); }
 
-    toJobName(jobID) {
-        if (jobID === "=") return "";
-        if (!jobID.startsWith("JOB_")) return jobID;
-        return jobID.substr(4)
+    get jobName() {
+        if (this.job === "=") return "";
+        if (!this.job.startsWith("JOB_")) return this.job;
+        return this.job.substr(4)
             .replace("_", "-")
             .split("-")
             .map(str => str.length === 0 ? "" : str[0] + str.substr(1).toLowerCase())
             .join("-");
     }
-
-    convertLevel(str) {
-        if (str == "=") return 0;
-        return parseInt(str);
-    }
-
-    parseDst(itemAsArray, parseBonusFunction) {
-        return parseBonusFunction(itemAsArray);
-    }
 }
 
-function maker(context, indexes) {
-    const factory = new ItemPropFactory(context, indexes);
-    return context.items.map(item => factory.makeItemProp(item));
-}
-
-/** To be able to better see the fields repartition */
-maker.updateNotes = function(items, predicate) {
-    const item = items.find(predicate);
-
-    if (item === undefined) {
-        throw Error("itemProp::updateNotes(): No suitable item found");
-    }
-    
-    fs.writeFileSync("notes.txt",
-        Object.entries(item).map(([index, value]) => `${index}: ${value}`).join("\n")
-    );
-}
-
-module.exports = maker;
-
-
-module.exports.ItemPropTxt = ItemPropTxt;
+module.exports = ItemPropTxt;
