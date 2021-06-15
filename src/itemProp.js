@@ -1,3 +1,5 @@
+const fs = require('fs');
+const iconvlite = require('iconv-lite');
 
 /**
  * 
@@ -10,6 +12,103 @@
 
     return path;
 }
+
+/**
+ * Check if the given string contains one of the symbol
+ * @param {string} str The string to verify
+ * @param {string[]} symbols The list of symbols
+ * @returns {boolean} True if the line contains one of the symbols
+ */
+function stringContainsOneOf(str, symbols) {
+    return symbols.find(symbol => str.indexOf(symbol) !== -1) !== undefined;
+}
+
+class ItemPropTxt {
+    static loadFile(path, context) {
+        const lines = iconvlite.decode(fs.readFileSync(path), 'cp1252')
+            .split(/\r?\n/);
+        
+        return new ItemPropTxt(lines, context);
+    }
+
+    constructor(lines, context) {
+        this.lines = [];
+        this.items = [];
+
+        let isInComment = false;
+        for (const line of lines) {
+            const testLine = line.trim();
+            if (testLine.startsWith("//")) {
+                this.lines.push(line);
+            } else if (testLine.startsWith("/*")) {
+                if (line.endsWith("*/") || line.indexOf("*/") === -1) {
+                    this.lines.push(line);
+                    isInComment = true;
+                } else {
+                    throw Error("Supported propItem.txt should not start with a /* and have a */ in the middle of it");
+                }
+            } else if (testLine === "*/") {
+                this.lines.push(line);
+                isInComment = false;
+            } else if (stringContainsOneOf(line, ["//", "/*", "*/"])) {
+                throw Error("propItem.txt should not contain any line that have a comment and doesn't lead with it");
+            } else if (isInComment) {
+                this.lines.push(line);
+            } else if (testLine === '') {
+                this.lines.push(line);
+            } else {
+                const item = new ItemProp(line, this);
+                this.lines.push(item);
+                this.items.push(item);
+            }
+        }
+
+        this.context = context;
+    }
+
+    toPropItemTxtString() {
+        return this.lines.map(line => {
+            if (typeof(line) == 'string') {
+                return line;
+            } else {
+                return line.toPropItemString();
+            }
+        }).join("\r\n");
+    }
+
+    /**
+     * Write the content of this instance to the given propItem.txt path
+     * @param {string} path Path to the file to write
+     */
+    saveFile(path) {
+        const buffer = iconvlite.encode(this.toPropItemTxtString(), "cp1252");
+        fs.writeFileSync(path, buffer);
+    }
+
+    *[Symbol.iterator]() {
+        for (const item of this.items) {
+            yield item;
+        }
+    }
+}
+
+class ItemProp {
+    /**
+     * 
+     * @param {string} line The line from the propItem.txt file
+     * @param {ItemPropTxt} itemPropTxt The ItemPropTxt instance that generated
+     * this ItemProp instance
+     */
+    constructor(line, itemPropTxt) {
+        this.line = line;
+
+    }
+
+    toPropItemString() {
+        return this.line;
+    }
+}
+
 
 class ItemPropFactory {
     constructor(context, indexes) {
@@ -79,3 +178,6 @@ maker.updateNotes = function(items, predicate) {
 }
 
 module.exports = maker;
+
+
+module.exports.ItemPropTxt = ItemPropTxt;
