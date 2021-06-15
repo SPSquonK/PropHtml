@@ -16,5 +16,29 @@ table
       td #{weapon.name}
       td #{weapon.jobName}
       td #{weapon.level !== 0 ? weapon.level : ""}
-      td !{weapon.bonus.filter(x => x !== undefined).map(bonusToString).join("<br>")}
-    
+      td 
+        unless edit
+          | !{weapon.bonus.filter(x => x !== undefined).map(bonusToString).join("<br>")}
+        if edit
+          each awake, ids in weapon.bonus
+            unless ids == 0
+              br
+
+            - var bonus_dst = `BONUS_${ids}_${weapon.id}`;
+            - var bonus_val = `BONUSVAL_${ids}_${weapon.id}`;
+            select(name=bonus_dst id=bonus_dst)
+              if awake !== undefined
+                option(value="None")
+              else
+                option(value="None" selected)
+              
+              each existing_dst in dsts
+                if awake !== undefined && existing_dst.dst == awake[0]
+                  option(value=existing_dst.dst selected) #{existing_dst.name}
+                else
+                  option(value=existing_dst.dst) #{existing_dst.name}
+            
+            if awake !== undefined
+              input(type="number" name=bonus_val value=awake[1])
+            else
+              input(type="number" name=bonus_val)

@@ -11,6 +11,8 @@ const PropItemTxt = require('./src/itemProp');
 
 const sdds = require('sdds');
 
+const isEditMode = true;
+
 function loadResources() {
     function p(file) {
         return path.join(conf.parsed.flyff, file);
@@ -96,7 +98,19 @@ app.get('/', (_, res) => {
     const weapon = pug.compileFile('pug/weapon.pug');
 
     let content = "";
-    content += weapon(extractWeapons("IK3_SWD"));
+    const swd = extractWeapons("IK3_SWD");
+
+    if (isEditMode) {
+        swd.edit = true;
+        swd.dsts = Object.entries(resources.dstMapping).map(([id, dict]) => {
+            return {
+                dst: id,
+                name: resources.textClient[dict.tid] === undefined ? dict.tid : resources.textClient[dict.tid]
+            }
+        });
+    }
+
+    content += weapon(swd);
 
     const mainPage = pug.compileFile('pug/index.pug');
     const trueContent = mainPage({ content: content });
