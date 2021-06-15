@@ -28,6 +28,42 @@ will be supported later.
 - `node index.js` will start the server.
 - Go on `http://localhost:3000`
 
+## Tools
+
+### dstProp
+
+If you want to use propHtml to expose to your users the list of items (even
+thought it is not recommanded considering the current state of propHtml), you
+do not want to depend on the source folder.
+
+PropHtml is able to extract the TID bound to the dst and produce a json file
+from it. You can then deploy propHtml with the generated json file and the other
+resources it needs.
+
+- Output the `dstProp.json` file in the console
+`node tools.js dstProp --source "c:\path\to\_Interface\WndManager.cpp"`
+- You can output it into a file by using either:
+    - the `--output path/to/dstProp.json` option
+    - or writing in a file the output of stdin with `> path/to/dstProp.json`
+- Fix the .env file by
+    - Commenting the `flyff_src` line
+    - Uncommenting the propJsonPath line
+    - Fixing the path
+
+You can also write manually the `dstProp.json` file. Here is an example where
+`DST_STR` will use the text bound to `TID_TOOLTIP_STR` as a flat value
+(`STR +5` for example) and `DST_SPEED` will use the text bound to
+`TID_TOOLTIP_SPEED` as a percentage (`Speed +7%` for example).
+
+```json
+{
+  "dst": {
+    "DST_STR":   { "tid": "TID_TOOLTIP_STR" },
+    "DST_SPEED": { "tid": "TID_TOOLTIP_SPEED", "isRate": true }
+  }
+}
+```
+
 ## License
 
 Licensied under the MIT License by SquonK.

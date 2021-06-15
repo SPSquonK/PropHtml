@@ -121,66 +121,88 @@ function readItems(path) {
 }
 
 function readDSTMapping(path) {
-    const DST_STRING = "static DST_STRING g_DstString[] =";
-    const DST_RATE = "static int nDstRate[] = {";
+    // Ugly file parsing
+    const { g_DstString, nDstRate } = (() => {
+        // TODO: use Scanner
+        const DST_STRING = "static DST_STRING g_DstString[] =";
+        const DST_RATE = "static int nDstRate[] = {";
 
-    let where = "Nowhere";
+        let where = "Nowhere";
 
-    let g_DstString = [];
-    let nDstRate = [];
+        let g_DstString = [];
+        let nDstRate = [];
 
-    for (const line_ of _readFile(path)) {
-        let line = line_.trim();
+        for (const line_ of _readFile(path)) {
+            let line = line_.trim();
 
-        let comment = line.indexOf("//");
-        if (comment !== -1) line = line.substr(0, comment).trim();
+            let comment = line.indexOf("//");
+            if (comment !== -1) line = line.substr(0, comment).trim();
 
-        if (line == "") continue;
-        if (line.startsWith("#")) continue;
+            if (line == "") continue;
+            if (line.startsWith("#")) continue;
 
-        if (where == "Nowhere") {
-            if (line == DST_STRING) {
-                where = "String";
-            } else if (line == DST_RATE) {
-                where = "Rate";
-            }
-        } else if (where == "String") {
-            if (line == "};") {
-                where = "Nowhere";
-            } else if (line == "{") {
-                // noop
-            } else {
-                line.split(",")
-                    .map(s => s.trim())
-                    .filter(x => x != '')
-                    .forEach(x => g_DstString.push(x));
-            }
-        } else if (where == "Rate") {
-            if (line == "};") {
-                where = "Nowhere";
-            } else {
-                line.split(",")
-                    .map(s => s.trim())
-                    .filter(x => x != '' && x != '0')
-                    .forEach(x => nDstRate.push(x));
+            if (where == "Nowhere") {
+                if (line == DST_STRING) {
+                    where = "String";
+                } else if (line == DST_RATE) {
+                    where = "Rate";
+                }
+            } else if (where == "String") {
+                if (line == "};") {
+                    where = "Nowhere";
+                } else if (line == "{") {
+                    // noop
+                } else {
+                    line.split(",")
+                        .map(s => s.trim())
+                        .filter(x => x != '')
+                        .forEach(x => g_DstString.push(x));
+                }
+            } else if (where == "Rate") {
+                if (line == "};") {
+                    where = "Nowhere";
+                } else {
+                    line.split(",")
+                        .map(s => s.trim())
+                        .filter(x => x != '' && x != '0')
+                        .forEach(x => nDstRate.push(x));
+                }
             }
         }
+
+        return { g_DstString, nDstRate };
+    })();
+
+    // Transform g_DstString
+    const dstStrings = (() => {
+        let xs = {};
+        for (let i = 0 ; i < g_DstString.length - 1 ; i += 2) {
+            if (g_DstString[i] === '0' || g_DstString[i + 1] === '0') {
+                continue;
+            }
+
+            xs[g_DstString[i]] = g_DstString[i + 1];
+        }
+        return xs;
+    })();
+    
+    // Build a better format
+    const content = { dst: {}, warnings: [] };
+
+    for (const [dst, tid] of Object.entries(dstStrings)) {
+        content.dst[dst] = { 'tid': tid };
     }
 
-    return {
-        dstStrings: (() => {
-            let xs = {};
-            for (let i = 0 ; i < g_DstString.length - 1 ; i += 2) {
-                if (g_DstString[i] === '0' || g_DstString[i + 1] === '0') {
-                    continue;
-                }
+    for (const dst of nDstRate) {
+        if (content.dst[dst] === undefined) {
+            content.dst[dst] = {};
+            content.warnings.push(`Warning: ${dst} is recognized as a dst rate but has no TID`);
+        }
 
-                xs[g_DstString[i]] = g_DstString[i + 1];
-            }
-            return xs;
-        })(),
-        dstRates: new Set(nDstRate)
-    };
+        content.dst[dst].isRate = true;
+    }
+
+    return content;
 }
 
 function textClient(inc, txttxt) {

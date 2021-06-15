@@ -20,7 +20,21 @@ function loadResources() {
     
     content.itemNames = FR.readStrings(p("propItem.txt.txt"))
     content.items = FR.readItems(p("propItem.txt"));
-    content.dstMapping = FR.readDSTMapping(path.join(conf.parsed.flyff_src, "_Interface", "WndManager.cpp"));
+
+    if (conf.parsed.flyff_src) {
+        const r = FR.readDSTMapping(path.join(conf.parsed.flyff_src, "_Interface", "WndManager.cpp"));
+
+        for (const warning of r.warnings) {
+            console.error("Warning: " + warning);
+        }
+
+        content.dstMapping = r.dst;
+    } else if (conf.parsed.dstPropPath) {
+        content.dstMapping = JSON.parse(fs.readFileSync(conf.parsed.dstPropPath, "utf8")).dst;
+    } else {
+        console.error("No path to source or path to dstProp");
+    }
+    
     
     content.textClient = FR.textClient(
         path.join(conf.parsed.flyff, "textClient.inc"),
@@ -67,13 +81,13 @@ function extractWeapons(ik3) {
         bonusToString: function([dst, value]) {
             let result;
 
-            const ids = resources.dstMapping.dstStrings[dst];
+            const ids = resources.dstMapping[dst];
             if (ids === undefined) {
                 result = dst;
             } else {
-                result = resources.textClient[ids];
+                result = resources.textClient[ids.tid];
                 if (result === undefined) {
-                    result = ids;
+                    result = ids.tid;
                 }
             }
 
@@ -85,7 +99,7 @@ function extractWeapons(ik3) {
                 result += value;
             }
 
-            if (resources.dstMapping.dstRates.has(dst)) {
+            if (resources.dstMapping[dst].isRate) {
                 result += "%";
             }
 
