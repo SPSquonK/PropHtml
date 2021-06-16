@@ -100,7 +100,7 @@ app.get('/dds/:path', (req, res) => {
 {
     const cache = {};
 
-    const SENDABLE_IK3 = [ 'IK3_SWD' ];
+    const SENDABLE_IK3 = [ 'IK3_SWD', 'IK3_BOW' ];
 
     app.get('/rest/dst_names', (_, res) => {
         if (cache.dst_names !== undefined) {

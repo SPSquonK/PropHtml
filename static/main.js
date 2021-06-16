@@ -6,6 +6,8 @@
 
 const stringify = {
     awake: function([dst, value], dstProp) {
+        if (dst === 'DST_NONE') return "";
+
         const dstName = dstProp[dst]?.tid || dst;
 
         let valueStr = "";
@@ -30,7 +32,7 @@ const stringify = {
 
 let data = {
     category: "",
-    items: [],
+    items: {},
     dstList: {},
     editMode: false
 };
@@ -40,9 +42,35 @@ let app = new Vue({
     data: data,
     methods: {
         buildBonus(bonuses) {
-            return bonuses.filter(x => x != null).map(
+            return bonuses.filter(x => x[0] !== 'DST_NONE').map(
                 x => stringify.awake(x, data.dstList)
             ).join("<br>");
+        },
+        hasBeenModified(item) {
+            for (let i = 0 ; i != item.bonus.length ; ++i) {
+                if (item.bonus[0] == 'DST_NONE') {
+                    if (item.originalBonus[0] != 'DST_NONE') return true;
+                } else if (item.originalBonus[0] == 'DST_NONE') {
+                    return true;
+                } else {
+                    if (item.bonus[0] != item.originalBonus[0]) {
+                        return true;
+                    }
+                    
+                    if (item.bonus[1] != item.originalBonus[1]) {
+                        return true;
+                    }
+                }
+
+            }
+
+            return false;
+        },
+        changedItem(item) {
+            item.style = this.hasBeenModified(item) ? 'color: red' : 'color: inherit';
+        },
+        modifyItemList(items) {
+            this.items = items;
         }
     }
 });
@@ -56,7 +84,14 @@ let app = new Vue({
         url: 'rest/dst_names'
     }).done(function(c) {
         if (c.result) {
-            data.dstList = c.result;
+            data.dstList = {
+                'DST_NONE': { tid: "" }
+            };
+
+            for (const [key, value] of Object.entries(c.result)) {
+                data.dstList[key] = value;
+            }
+
             requestIk3('IK3_SWD');
         } else {
             console.error("Error on loading dst_names");
@@ -77,7 +112,26 @@ function requestIk3(ik3) {
         document.getElementById("app").classList.remove("hidden");
 
         data.category = ik3;
-        data.items = c.items;
+
+        let z = {};
+        
+        Object.values(c.items).map(item => {
+            item.bonus = item.bonus.map(awake => awake == null ? ['DST_NONE', ""] : awake )
+
+            item.originalBonus = item.bonus.map(awake => {
+                if (awake === null) {
+                    return ['DST_NONE', ''];
+                } else {
+                    return [...awake];  // copy
+                }
+            })
+
+            item.style = "color: inherit;";
+
+            return item;
+        }).forEach(i => z[i.id] = i);
+
+        app.modifyItemList(z);
     });
 }
 
