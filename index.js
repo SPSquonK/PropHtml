@@ -2,13 +2,11 @@ const conf = require('dotenv').config()
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const pug = require('pug');
-const port = 3001;
+const port = 3000;
 const { PNG } = require('pngjs');
 
 const FR = require('./src/file_reader');
 const PropItemTxt = require('./src/itemProp');
-const BonusToStr = require('./common/bonusToStr');
 
 const sdds = require('sdds');
 
@@ -52,18 +50,6 @@ const resources = loadResources();
 
 const items = [...resources.propItems];
 
-function extractWeapons(ik3) {
-    return {
-        weaponname: ik3,
-        weapons: items.filter(item => item.ik3 === ik3),
-        bonusToString: function([dst, value]) {
-            BonusToStr.bonusToString(
-                [dst, value], resources.dstMapping, resources.textClient
-            );
-        }
-    };
-}
-
 
 /* ==== WEB SERVER ==== */
 
@@ -73,55 +59,6 @@ app.listen(port, () => console.log(`Server started on http://localhost:${port}/`
 
 app.use('/', express.static('static'));
 
-app.get('/', (_, res) => {
-    const weapon = pug.compileFile('pug/weapon.pug');
-
-    let content = "";
-    const swd = extractWeapons("IK3_SWD");
-
-    if (isEditMode) {
-        swd.edit = true;
-        swd.dsts = Object.entries(resources.dstMapping).map(([id, dict]) => {
-            return {
-                dst: id,
-                name: resources.textClient[dict.tid] === undefined ? dict.tid : resources.textClient[dict.tid]
-            }
-        });
-    }
-
-    content += weapon(swd);
-
-    const mainPage = pug.compileFile('pug/index.pug');
-    const trueContent = mainPage({ content: content });
-    return res.send(trueContent);
-});
-
-app.use('/weapon.css', express.static(__dirname, { index: 'pug/weapon.css' }));
-
-app.use('/common/:file', (req, res) => {
-    const filename = path.join("common", req.params['file']);
-
-    if (!filename.startsWith("common\\")) {
-        return res.status(404).send('???');
-    } else if (!fs.existsSync(filename)) {
-        return res.status(404).send('Wow. Much inexistence. Very wow');
-    }
-
-    if (filename.endsWith('.js')) {
-        const jsFile = fs.readFileSync(filename, 'utf-8')
-            .split(/\r?\n/)
-            .filter(line => !line.startsWith("module.exports"))
-            .join("\n");
-        
-        res.writeHead(200, {
-            'Content-Type': 'application/javascript'
-        });
-        
-        return res.end(jsFile);
-    } else {
-        return res.status(404).send('There are no such kind of files here');
-    }
-});
 
 // Images
 

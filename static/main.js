@@ -1,8 +1,38 @@
+"use strict";
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Display logic
+
+const stringify = {
+    awake: function([dst, value], dstProp) {
+        const dstName = dstProp[dst]?.tid || dst;
+
+        let valueStr = "";
+        if (value >= 0) valueStr += "+";
+        if (dst == "DST_ATTACKSPEED") {
+            valueStr += (value / 20);
+        } else {
+            valueStr += value;
+        }
+
+        if (dstProp[dst].isRate) {
+            valueStr += "%";
+        }
+
+        return `${dstName} ${valueStr}`;
+    }
+};
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Vue
 
 let data = {
     category: "",
     items: [],
-    dstList: {}
+    dstList: {},
+    editMode: false
 };
 
 let app = new Vue({
@@ -11,11 +41,15 @@ let app = new Vue({
     methods: {
         buildBonus(bonuses) {
             return bonuses.filter(x => x != null).map(
-                x => BonusToStr.bonusToString(x, data.dstList, {})
+                x => stringify.awake(x, data.dstList)
             ).join("<br>");
         }
     }
 });
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Communication with the server
 
 (() => {
     $.ajax({
@@ -38,6 +72,9 @@ function requestIk3(ik3) {
             console.error(c.error);
             return;
         }
+
+        document.getElementById("loading").classList.add("hidden");
+        document.getElementById("app").classList.remove("hidden");
 
         data.category = ik3;
         data.items = c.items;
