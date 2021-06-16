@@ -3,11 +3,12 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const pug = require('pug');
-const port = 3000;
+const port = 3001;
 const { PNG } = require('pngjs');
 
 const FR = require('./src/file_reader');
 const PropItemTxt = require('./src/itemProp');
+const BonusToStr = require('./common/bonusToStr');
 
 const sdds = require('sdds');
 
@@ -56,31 +57,9 @@ function extractWeapons(ik3) {
         weaponname: ik3,
         weapons: items.filter(item => item.ik3 === ik3),
         bonusToString: function([dst, value]) {
-            let result;
-
-            const ids = resources.dstMapping[dst];
-            if (ids === undefined) {
-                result = dst;
-            } else {
-                result = resources.textClient[ids.tid];
-                if (result === undefined) {
-                    result = ids.tid;
-                }
-            }
-
-            result += " ";
-            if (value >= 0) result += "+";
-            if (dst == "DST_ATTACKSPEED") {
-                result += (value / 20);
-            } else {
-                result += value;
-            }
-
-            if (resources.dstMapping[dst].isRate) {
-                result += "%";
-            }
-
-            return result;
+            BonusToStr.bonusToString(
+                [dst, value], resources.dstMapping, resources.textClient
+            );
         }
     };
 }
@@ -117,6 +96,34 @@ app.get('/', (_, res) => {
     return res.send(trueContent);
 });
 
+app.use('/weapon.css', express.static(__dirname, { index: 'pug/weapon.css' }));
+
+app.use('/common/:file', (req, res) => {
+    const filename = path.join("common", req.params['file']);
+
+    if (!filename.startsWith("common\\")) {
+        return res.status(404).send('???');
+    } else if (!fs.existsSync(filename)) {
+        return res.status(404).send('Wow. Much inexistence. Very wow');
+    }
+
+    if (filename.endsWith('.js')) {
+        const jsFile = fs.readFileSync(filename, 'utf-8')
+            .split(/\r?\n/)
+            .filter(line => !line.startsWith("module.exports"))
+            .join("\n");
+        
+        res.writeHead(200, {
+            'Content-Type': 'application/javascript'
+        });
+        
+        return res.end(jsFile);
+    } else {
+        return res.status(404).send('There are no such kind of files here');
+    }
+});
+
+// Images
 
 /**
  * @param {string} pngImage 
@@ -145,8 +152,51 @@ app.get('/dds/:path', (req, res) => {
         res.writeHead(200, {
             'Content-Type': 'image/png',
             'Content-Length': buffer.length
-          });
+        });
         
-        res.end(buffer);
+        return res.end(buffer);
     }
 });
+
+// Rest API
+
+{
+    const cache = {};
+
+    const SENDABLE_IK3 = [ 'IK3_SWD' ];
+
+    app.get('/rest/dst_names', (_, res) => {
+        if (cache.dst_names !== undefined) {
+            return res.json({ result: cache.dst_names });
+        }
+
+        const result = {};
+
+        for (const [dst, dict] of Object.entries(resources.dstMapping)) {
+            const realText = resources.textClient[dict.tid];
+
+            result[dst] = {
+                tid: realText ? realText : dict.tid,
+                isRate: dict.isRate
+            }
+        }
+        
+        cache.dst_names = result;
+        return res.json({ result });
+    });
+
+    app.get('/rest/ik3/:ik3', (req, res) => {
+        const ik3 = req.params['ik3'];
+
+        if (SENDABLE_IK3.indexOf(ik3) === -1) {
+            return res.status(404).json({
+                error: "This Item Kind 3 has not been found"
+            });
+        }
+
+        const yourItems = items.filter(item => item.ik3 == ik3)
+            .map(item => item.toClient());
+
+        return res.json({ items: yourItems });
+    });
+}

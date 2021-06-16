@@ -194,6 +194,20 @@ class ItemPropInContext extends ItemProp {
             .map(str => str.length === 0 ? "" : str[0] + str.substr(1).toLowerCase())
             .join("-");
     }
+
+    /**
+     * Build a version of this instance that is sendable to the client
+     */
+    toClient() {
+        return {
+            icon   : this.icon,
+            id     : this.id,
+            name   : this.name,
+            jobName: this.jobName,
+            level  : this.level,
+            bonus  : this.bonus
+        };
+    }
 }
 
 module.exports = ItemPropTxt;
