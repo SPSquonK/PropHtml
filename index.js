@@ -5,11 +5,11 @@ const fs = require('fs');
 const path = require('path');
 const port = 3000;
 const { PNG } = require('pngjs');
+const ImageServer = require('./src/ImageServer');
 
 const FR = require('./src/file_reader');
 const PropItemTxt = require('./src/itemProp');
 
-const sdds = require('sdds');
 
 const program = new Command()
     .description('Can the server modify the resources')
@@ -85,50 +85,30 @@ app.use('/', express.static('static'));
 
 // Images
 
-/**
- * @param {string} pngImage 
- */
-function loadConvertedImage(pngImage) {
-    const dds = fs.readFileSync(path.join(conf.parsed.flyff, "Item", pngImage + ".dds"));
-    let png = sdds(dds);
 
-    // Convert Magenta to transparent
-    for (let y = 0; y < png.height; y++) {
-        for (let x = 0; x < png.width; x++) {
-            const idx = (png.width * y + x) << 2;
-
-            const [red, green, blue] = png.data.slice(idx, 3);
-            if (red == 255 && green == 0 && blue == 255) {
-                png.data[idx + 3] = 0;
-            }
-        }
-    }
-
-    return png;
-}
+/** @type ImageServer */
+const imageServer = new ImageServer(path.join(conf.parsed.flyff, 'Item'));
 
 app.get('/dds/:path', (req, res) => {
-    const filename = req.params['path'];
+    const filename = path.normalize(req.params['path']);
 
-    if (!filename.endsWith('.png') && !filename.toLowerCase().endsWith('.dds')) {
-        return res.status(404).send("dds only contains png files");
+    if (filename.startsWith('..') || path.isAbsolute(filename)) {
+        return res.status(404).send('File not found');
     }
 
-    const key = filename.substr(0, filename.length - '.png'.length);
+    const result = imageServer.getImage(filename);
 
-    const pngImage = loadConvertedImage(key);
-
-    if (pngImage == null) {
-        return res.status(404).send('no match');
-    } else {
-        let buffer = PNG.sync.write(pngImage);
-
+    if (result.ok !== undefined) {
         res.writeHead(200, {
             'Content-Type': 'image/png',
-            'Content-Length': buffer.length
+            'Content-Length': result.ok.length
         });
-        
-        return res.end(buffer);
+
+        return res.end(result.ok);
+    } else if (result.error !== undefined) {
+        return res.status(404).send(result.error);
+    } else {
+        return res.status(500).send('Server logic error');
     }
 });
 
