@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Express Prop Html</title>
+    <link href="itemlist.css" rel="stylesheet" />
+    <style>
+      .hidden { display: none; }
+    </style>
+  </head>
+  <body>
+    <h1>Express Prop Html</h1>
+    <div id="loading"></div>
+    <div id="app" class="hidden">
+      <p v-if="editable">
+        <label for="editMode">
+          <input
+            type="checkbox"
+            name="inEditMode"
+            v-model="editMode"
+          />
+          Switch to edit mode
+        </label>
+      </p>
+
+      <div v-if="editMode">
+        <h2>Pending changes</h2>
+
+        <ul style="height: 7.7em; overflow-y: scroll;">
+          <li v-for="item in pending">
+            <em>{{ item.name }}</em>:
+            <span v-html="strInLine(item.originalBonus)" style="text-decoration: line-through"></span>
+            -&gt;
+            <span v-html="strInLine(item.bonus)"></span>
+          </li>
+        </ul>
+
+        <p v-if="errorMessage" v-text="errorMessage" style="color: darkred;"></p>
+        <p v-if="commitMessage" style="color: darkgreen;">{{ commitMessage }}</p>
+
+        <input type="Reset" value="Reset"   v-on:click="reset()"  />
+        <input type="submit" value="Submit" v-on:click="submit()" />
+      </div>
+
+      <h2>{{ category }}</h2>
+
+
+      <table>
+        <tr>
+          <th>Icon</th>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Job</th>
+          <th>Level</th>
+          <th>Bonus</th>
+        </tr>
+
+        <template>
+          <item-row
+            v-for="item in items"
+            v-bind:item="item"
+            v-bind:dstlist="dstList"
+            v-bind:editmode="editMode"
+            v-on:modifieditem="modifyPending($event)"
+            v-bind:key="item.id"
+          >
+          </item-row>
+        </template>
+      </table>
+      
+      <footer>
+        <a href="https://github.com/SPSquonK/PropHtml">Express Prop Html</a> © SquonK, 2021
+      </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+  </body>
+</html>

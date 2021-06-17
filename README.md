@@ -64,6 +64,12 @@ You can also write manually the `dstProp.json` file. Here is an example where
 }
 ```
 
+## Test
+
+You can run the few existing unit tests by using mocha
+
+- `npx mocha`
+
 ## License
 
 Licensied under the MIT License by SquonK.
