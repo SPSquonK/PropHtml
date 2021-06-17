@@ -1,12 +1,13 @@
 const fs = require('fs');
 const iconvlite = require('iconv-lite');
 const FR = require('./file_reader');
+const path = require('path');
 
 /**
  * 
  * @param {string} path The path read from the resource file
  */
- function _removeQuotes(path) {
+function _removeQuotes(path) {
     while (path.length > 0 && path[0] == '"' && path[path.length - 1] == '"') {
         path = path.substr(1, path.length - 2);
     }
@@ -37,10 +38,9 @@ const v15fields = {
     'LEVEL': 116,
     'ICON': 120,
     'DESCRIPTION': 123,
+    bonusLines: [ [53, 56], [54, 57], [55, 58] ],
     parseBonuses: item => {
-        const pairs = [ [53, 56], [54, 57], [55, 58] ];
-
-        return pairs.map(
+        return v15fields.bonusLines.map(
             ([dst, value]) => {
                 if (item[dst] === "=" || item[value] === "=") {
                     return undefined;
@@ -48,8 +48,29 @@ const v15fields = {
 
                 return [item[dst], parseInt(item[value])];
             });
+    },
+    modifyBonuses: (item, newBonuses) => {
+        if (newBonuses.length > v15fields.bonusLines.length) {
+            return false;
+        }
+
+        for (let i = 0; i != v15fields.bonusLines.length; ++i) {
+            const [addrDst, addrValue] = v15fields.bonusLines[i];
+
+            if (i >= newBonuses.length) {
+                item[addrDst]   = "=";
+                item[addrValue] = "=";
+            } else {
+                item[addrDst]   = newBonuses[i][0];
+                item[addrValue] = newBonuses[i][1].toString();
+            }
+        }
+
+        return true;
     }
 };
+
+// TODO : Enforce 'loaded files should not have duplicates'
 
 class ItemPropTxt {
     static loadFile(path, context) {
@@ -125,6 +146,43 @@ class ItemPropTxt {
             yield item;
         }
     }
+
+    applyBonusChange(changes) {
+        let changedItems = [];
+
+        for (const item of this.items) {
+            if (changes[item.id] !== undefined) {
+                let r = item.applyBonusChange(changes[item.id]);
+                if (r) changedItems.push(item);
+            }
+        }
+
+        return changedItems;
+    }
+
+    persist(resourcePath, keepOriginalPropItemPath, newItemPropPath) {
+        // TODO: manage absolute paths
+
+        // Keep Original Prop Item Path
+        if (keepOriginalPropItemPath !== undefined) {
+            const dstPath = path.join(resourcePath, keepOriginalPropItemPath);
+
+            if (!fs.existsSync(path)) {
+                fs.copyFileSync(
+                    path.join(resourcePath, 'propItem.txt'),
+                    dstPath
+                );
+            }
+        }
+
+        // 
+        if (newItemPropPath === undefined) {
+            newItemPropPath = 'propItem.txt';
+        }
+
+        const target = path.join(resourcePath, newItemPropPath);
+        this.saveFile(target);
+    }
 }
 
 class ItemProp {
@@ -169,6 +227,10 @@ class ItemProp {
         fs.writeFileSync(path,
             Object.entries(this.content).map(([index, value]) => `${index}: ${value}`).join("\n")
         );
+    }
+
+    applyBonusChange(newBonus) {
+        return this.fields.modifyBonuses(this.content, newBonus);
     }
 }
 

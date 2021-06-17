@@ -39,6 +39,13 @@ function copyArray2LevelsDeep(arrayOfArrays) {
     return arrayOfArrays.map(array => [...array]);
 }
 
+function transformNetworkedItem(item) {
+    item.bonus = item.bonus.map(awake => awake == null ? ['DST_NONE', ""] : awake )
+    item.originalBonus = copyArray2LevelsDeep(item.bonus);
+    item.style = "color: inherit;";
+    item.isModified = false;
+    return item;
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -50,7 +57,9 @@ let data = {
     items: {},
     dstList: {},
     editMode: false,
-    pending: []
+    pending: [],
+    errorMessage: false,
+    commitMessage: false
 };
 
 Vue.component(
@@ -164,6 +173,7 @@ let app = new Vue({
                     return acc; 
                 }, {});
 
+            const self = this;
             $.ajax({
                 url: 'rest/item-awakes',
                 method: 'POST',
@@ -172,9 +182,27 @@ let app = new Vue({
                 contentType: "application/json; charset=utf-8",
             }).done(function(c) {
                 if (c.error) {
-                    console.error(c.error);
+                    self.errorMessage = 'Bad request:\n'
+                        + JSON.stringify(c.error, null, 2)
+                        + '\nIf you think your input was correct, submit an issue here:'
+                        + '\nhttps://github.com/SPSquonK/PropHtml/issues';
+                    self.commitMessage = false;
                 } else {
-                    console.log("Success")
+                    self.errorMessage = false;
+
+                    let commitMessage = `Successfully changed ${c.modified.length}`;
+                    if (c.notProcessed !== undefined) {
+                        commitMessage += " / " + (Object.keys(c.notProcessed).length);
+                    }
+                    commitMessage += " items";
+
+                    self.commitMessage = commitMessage;
+
+                    for (const changedItem of c.modified) {
+                        const realItem = self.items[changedItem.id];
+                        self.items[changedItem.id] = transformNetworkedItem(changedItem);
+                        self.pending.splice(self.pending.indexOf(realItem), 1);
+                    }
                 }
             });
         }
@@ -221,13 +249,7 @@ function requestIk3(ik3) {
 
         let z = {};
         
-        Object.values(c.items).map(item => {
-            item.bonus = item.bonus.map(awake => awake == null ? ['DST_NONE', ""] : awake )
-            item.originalBonus = copyArray2LevelsDeep(item.bonus);
-            item.style = "color: inherit;";
-            item.isModified = false;
-            return item;
-        }).forEach(i => z[i.id] = i);
+        Object.values(c.items).map(item => transformNetworkedItem(item)).forEach(i => z[i.id] = i);
 
         app.modifyItemList(z);
     });

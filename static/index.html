@@ -24,15 +24,16 @@
         <h2>Pending changes</h2>
 
         <ul style="height: 7.7em; overflow-y: scroll;">
-          <li
-            v-for="item in pending"
-          >
+          <li v-for="item in pending">
             <em>{{ item.name }}</em>:
             <span v-html="strInLine(item.originalBonus)" style="text-decoration: line-through"></span>
             -&gt;
             <span v-html="strInLine(item.bonus)"></span>
           </li>
         </ul>
+
+        <p v-if="errorMessage" v-text="errorMessage" style="color: darkred;"></p>
+        <p v-if="commitMessage" style="color: darkgreen;">{{ commitMessage }}</p>
 
         <input type="Reset" value="Reset"   v-on:click="reset()"  />
         <input type="submit" value="Submit" v-on:click="submit()" />

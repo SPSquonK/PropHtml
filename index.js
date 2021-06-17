@@ -12,6 +12,11 @@ const sdds = require('sdds');
 
 const isEditMode = true;
 
+function inDictReduce(acc, [id, value]) {
+    acc[id] = value;
+    return acc;
+}
+
 function loadResources() {
     function p(file) {
         return path.join(conf.parsed.flyff, file);
@@ -39,7 +44,8 @@ function loadResources() {
         path.join(conf.parsed.flyff, "textClient.inc"),
         path.join(conf.parsed.flyff, "textClient.txt.txt")
     );
-
+    
+    /** @type PropItemTxt */
     content.propItems = PropItemTxt.loadFile(path.join(conf.parsed.flyff, "propItem.txt"), content);
 
     return content;
@@ -139,13 +145,89 @@ app.get('/dds/:path', (req, res) => {
     });
 
     if (true || isEditMode) {
+        function numberOfAwakes(items) {
+            for (const item of items) {
+                return item.bonus.length;
+            }
+            
+            return undefined;
+        }
+
         app.post('/rest/item-awakes', (req, res) => {
-            console.log("Received a query to modify: ");
-            console.log(JSON.stringify(req.body));
+            // Check DST validity
+            const awakeMaxNb = numberOfAwakes(items);
+
+            let badElements = [];
+
+            for (const [itemId, newBonuses] of Object.entries(req.body)) {
+                let item = items.find(i => i.id === itemId);
+
+                if (item === undefined) {
+                    badElements.push({ 'item': itemId, 'type': 'Invalid ItemId' });
+                }
+
+                if (newBonuses.length > awakeMaxNb) {
+                    badElements.push({
+                        'item': itemId,
+                        'type': 'Requested too much lines',
+                        'requestedQuantity': newBonuses.length,
+                        'maxQuantity': awakeMaxNb
+                    });
+                }
+
+                for (const line of newBonuses) {
+                    const addBadElement = extra => badElements.push({
+                        'item': itemId, 'type': 'Bad line',
+                        'line': line  , 'extra': extra
+                    });
+
+                    if (line === undefined || line === null || line.length > 2) {
+                        addBadElement('Format should be [dst, value]');
+                        continue;
+                    }
+
+                    const [dst, value] = line;
+
+                    if (resources.dstMapping[dst] === undefined) {
+                        addBadElement('The given DST is not valid');
+                    }
+
+                    if (isNaN(value) || parseInt(value) === 0) {
+                        addBadElement('The value is not a valid quantity (should be ≠ 0)');
+                    }
+                }
+            }
+
+            if (badElements.length !== 0) {
+                return res.json({
+                    error: {
+                        message: 'Invalid request - Requested bonuses are ill-formed',
+                        badElements
+                    }
+                });
+            }
+
+            // 
+            let chg = resources.propItems.applyBonusChange(req.body);
+
+            let notProcessed = Object.entries(req.body)
+                .filter(([id, _]) => chg.find(i => i.id === id) === undefined)
+                .reduce(inDictReduce, {});
+
+            if (Object.keys(notProcessed).length === 0) notProcessed = undefined;
+
+            if (chg.length !== 0) {
+                resources.propItems.persist(
+                    conf.parsed.flyff,
+                    conf.parsed.KEEP_ORIGINAL_PROP_ITEM,
+                    conf.parsed.NEW_PROP_ITEM_PATH
+                );
+            }
 
             return res.json({
-                result: 'Received your request',
-                but: "this is not yet implemented"
+                result: 'ok',
+                modified: chg.map(i => i.toClient()),
+                notProcessed: notProcessed,
             });
         })
     }
