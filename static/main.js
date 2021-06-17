@@ -53,6 +53,7 @@ function transformNetworkedItem(item) {
 // Vue
 
 let data = {
+    editable: false,
     category: "",
     items: {},
     dstList: {},
@@ -231,6 +232,9 @@ let app = new Vue({
             console.error("Error on loading dst_names");
         }
     });
+
+    $.ajax({ url: 'rest/editable' }).done(c => data.editable = c.isEditable);
+
 })();
 
 function requestIk3(ik3) {

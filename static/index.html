@@ -11,14 +11,16 @@
     <h1>Express Prop Html</h1>
     <div id="loading"></div>
     <div id="app" class="hidden">
-      <p><label for="editMode">
-        <input
-          type="checkbox"
-          name="inEditMode"
-          v-model="editMode"
-        />
-        Switch to edit mode
-      </label></p>
+      <p v-if="editable">
+        <label for="editMode">
+          <input
+            type="checkbox"
+            name="inEditMode"
+            v-model="editMode"
+          />
+          Switch to edit mode
+        </label>
+      </p>
 
       <div v-if="editMode">
         <h2>Pending changes</h2>

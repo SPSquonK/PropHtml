@@ -39,13 +39,13 @@ function dstProp(propJsonPath, wndManagerPath) {
 ////////////////////////////////////////////////////////////////////////////////
 // restore tool
 
-function restore(destination, source, diff, apply) {
+function restore(destination, source, diff, apply, deleteOriginal) {
     if (source === undefined || !fs.existsSync(source)) {
         console.error('source must be a valid path and must exist.');
         return;
     }
 
-    if (!diff && !apply) {
+    if (!diff && !apply && !deleteOriginal) {
         console.error('Either the diff or the apply option must be used');
         return;
     }
@@ -67,9 +67,8 @@ function restore(destination, source, diff, apply) {
         }
     }
 
-    if (apply) {
-        fs.copyFileSync(source, destination);
-    }
+    if (apply) fs.copyFileSync(source, destination);
+    if (deleteOriginal) fs.rmSync(source);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -104,9 +103,10 @@ if (require.main === module) {
         )
         .option('--diff', 'Display the bonus difference between the two files')
         .option('--apply', 'Replace the destination with the source')
+        .option('--deleteOriginal', 'Delete the original file')
         .action(options => restore(
             options.destination, options.source,
-            options.diff, options.apply
+            options.diff, options.apply, options.deleteOriginal
         ));
 
     program.parse(process.argv);

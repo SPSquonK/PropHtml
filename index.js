@@ -1,4 +1,5 @@
 const conf = require('dotenv').config()
+const { Command } = require('commander');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -10,7 +11,22 @@ const PropItemTxt = require('./src/itemProp');
 
 const sdds = require('sdds');
 
-const isEditMode = true;
+const program = new Command()
+    .description('Can the server modify the resources')
+    .option('-e, --editable', 'The server can modify the resources')
+    .option('-r, --readonly', 'The server is in read-only mode');
+
+program.parse(process.argv);
+
+const options = program.opts();
+
+if (options.editable && options.readonly) {
+    console.error('editable and readonly are mutually exclusive');
+    return;
+}
+
+const isEditMode = !options.readonly;
+
 
 function inDictReduce(acc, [id, value]) {
     acc[id] = value;
@@ -142,6 +158,10 @@ app.get('/dds/:path', (req, res) => {
             .map(item => item.toClient());
 
         return res.json({ items: yourItems });
+    });
+
+    app.get('/rest/editable', (_, res) => {
+        return res.json({ isEditable: isEditMode });
     });
 
     if (true || isEditMode) {
