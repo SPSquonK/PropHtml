@@ -35,7 +35,6 @@ function loadResources() {
         console.error("No path to source or path to dstProp");
     }
     
-    
     content.textClient = FR.textClient(
         path.join(conf.parsed.flyff, "textClient.inc"),
         path.join(conf.parsed.flyff, "textClient.txt.txt")
@@ -54,6 +53,8 @@ const items = [...resources.propItems];
 /* ==== WEB SERVER ==== */
 
 const app = express();
+
+app.use(express.json());
 
 app.listen(port, () => console.log(`Server started on http://localhost:${port}/`));
 
@@ -136,4 +137,16 @@ app.get('/dds/:path', (req, res) => {
 
         return res.json({ items: yourItems });
     });
+
+    if (true || isEditMode) {
+        app.post('/rest/item-awakes', (req, res) => {
+            console.log("Received a query to modify: ");
+            console.log(JSON.stringify(req.body));
+
+            return res.json({
+                result: 'Received your request',
+                but: "this is not yet implemented"
+            });
+        })
+    }
 }

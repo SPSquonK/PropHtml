@@ -20,7 +20,26 @@
         Switch to edit mode
       </label></p>
 
+      <div v-if="editMode">
+        <h2>Pending changes</h2>
+
+        <ul style="height: 7.7em; overflow-y: scroll;">
+          <li
+            v-for="item in pending"
+          >
+            <em>{{ item.name }}</em>:
+            <span v-html="strInLine(item.originalBonus)" style="text-decoration: line-through"></span>
+            -&gt;
+            <span v-html="strInLine(item.bonus)"></span>
+          </li>
+        </ul>
+
+        <input type="Reset" value="Reset"   v-on:click="reset()"  />
+        <input type="submit" value="Submit" v-on:click="submit()" />
+      </div>
+
       <h2>{{ category }}</h2>
+
 
       <table>
         <tr>
@@ -31,28 +50,18 @@
           <th>Level</th>
           <th>Bonus</th>
         </tr>
-        <tr v-for="item in items" v-bind:style="item.style">
-          <td><img v-bind:src="'dds/' + item.icon" /></td>
-          <td>{{ item.id }}</td>
-          <td>{{ item.name }}</td>
-          <td>{{ item.jobName }}</td>
-          <td><span v-if="item.level != 0">{{ item.level }}</span></td>
-          <td v-html="buildBonus(item.bonus)" v-if="editMode !== true"></td>
-          <td v-if="editMode">
-            <template v-for="(awake, iAwake) in item.bonus">
-              <br v-if="iAwake > 0" />
-              <select v-model="awake[0]" v-on:change="changedItem(item)">
-                <option
-                  v-for="(value, key) in dstList"
-                  v-bind:value="key"
-                >
-                  {{ value.tid }}
-                </option>
-              </select>
-              <input type="number" v-model="awake[1]" v-on:change="changedItem(item)">
-            </template>
-          </td>
-        </tr>
+
+        <template>
+          <item-row
+            v-for="item in items"
+            v-bind:item="item"
+            v-bind:dstlist="dstList"
+            v-bind:editmode="editMode"
+            v-on:modifieditem="modifyPending($event)"
+            v-bind:key="item.id"
+          >
+          </item-row>
+        </template>
       </table>
       
       <footer>
