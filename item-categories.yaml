@@ -1,0 +1,26 @@
+
+
+# List of requestable categories for single item listing
+requestable-ik3:
+  'Sword':
+    - IK3_SWD
+  'Axe':
+    - IK3_AXE
+  'Stick':
+    - IK3_CHEERSTICK
+  'Knuckle':
+    - IK3_KNUCKLEHAMMER
+  'Wand':
+    - IK3_WAND
+  'Staff':
+    - IK3_STAFF
+  'Yoyo':
+    - IK3_YOYO
+  'Bow':
+    - IK3_BOW
+    - IK3_CROSSBOW
+  'Shield':
+    - IK3_SHIELD
+    - IK3_MAGICBARUNA
+    - IK3_ZEMBARUNA
+    - IK3_SHILDBARUNA

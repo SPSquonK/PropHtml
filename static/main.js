@@ -60,7 +60,8 @@ let data = {
     editMode: false,
     pending: [],
     errorMessage: false,
-    commitMessage: false
+    commitMessage: false,
+    categories: []
 };
 
 Vue.component(
@@ -176,7 +177,7 @@ let app = new Vue({
 
             const self = this;
             $.ajax({
-                url: 'rest/item-awakes',
+                url: 'rest/individual-items/awakes',
                 method: 'POST',
                 data: JSON.stringify(toPush),
                 dataType: "json",
@@ -216,7 +217,7 @@ let app = new Vue({
 
 (() => {
     $.ajax({
-        url: 'rest/dst_names'
+        url: 'rest/dst-names'
     }).done(function(c) {
         if (c.result) {
             data.dstList = {
@@ -227,19 +228,30 @@ let app = new Vue({
                 data.dstList[key] = value;
             }
 
-            requestIk3('IK3_SWD');
+            requestServices();
         } else {
             console.error("Error on loading dst_names");
         }
     });
 
-    $.ajax({ url: 'rest/editable' }).done(c => data.editable = c.isEditable);
-
 })();
 
-function requestIk3(ik3) {
+function requestServices() {
     $.ajax({
-        url: 'rest/ik3/' + ik3
+        url: 'rest/services'
+    }).done(c => {
+        data.editable = c.isEditable;
+        data.categories.push(...c.categories);
+
+        if (data.categories.length > 0) {
+            requestIk3(0);
+        }
+    });
+}
+
+function requestIk3(requestedCategory) {
+    $.ajax({
+        url: 'rest/individual-items/category/' + requestedCategory
     }).done(function (c) {
         if (c.error) {
             console.error(c.error);
@@ -249,7 +261,7 @@ function requestIk3(ik3) {
         document.getElementById("loading").classList.add("hidden");
         document.getElementById("app").classList.remove("hidden");
 
-        data.category = ik3;
+        data.category = data.categories[requestedCategory];
 
         let z = {};
         

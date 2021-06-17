@@ -3,12 +3,15 @@ const { Command } = require('commander');
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const port = 3000;
-const ImageServer = require('./src/ImageServer');
+const YAML = require('yaml');
 
 const FR = require('./src/file_reader');
 const PropItemTxt = require('./src/itemProp');
+const ImageServer = require('./src/ImageServer');
 
+const port = 3000;
+
+// TODO: remove .env configuration
 
 const program = new Command()
     .description('Can the server modify the resources')
@@ -26,6 +29,7 @@ if (options.editable && options.readonly) {
 
 const isEditMode = !options.readonly;
 
+const yamlConf = YAML.parse(fs.readFileSync('item-categories.yaml', 'utf8'));
 
 function inDictReduce(acc, [id, value]) {
     acc[id] = value;
@@ -62,9 +66,21 @@ function loadResources() {
     return content;
 }
 
+function buildCategories(yamlCategories) {
+    const result = [];
+
+    for (const [name, filters] of Object.entries(yamlCategories)) {
+        const filter = item => filters.indexOf(item.ik3) !== -1;
+        result.push({ name, filter });
+    }
+
+    return result;
+}
+
 const resources = loadResources();
 
 const items = [...resources.propItems];
+const categories = buildCategories(yamlConf['requestable-ik3']);
 
 
 /* ==== WEB SERVER ==== */
@@ -72,11 +88,12 @@ const items = [...resources.propItems];
 /**
  * Starts the ExpressPropHtml web server
  * @param {number | string} port The port used by the server
+ * @param {any[]} The list of categories
  * @param {boolean} silent If true, the server will not display in console the
  * "Server has been started at ..." message
  * @returns The express instance of the server
  */
-function startWebServer(port, silent = false) {
+function startWebServer(port, categories, silent = false) {
     // Build the express instance
     const app = express();
     app.use(express.json());
@@ -113,11 +130,14 @@ function startWebServer(port, silent = false) {
     // REST API
     const cache = {};
 
-    app.get('/rest/editable', (_, res) => {
-        return res.json({ isEditable: isEditMode });
+    app.get('/rest/services', (_, res) => {
+        return res.json({
+            isEditable: isEditMode,
+            categories: categories.map(dict => dict.name)
+        });
     });
 
-    app.get('/rest/dst_names', (_, res) => {
+    app.get('/rest/dst-names', (_, res) => {
         if (cache.dst_names !== undefined) {
             return res.json({ result: cache.dst_names });
         }
@@ -137,17 +157,15 @@ function startWebServer(port, silent = false) {
         return res.json({ result });
     });
 
-    const SENDABLE_IK3 = [ 'IK3_SWD', 'IK3_BOW' ];
-    app.get('/rest/ik3/:ik3', (req, res) => {
-        const ik3 = req.params['ik3'];
-
-        if (SENDABLE_IK3.indexOf(ik3) === -1) {
-            return res.status(404).json({
-                error: "This Item Kind 3 has not been found"
-            });
+    app.get('/rest/individual-items/category/:id', (req, res) => {
+        const category = parseInt(req.params['id']);
+        if (isNaN(category) || category >= categories.length) {
+            return res.status(404).json({ error: 'Bad request' });
         }
 
-        const yourItems = items.filter(item => item.ik3 == ik3)
+        const categoryDict = categories[category];
+
+        const yourItems = items.filter(i => categoryDict.filter(i))
             .map(item => item.toClient());
 
         return res.json({ items: yourItems });
@@ -162,7 +180,11 @@ function startWebServer(port, silent = false) {
             return undefined;
         }
 
-        app.post('/rest/item-awakes', (req, res) => {
+        app.post('/rest/individual-items/awakes', (req, res) => {
+            // Note: we don't check if the modified items are actually
+            // displayable because edit mode should be run only if the
+            // administrator trusts the user (most likely themself)
+
             // Check DST validity
             const awakeMaxNb = numberOfAwakes(items);
 
@@ -249,4 +271,4 @@ function startWebServer(port, silent = false) {
     return app;
 }
 
-startWebServer(port);
+startWebServer(port, categories);

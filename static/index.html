@@ -11,6 +11,18 @@
     <h1>Express Prop Html</h1>
     <div id="loading"></div>
     <div id="app" class="hidden">
+      <ul>
+        <li
+          v-for="(oneCategory, index) in categories"
+          style="display: inline;"
+        >
+          <a v-bind:href="'javascript:requestIk3(' + index + ')'">
+            {{ oneCategory }}
+          </a>
+        </li>
+
+      </ul>
+
       <p v-if="editable">
         <label for="editMode">
           <input
