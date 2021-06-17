@@ -183,6 +183,63 @@ class ItemPropTxt {
         const target = path.join(resourcePath, newItemPropPath);
         this.saveFile(target);
     }
+
+
+    /**
+     * 
+     * @param {ItemPropTxt} originalFile 
+     */
+    diff(originalFile) {
+        const mine = this.itemsAsDict();
+        const your = originalFile.itemsAsDict();
+
+        const result = {};
+
+        if (mine.size !== your.size) return undefined;
+
+        const cmpBonuses = (a, b) => {
+            for (let i = 0 ; i != a.length ; ++i) {
+                let ax = a[i];
+                let bx = b[i];
+
+                if (ax === undefined || bx === undefined) {
+                    if (ax !== undefined || bx !== undefined) {
+                        return false;
+                    }
+                } else if (ax[0] !== bx[0] || (
+                    ax[1] !== bx[1] && !(isNaN(ax[1]) && isNaN(bx[1]))
+                )) {
+                    return false;
+                }
+            }
+
+            return true;
+        };
+
+        for (const [id, newItem] of Object.entries(mine)) {
+            const originalItem = your[id];
+
+            if (originalItem === undefined) {
+                return undefined;
+            }
+
+            if (!cmpBonuses(originalItem.bonus, newItem.bonus)) {
+                result[id] = { o: originalItem.bonus, p: newItem.bonus };
+            }
+        }
+
+        return result;
+    }
+
+    /** Return the items contained in this instance as a dictionnary */
+    itemsAsDict() {
+        return this.items.reduce(
+            (acc, item) => {
+                acc[item.id] = item;
+                return acc;
+            }, {}
+        );
+    }
 }
 
 class ItemProp {
