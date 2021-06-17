@@ -4,7 +4,6 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const port = 3000;
-const { PNG } = require('pngjs');
 const ImageServer = require('./src/ImageServer');
 
 const FR = require('./src/file_reader');
@@ -34,13 +33,9 @@ function inDictReduce(acc, [id, value]) {
 }
 
 function loadResources() {
-    function p(file) {
-        return path.join(conf.parsed.flyff, file);
-    }
-    
     const content = {};
     
-    content.itemNames = FR.readStrings(p("propItem.txt.txt"))
+    content.itemNames = FR.readStrings(path.join(conf.parsed.flyff, "propItem.txt.txt"))
 
     if (conf.parsed.flyff_src) {
         const r = FR.readDSTMapping(path.join(conf.parsed.flyff_src, "_Interface", "WndManager.cpp"));
@@ -74,50 +69,53 @@ const items = [...resources.propItems];
 
 /* ==== WEB SERVER ==== */
 
-const app = express();
+/**
+ * Starts the ExpressPropHtml web server
+ * @param {number | string} port The port used by the server
+ * @param {boolean} silent If true, the server will not display in console the
+ * "Server has been started at ..." message
+ * @returns The express instance of the server
+ */
+function startWebServer(port, silent = false) {
+    // Build the express instance
+    const app = express();
+    app.use(express.json());
 
-app.use(express.json());
+    // Static resources
+    app.use('/', express.static('static'));
 
-app.listen(port, () => console.log(`Server started on http://localhost:${port}/`));
+    // Image folder
+    const imageServer = new ImageServer(path.join(conf.parsed.flyff, 'Item'));
 
-app.use('/', express.static('static'));
+    app.get('/dds/:path', (req, res) => {
+        const filename = path.normalize(req.params['path']);
 
+        if (filename.startsWith('..') || path.isAbsolute(filename)) {
+            return res.status(404).send('File not found');
+        }
 
-// Images
+        const result = imageServer.getImage(filename);
 
+        if (result.ok !== undefined) {
+            res.writeHead(200, {
+                'Content-Type': 'image/png',
+                'Content-Length': result.ok.length
+            });
 
-/** @type ImageServer */
-const imageServer = new ImageServer(path.join(conf.parsed.flyff, 'Item'));
-
-app.get('/dds/:path', (req, res) => {
-    const filename = path.normalize(req.params['path']);
-
-    if (filename.startsWith('..') || path.isAbsolute(filename)) {
-        return res.status(404).send('File not found');
-    }
-
-    const result = imageServer.getImage(filename);
-
-    if (result.ok !== undefined) {
-        res.writeHead(200, {
-            'Content-Type': 'image/png',
-            'Content-Length': result.ok.length
-        });
-
-        return res.end(result.ok);
-    } else if (result.error !== undefined) {
-        return res.status(404).send(result.error);
-    } else {
-        return res.status(500).send('Server logic error');
-    }
-});
-
-// Rest API
-
-{
+            return res.end(result.ok);
+        } else if (result.error !== undefined) {
+            return res.status(404).send(result.error);
+        } else {
+            return res.status(500).send('Server logic error');
+        }
+    });
+    
+    // REST API
     const cache = {};
 
-    const SENDABLE_IK3 = [ 'IK3_SWD', 'IK3_BOW' ];
+    app.get('/rest/editable', (_, res) => {
+        return res.json({ isEditable: isEditMode });
+    });
 
     app.get('/rest/dst_names', (_, res) => {
         if (cache.dst_names !== undefined) {
@@ -139,6 +137,7 @@ app.get('/dds/:path', (req, res) => {
         return res.json({ result });
     });
 
+    const SENDABLE_IK3 = [ 'IK3_SWD', 'IK3_BOW' ];
     app.get('/rest/ik3/:ik3', (req, res) => {
         const ik3 = req.params['ik3'];
 
@@ -154,11 +153,7 @@ app.get('/dds/:path', (req, res) => {
         return res.json({ items: yourItems });
     });
 
-    app.get('/rest/editable', (_, res) => {
-        return res.json({ isEditable: isEditMode });
-    });
-
-    if (true || isEditMode) {
+    if (isEditMode) {
         function numberOfAwakes(items) {
             for (const item of items) {
                 return item.bonus.length;
@@ -243,6 +238,15 @@ app.get('/dds/:path', (req, res) => {
                 modified: chg.map(i => i.toClient()),
                 notProcessed: notProcessed,
             });
-        })
+        });
     }
+
+    // Start the server
+    app.listen(port, () => {
+        if (!silent) console.log(`Server started on http://localhost:${port}/`)
+    });
+
+    return app;
 }
+
+startWebServer(port);
