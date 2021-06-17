@@ -90,7 +90,21 @@ app.use('/', express.static('static'));
  */
 function loadConvertedImage(pngImage) {
     const dds = fs.readFileSync(path.join(conf.parsed.flyff, "Item", pngImage + ".dds"));
-    return sdds(dds);
+    let png = sdds(dds);
+
+    // Convert Magenta to transparent
+    for (let y = 0; y < png.height; y++) {
+        for (let x = 0; x < png.width; x++) {
+            const idx = (png.width * y + x) << 2;
+
+            const [red, green, blue] = png.data.slice(idx, 3);
+            if (red == 255 && green == 0 && blue == 255) {
+                png.data[idx + 3] = 0;
+            }
+        }
+    }
+
+    return png;
 }
 
 app.get('/dds/:path', (req, res) => {
