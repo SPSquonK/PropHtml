@@ -93,23 +93,24 @@ Vue.component(
     template: `
     <tr v-bind:style="item.style">
         <td><img v-bind:src="'dds/' + item.icon" /></td>
-        <td>{{ item.id }}</td>
-        <td>{{ item.name }}</td>
+        <td><span style="font-family: monospace;">{{ item.id }}</span><br />{{ item.name }}</td>
         <td>{{ item.jobName }}</td>
         <td><span v-if="item.level != 0">{{ item.level }}</span></td>
-        <td v-html="buildBonus(item.bonus)" v-if="editmode !== true"></td>
-        <td v-if="editmode">
+        <td class="has-text-left" v-html="buildBonus(item.bonus)" v-if="editmode !== true"></td>
+        <td class="has-text-left" v-if="editmode">
         <template v-for="(awake, iAwake) in item.bonus">
             <br v-if="iAwake > 0" />
+            <div class="select is-small">
             <select v-model="awake[0]" v-on:change="changedItem(item)">
-            <option
-                v-for="(value, key) in dstlist"
-                v-bind:value="key"
-            >
-                {{ value.tid }}
-            </option>
+                <option
+                    v-for="(value, key) in dstlist"
+                    v-bind:value="key"
+                >
+                    {{ value.tid }}
+                </option>
             </select>
-            <input type="number" v-model="awake[1]" v-on:change="changedItem(item)">
+            </div>
+            <input type="number" v-model="awake[1]" v-on:change="changedItem(item)" class="is-small" style="width: 8em;" />
         </template>
         </td>
     </tr>
@@ -161,6 +162,8 @@ let app = new Vue({
                 });
             
             this.pending.length = 0;
+            this.errorMessage = false;
+            this.commitMessage = false;
         },
         modifyPending(item) {
             if (this.pending.indexOf(item) !== -1) {
@@ -202,9 +205,7 @@ let app = new Vue({
             }).done(function(c) {
                 if (c.error) {
                     self.errorMessage = 'Bad request:\n'
-                        + JSON.stringify(c.error, null, 2)
-                        + '\nIf you think your input was correct, submit an issue here:'
-                        + '\nhttps://github.com/SPSquonK/PropHtml/issues';
+                        + JSON.stringify(c.error, null, 2);
                     self.commitMessage = false;
                 } else {
                     self.errorMessage = false;
@@ -221,7 +222,7 @@ let app = new Vue({
                         if (self.items[changedItem.id] !== undefined) {
                             self.items[changedItem.id] = transformNetworkedItem(changedItem);
                         }
-                        
+
                         self.pending.splice(self.pending.findIndex(i => i.id === changedItem.id), 1);
                     }
                 }

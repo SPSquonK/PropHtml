@@ -2,87 +2,128 @@
 <html>
   <head>
     <title>Express Prop Html</title>
-    <link href="itemlist.css" rel="stylesheet" />
+    <!-- <link href="itemlist.css" rel="stylesheet" /> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       .hidden { display: none; }
+
+      .table.itemlist td,
+      .table.itemlist tr {
+        vertical-align: middle;
+      }
     </style>
   </head>
   <body>
-    <h1>Express Prop Html</h1>
-    <div id="loading"></div>
-    <div id="app" class="hidden">
-      <ul>
-        <li
-          v-for="(oneCategory, index) in categories"
-          style="display: inline;"
-        >
-          <a v-bind:href="'javascript:requestIk3(' + index + ')'">
-            {{ oneCategory }}
-          </a>
-        </li>
 
-      </ul>
+    <section class="section">
+      <h1 class="title has-text-centered is-link">Express Prop Html</h1>
+      <div id="loading"></div>
+      <div id="app" class="hidden">
+        <div class="block">
+          <nav class="navbar is-link has-shadow" role="navigation" aria-label="main navigation">
 
-      <p v-if="editable">
-        <label for="editMode">
-          <input
-            type="checkbox"
-            name="inEditMode"
-            v-model="editMode"
-          />
-          Switch to edit mode
-        </label>
-      </p>
+            <div class="navbar-brand">
+              <span class="navbar-item" style="font-weight: bold;">Categories</span>
+            </div>
 
-      <div v-if="editMode">
-        <h2>Pending changes</h2>
+            <div class="navbar-menu">
+              <div class="navbar-start">
+                <a
+                  v-for="(oneCategory, index) in categories"
+                  v-bind:href="'javascript:requestIk3(' + index + ')'"
+                  v-bind:class="'navbar-item' + (oneCategory === category ? ' is-active' : '')"
+                >
+                  {{ oneCategory }}
+                </a>
+              </div>
+            </div>
+          </nav>
+        </div>
 
-        <ul style="height: 7.7em; overflow-y: scroll;">
-          <li v-for="item in pending">
-            <em>{{ item.name }}</em>:
-            <span v-html="strInLine(item.originalBonus)" style="text-decoration: line-through"></span>
-            -&gt;
-            <span v-html="strInLine(item.bonus)"></span>
-          </li>
-        </ul>
+        <div class="block box">
+          <p v-if="editable">
+            <label for="editMode" class="checkbox">
+              <input type="checkbox" name="editMode" v-model="editMode" />
+              Switch to edit mode
+            </label>
+          </p>
 
-        <p v-if="errorMessage" v-text="errorMessage" style="color: darkred;"></p>
-        <p v-if="commitMessage" style="color: darkgreen;">{{ commitMessage }}</p>
+          <div v-if="editMode" class="box">
+            <h2 class="title is-3">Pending changes</h2>
 
-        <input type="Reset" value="Reset"   v-on:click="reset()"  />
-        <input type="submit" value="Submit" v-on:click="submit()" />
-      </div>
+            <ul style="height: 7.7em; overflow-y: scroll;">
+              <li v-for="item in pending">
+                <em>{{ item.name }}</em>:
+                <span v-html="strInLine(item.originalBonus)" style="text-decoration: line-through"></span>
+                -&gt;
+                <span v-html="strInLine(item.bonus)"></span>
+              </li>
+            </ul>
 
-      <h2>{{ category }}</h2>
+            <article class="message is-danger  message-body" v-if="errorMessage">
+              {{ errorMessage }}
+              <br />
+              <em>
+                If you think your input was correct, submit an issue here:
+                <a href="https://github.com/SPSquonK/PropHtml/issues">
+                  https://github.com/SPSquonK/PropHtml/issues
+                </a>
+              </em>
+            </article>
+            <article class="message is-success message-body" v-if="commitMessage">{{ commitMessage }}</article>
+
+            <div class="field is-grouped">
+              <p class="control">
+                <input type="submit" value="Submit" v-on:click="submit()" class="button is-primary" />
+              </p>
+              <p class="control">
+                <input type="Reset" value="Reset"   v-on:click="reset()" class="button is-light"  />
+              </p>
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="block box">
+          <h2 class="title is-3">{{ category }}</h2>
 
 
-      <table>
-        <tr>
-          <th>Icon</th>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Job</th>
-          <th>Level</th>
-          <th>Bonus</th>
-        </tr>
-
-        <template>
-          <item-row
-            v-for="item in items"
-            v-bind:item="item"
-            v-bind:dstlist="dstList"
-            v-bind:editmode="editMode"
-            v-on:modifieditem="modifyPending($event)"
-            v-bind:key="item.id"
+          <table
+            class="table is-hoverable is-striped is-bordered is-fullwidth itemlist has-text-centered"
           >
-          </item-row>
-        </template>
-      </table>
-      
-      <footer>
-        <a href="https://github.com/SPSquonK/PropHtml">Express Prop Html</a> © SquonK, 2021
-      </footer>
-    </div>
+            <thead>
+              <tr>
+                <th>Icon</th>
+                <th>Name</th>
+                <th>Job</th>
+                <th>Level</th>
+                <th class="has-text-left">Bonus</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <template>
+                <item-row
+                  v-for="item in items"
+                  v-bind:item="item"
+                  v-bind:dstlist="dstList"
+                  v-bind:editmode="editMode"
+                  v-on:modifieditem="modifyPending($event)"
+                  v-bind:key="item.id"
+                >
+                </item-row>
+              </template>
+            </tbody>
+          </table>
+        </div>
+        
+        <footer class="has-text-right">
+          <strong><a href="https://github.com/SPSquonK/PropHtml">Express Prop Html</a></strong>
+          by <a href="https://squonk.fr">SquonK</a>, 2021.
+        </footer>
+      </div>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script
