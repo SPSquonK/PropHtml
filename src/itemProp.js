@@ -2,6 +2,7 @@ const fs = require('fs');
 const iconvlite = require('iconv-lite');
 const FR = require('./file_reader');
 const path = require('path');
+const YAML = require('yaml');
 
 /**
  * 
@@ -25,62 +26,69 @@ function stringContainsOneOf(str, symbols) {
     return symbols.find(symbol => str.indexOf(symbol) !== -1) !== undefined;
 }
 
-/** Positions of the fields in a clean v15 propItem.txt */
-const v15fields = {
-    'ID': 1,
-    'TID': 2,
-    'IK1': 5,
-    'IK2': 6,
-    'IK3': 7,
-    'JOB': 8,
-    'HANDS': 16,
-    'RANK': 91,
-    'LEVEL': 116,
-    'ICON': 120,
-    'DESCRIPTION': 123,
-    bonusLines: [ [53, 56], [54, 57], [55, 58] ],
-    parseBonuses: item => {
-        return v15fields.bonusLines.map(
-            ([dst, value]) => {
-                if (item[dst] === "=" || item[value] === "=") {
-                    return undefined;
-                }
+function detectFields(line) {
+    const numberOfTokens = FR.tokenize(line).length;
 
-                return [item[dst], parseInt(item[value])];
-            });
-    },
-    modifyBonuses: (item, newBonuses) => {
-        if (newBonuses.length > v15fields.bonusLines.length) {
-            return false;
-        }
-
-        for (let i = 0; i != v15fields.bonusLines.length; ++i) {
-            const [addrDst, addrValue] = v15fields.bonusLines[i];
-
-            if (i >= newBonuses.length) {
-                item[addrDst]   = "=";
-                item[addrValue] = "=";
-            } else {
-                item[addrDst]   = newBonuses[i][0];
-                item[addrValue] = newBonuses[i][1].toString();
-            }
-        }
-
-        return true;
+    const p = path.join(__dirname, '..', 'configuration', 'item-layouts.yaml');
+    if (!fs.existsSync(p)) {
+        throw Error('configuration/item-layouts.yaml should exist');
     }
-};
+
+    const layouts = YAML.parse(fs.readFileSync(p, 'utf8'));
+
+    for (const candidateName of layouts['@candidates']) {
+        const candidate = layouts[candidateName];
+        
+        if (numberOfTokens === candidate['@ExpectedNumberOfFields']) {
+            return candidate;
+        }
+    }
+
+    throw Error('ItemProp field detection failed');
+}
+
+function parseBonuses(item, fields) {
+    return fields.bonusLines.map(
+        ([dst, value]) => {
+            if (item[dst] === "=" || item[value] === "=") {
+                return undefined;
+            }
+
+            return [item[dst], parseInt(item[value])];
+        });
+}
+
+function modifyBonuses(item, fields, newBonuses) {
+    if (newBonuses.length > fields.bonusLines.length) {
+        return false;
+    }
+
+    for (let i = 0; i != fields.bonusLines.length; ++i) {
+        const [addrDst, addrValue] = fields.bonusLines[i];
+
+        if (i >= newBonuses.length) {
+            item[addrDst]   = "=";
+            item[addrValue] = "=";
+        } else {
+            item[addrDst]   = newBonuses[i][0];
+            item[addrValue] = newBonuses[i][1].toString();
+        }
+    }
+
+    return true;
+}
 
 // TODO : Enforce 'loaded files should not have duplicates'
 
 class ItemPropTxt {
-    static loadFile(path, context) {
+    static loadFile(path, context, fields) {
         const lines = iconvlite.decode(fs.readFileSync(path), 'cp1252')
             .split(/\r?\n/);
         
-        return new ItemPropTxt(lines, context);
+        return new ItemPropTxt(lines, context, fields);
     }
 
-    constructor(lines, context) {
+    constructor(lines, context, fields) {
         this.lines = [];
         this.items = [];
 
@@ -107,11 +115,16 @@ class ItemPropTxt {
                 this.lines.push(line);
             } else {
                 let item;
+
+                if (fields === undefined) {
+                    fields = detectFields(line);
+                }
+
                 if (context === undefined) {
-                    item = new ItemProp(line, v15fields);
+                    item = new ItemProp(line, fields);
                 } else {
                     // TODO: pass whole context or modify itemNames to do more fun things
-                    item = new ItemPropInContext(line, v15fields, context.itemNames);
+                    item = new ItemPropInContext(line, fields, context.itemNames);
                 }
 
                 this.lines.push(item);
@@ -120,6 +133,10 @@ class ItemPropTxt {
         }
 
         this.context = context;
+    }
+
+    getItem(itemId) {
+        return this.items.find(item => item.id === itemId);
     }
 
     toPropItemTxtString() {
@@ -160,7 +177,7 @@ class ItemPropTxt {
         return changedItems;
     }
 
-    persist(resourcePath, keepOriginalPropItemPath, newItemPropPath) {
+    persist(resourcePath, keepOriginalPropItemPath, newItemPropPath, propItemDotTxt) {
         // TODO: manage absolute paths
 
         // Keep Original Prop Item Path
@@ -169,7 +186,7 @@ class ItemPropTxt {
 
             if (!fs.existsSync(path)) {
                 fs.copyFileSync(
-                    path.join(resourcePath, 'propItem.txt'),
+                    path.join(resourcePath, propItemDotTxt),
                     dstPath
                 );
             }
@@ -177,7 +194,7 @@ class ItemPropTxt {
 
         // 
         if (newItemPropPath === undefined) {
-            newItemPropPath = 'propItem.txt';
+            newItemPropPath = propItemDotTxt;
         }
 
         const target = path.join(resourcePath, newItemPropPath);
@@ -252,9 +269,10 @@ class ItemProp {
         this.content = FR.tokenize(line);
         this.fields = fields;
 
-        if (this.content.length !== fields.DESCRIPTION + 1) {
+        if (fields['@ExpectedNumberOfFields'] !== undefined
+            && this.content.length !== fields['@ExpectedNumberOfFields']) {
             throw Error(
-                "Item doesn't have " + (fields.DESCRIPTION + 1)
+                "Item doesn't have " + fields['@ExpectedNumberOfFields']
                 + " tokens but " + this.content.length
             );
         }
@@ -271,7 +289,7 @@ class ItemProp {
     get ik3()   { return this.content[this.fields.IK3]; }
     get job()   { return this.content[this.fields.JOB]; }
     get icon()  { return _removeQuotes(this.content[this.fields.ICON]); }
-    get bonus() { return this.fields.parseBonuses(this.content); }
+    get bonus() { return parseBonuses(this.content, this.fields); }
 
     get level() {
         const rawLevel = this.content[this.fields.LEVEL];
@@ -280,14 +298,18 @@ class ItemProp {
     }
 
     /** To be able to better see the fields repartition */
-    saveInNotes(path) {
-        fs.writeFileSync(path,
-            Object.entries(this.content).map(([index, value]) => `${index}: ${value}`).join("\n")
-        );
+    saveInNotes(refItem) {
+        if (refItem === null) {
+            return Object.entries(this.content)
+                .map(([index, value]) => `${value}`)
+                .join("\n");
+        } else {
+
+        }
     }
 
     applyBonusChange(newBonus) {
-        return this.fields.modifyBonuses(this.content, newBonus);
+        return modifyBonuses(this.content, this.fields, newBonus);
     }
 }
 

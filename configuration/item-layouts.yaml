@@ -1,0 +1,68 @@
+
+'@candidates':
+  - V15
+  - SFlyFF
+  - V21
+
+# V15 basic layout
+V15:
+  '@ExpectedNumberOfFields': 124
+  ID   : 1
+  TID  : 2
+  IK1  : 5
+  IK2  : 6
+  IK3  : 7
+  JOB  : 8
+  HANDS: 16
+  RANK : 91
+  LEVEL: 116
+  ICON : 120
+  DESCRIPTION: 123
+  bonusLines:
+    - [53, 56]
+    - [54, 57]
+    - [55, 58]
+
+# SFlyFF layout: 6 bonuses, no extra fields
+SFlyFF:
+  '@ExpectedNumberOfFields': 136
+  ID   : 1
+  TID  : 2
+  IK1  : 5
+  IK2  : 6
+  IK3  : 7
+  JOB  : 8
+  HANDS: 16
+  RANK : 103
+  LEVEL: 128
+  ICON : 132
+  DESCRIPTION: 135
+  bonusLines:
+    - [53, 59]
+    - [54, 60]
+    - [55, 61]
+    - [56, 62]
+    - [57, 63]
+    - [58, 64]
+
+# V21 layout: 6 bonuses + extra fields at the end
+V21:
+  '@ExpectedNumberOfFields': 171
+  ID   : 1
+  TID  : 2
+  IK1  : 5
+  IK2  : 6
+  IK3  : 7
+  JOB  : 8
+  HANDS: 16
+  RANK : 103
+  LEVEL: 128
+  ICON : 132
+  DESCRIPTION: 135
+  bonusLines:
+    - [53, 59]
+    - [54, 60]
+    - [55, 61]
+    - [56, 62]
+    - [57, 63]
+    - [58, 64]

@@ -40,7 +40,10 @@ function loadResources(configuration) {
     );
     
     /** @type PropItemTxt */
-    content.propItems = PropItemTxt.loadFile(path.join(configuration['resource-folder'], "propItem.txt"), content);
+    content.propItems = PropItemTxt.loadFile(
+        path.join(configuration['resource-folder'], configuration.propItemDotTxt),
+        content
+    );
 
     return content;
 }
@@ -224,7 +227,8 @@ function startWebServer(port, { configuration, resources, isEditMode, items, cat
                 resources.propItems.persist(
                     configuration['resource-folder'],
                     configuration['keep-original-prop-item'] || undefined,
-                    configuration['new-prop-item-path'] || undefined
+                    configuration['new-prop-item-path'] || undefined,
+                    configuration['propitemDotTxt']
                 );
             }
 

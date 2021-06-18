@@ -41,8 +41,8 @@
           </nav>
         </div>
 
-        <div class="block box">
-          <p v-if="editable">
+        <div class="block box" v-if="editable">
+          <p>
             <label for="editMode" class="checkbox">
               <input type="checkbox" name="editMode" v-model="editMode" />
               Switch to edit mode
@@ -88,16 +88,15 @@
         <div class="block box">
           <h2 class="title is-3">{{ category }}</h2>
 
-
           <table
             class="table is-hoverable is-striped is-bordered is-fullwidth itemlist has-text-centered"
           >
             <thead>
               <tr>
-                <th>Icon</th>
-                <th>Name</th>
-                <th>Job</th>
-                <th>Level</th>
+                <th style="width: 64px;">Icon</th>
+                <th style="width: 30em;">Name</th>
+                <th style="width: 10em;">Job</th>
+                <th style="width: 5em;">Level</th>
                 <th class="has-text-left">Bonus</th>
               </tr>
             </thead>

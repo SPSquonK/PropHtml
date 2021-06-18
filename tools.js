@@ -73,6 +73,31 @@ function restore(destination, source, diff, apply, deleteOriginal) {
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+// Prop Item Devtool
+
+function studyPropItem(propItem, options) {
+    function getItemFrom(path) {
+        if (path == null) return null;
+
+        const itemPropTxt = ItemPropTxt.loadFile(propItem, undefined, { ID: 1 });
+        return itemPropTxt.getItem(options.referenceItem);        
+    }
+
+    const studiedItem = getItemFrom(propItem);
+    const refItem = getItemFrom(options.referenceItemProp);
+
+    const notes = studiedItem.saveInNotes(refItem);
+
+    if (options.output === null) {
+        console.log(notes);
+    } else {
+        fs.writeFileSync(options.output, 'utf8');
+    }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 // Command Line Interface
 
 function extractFromEnv(key, file, default_) {
@@ -100,7 +125,7 @@ if (require.main === module) {
             extractFromEnv('resource-folder', conf['keep-original-prop-item'])
         )
         .option('-d, --destination <path/to/usedPropItem>', 'The path to the propItem to replace', 
-            extractFromEnv('resource-folder', 'propItem.txt')
+            extractFromEnv('resource-folder', conf.propItemDotTxt)
         )
         .option('--diff', 'Display the bonus difference between the two files')
         .option('--apply', 'Replace the destination with the source')
@@ -109,6 +134,13 @@ if (require.main === module) {
             options.destination, options.source,
             options.diff, options.apply, options.deleteOriginal
         ));
+    
+    program.command('studyPropItem <propItem>')
+        .option('-i, --referenceItem <item>', 'Item used to compare', 'II_WEA_SWO_WOODEN')
+        .option('-o, --output <path/to/dstProp.json>', 'The path to the produced file', null)
+        .option('-r, --referenceItemProp <path/to/dstProp.json>', 'Another prop item to compare to', null)
+        .description('A development tool for prop item analysis')
+        .action((a, options) => studyPropItem(a, options));
 
     program.parse(process.argv);
 }

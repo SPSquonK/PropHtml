@@ -109,6 +109,10 @@ function initialize(target) {
         throw Error('Unknown menu');
     }
 
+    if (fs.existsSync(path.join(newContent['resource-folder'], 'Spec_Item.txt'))) {
+        newContent['the-file-that-contains-itemprops-is-not-propitem'] = 'Spec_Item.txt';
+    }
+
     const built = yamlDiffPatch.yamlDiffPatch(templateFile, old, newContent);
     fs.writeFileSync(target, built);
 }
@@ -120,7 +124,9 @@ function getConfiguration() {
         initialize(p);
     }
 
-    return YAML.parse(fs.readFileSync(p, 'utf8'));
+    let result = YAML.parse(fs.readFileSync(p, 'utf8'));
+    result['propItemDotTxt'] = result['the-file-that-contains-itemprops-is-not-propitem'] || 'propItem.txt';
+    return result;
 }
 
 module.exports = getConfiguration;
