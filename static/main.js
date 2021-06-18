@@ -47,6 +47,29 @@ function transformNetworkedItem(item) {
     return item;
 }
 
+const ItemModification = {
+    hasBeenModified: function(item) {
+        for (let i = 0 ; i != item.bonus.length ; ++i) {
+            if (item.bonus[i][0] == 'DST_NONE') {
+                if (item.originalBonus[i][0] != 'DST_NONE') return true;
+            } else if (item.originalBonus[i][0] == 'DST_NONE') {
+                return true;
+            } else {
+                if (item.bonus[i][0] != item.originalBonus[i][0]) {
+                    return true;
+                }
+                
+                if (item.bonus[i][1] != item.originalBonus[i][1]) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+};
+
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -97,28 +120,9 @@ Vue.component(
                 x => stringify.awake(x, data.dstList)
             ).join("<br>");
         },
-        hasBeenModified(item) {
-            for (let i = 0 ; i != item.bonus.length ; ++i) {
-                if (item.bonus[i][0] == 'DST_NONE') {
-                    if (item.originalBonus[i][0] != 'DST_NONE') return true;
-                } else if (item.originalBonus[i][0] == 'DST_NONE') {
-                    return true;
-                } else {
-                    if (item.bonus[i][0] != item.originalBonus[i][0]) {
-                        return true;
-                    }
-                    
-                    if (item.bonus[i][1] != item.originalBonus[i][1]) {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        },
         changedItem(item) {
             const old = item.isModified;
-            item.isModified = this.hasBeenModified(item);
+            item.isModified = ItemModification.hasBeenModified(item);
             item.style = item.isModified ? 'color: red' : 'color: inherit';
 
             if (old !== item.isModified) {
@@ -134,6 +138,19 @@ let app = new Vue({
     methods: {
         modifyItemList(items) {
             this.items = items;
+
+            for (let i = 0; i != this.pending.length; ++i) {
+                const pendingItem = this.pending[i];
+                const realItem = this.items[pendingItem.id];
+
+                if (realItem !== undefined) {
+                    realItem.bonus = pendingItem.bonus;
+                    this.pending[i] = realItem;
+                    
+                    realItem.isModified = ItemModification.hasBeenModified(realItem);
+                    realItem.style = realItem.isModified ? 'color: red' : 'color: inherit';
+                }
+            }
         },
         reset() {
             Object.values(this.items)
@@ -201,9 +218,11 @@ let app = new Vue({
                     self.commitMessage = commitMessage;
 
                     for (const changedItem of c.modified) {
-                        const realItem = self.items[changedItem.id];
-                        self.items[changedItem.id] = transformNetworkedItem(changedItem);
-                        self.pending.splice(self.pending.indexOf(realItem), 1);
+                        if (self.items[changedItem.id] !== undefined) {
+                            self.items[changedItem.id] = transformNetworkedItem(changedItem);
+                        }
+                        
+                        self.pending.splice(self.pending.findIndex(i => i.id === changedItem.id), 1);
                     }
                 }
             });
