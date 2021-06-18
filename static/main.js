@@ -18,7 +18,7 @@ const stringify = {
             valueStr += value;
         }
 
-        if (dstProp[dst].isRate) {
+        if (dstProp[dst] !== undefined && dstProp[dst].isRate) {
             valueStr += "%";
         }
 
