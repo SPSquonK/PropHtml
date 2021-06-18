@@ -3,7 +3,7 @@
 const path = require('path');
 const { Command } = require('commander');
 const fs = require('fs');
-const FR = require('./src/file_reader');
+const FR = require('./src/file-reader');
 const ItemPropTxt = require('./src/itemProp');
 const beautify = require("json-beautify");
 const conf = require('./src/configuration')();

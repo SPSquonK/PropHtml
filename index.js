@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const YAML = require('yaml');
 
-const FR = require('./src/file_reader');
+const FR = require('./src/file-reader');
 const PropItemTxt = require('./src/itemProp');
 const ImageServer = require('./src/ImageServer');
 
@@ -17,8 +17,7 @@ function inDictReduce(acc, [id, value]) {
 
 function loadResources(configuration) {
     const content = {};
-    
-    content.itemNames = FR.readStrings(path.join(configuration['resource-folder'], "propItem.txt.txt"))
+    content.itemNames = FR.readStrings(path.join(configuration['resource-folder'], "propItem.txt.txt"));
 
     if (configuration['source-folder']) {
         const r = FR.readDSTMapping(path.join(configuration['source-folder'], "_Interface", "WndManager.cpp"));
@@ -228,7 +227,7 @@ function startWebServer(port, { configuration, resources, isEditMode, items, cat
                     configuration['resource-folder'],
                     configuration['keep-original-prop-item'] || undefined,
                     configuration['new-prop-item-path'] || undefined,
-                    configuration['propitemDotTxt']
+                    configuration['propItemDotTxt']
                 );
             }
 

@@ -1,6 +1,5 @@
 const fs = require('fs');
-const iconvlite = require('iconv-lite');
-const FR = require('./file_reader');
+const FR = require('./file-reader');
 const path = require('path');
 const YAML = require('yaml');
 
@@ -82,15 +81,16 @@ function modifyBonuses(item, fields, newBonuses) {
 
 class ItemPropTxt {
     static loadFile(path, context, fields) {
-        const lines = iconvlite.decode(fs.readFileSync(path), 'cp1252')
-            .split(/\r?\n/);
-        
-        return new ItemPropTxt(lines, context, fields);
+        const file = FR.readFileSync(path, true);
+        return new ItemPropTxt(
+            file.content.split(/\r?\n/), file.encoding, context, fields
+        );
     }
 
-    constructor(lines, context, fields) {
+    constructor(lines, encoding, context, fields) {
         this.lines = [];
         this.items = [];
+        this.encoding = encoding;
 
         let isInComment = false;
         for (const line of lines) {
@@ -154,8 +154,7 @@ class ItemPropTxt {
      * @param {string} path Path to the file to write
      */
     saveFile(path) {
-        const buffer = iconvlite.encode(this.toPropItemTxtString(), "cp1252");
-        fs.writeFileSync(path, buffer);
+        FR.writeFileSync(path, this.toPropItemTxtString(), this.encoding);
     }
 
     *[Symbol.iterator]() {
