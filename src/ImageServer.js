@@ -3,6 +3,9 @@ const path = require('path');
 const { PNG } = require('pngjs');
 const sdds = require('sdds');
 
+// To help catching bugs and improve SDDS
+sdds._config.strongerFormatCheck = true;
+
 /**
  * A class that can read and store the image requested from a folder.
  * 
