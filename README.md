@@ -17,11 +17,15 @@ The current goal is to support the same features as PropHtml.
 Node.js and npm are required. If you haven't succumbed to the powers of the
 light side, https://nodejs.org/en/ might help you.
 
+- `git clone https://github.com/SPSquonK/PropHtml.git`
+- `cd PropHtml`
 - `npm install`
-- Modify the .env to point to your resources.
-
-Currently, only a clean V15 source is supported. SFlyFF and V21 sources
-will be supported later.
+- `node index.js`
+- A prompt will open, asking you where is your FlyFF folder
+  - If your FlyFF folder is structured with a Source and Resource folder, pick
+  "Fast configuration", copy the path to your FlyFF Folder and you are done
+  - Else, pick "Advance configuration" and follow the instructions
+  - You can change later the settings by modifying `configuration/index.yaml`
 
 ### Usage
 
@@ -45,10 +49,9 @@ resources it needs.
 - You can output it into a file by using either:
     - the `--output path/to/dstProp.json` option
     - or writing in a file the output of stdin with `> path/to/dstProp.json`
-- Fix the .env file by
-    - Commenting the `flyff_src` line
-    - Uncommenting the propJsonPath line
-    - Fixing the path
+- Fix the `configuration-index.yaml` file by
+    - Setting `source-folder` to false
+    - Replacing the value of `dst-prop-json` with the path to the generated file
 
 You can also write manually the `dstProp.json` file. Here is an example where
 `DST_STR` will use the text bound to `TID_TOOLTIP_STR` as a flat value
