@@ -18,13 +18,16 @@
   "homepage": "https://github.com/SPSquonK/PropHtml#readme",
   "dependencies": {
     "commander": "^7.2.0",
-    "dotenv": "^10.0.0",
+    "deasync": "^0.1.21",
     "express": "^4.17.1",
     "iconv-lite": "^0.4.24",
+    "inquirer": "^6.5.2",
+    "inquirer-fuzzy-path": "^2.3.0",
     "json-beautify": "^1.1.1",
     "papaparse": "^5.3.1",
     "pngjs": "^6.0.0",
     "sdds": "^0.0.2",
-    "yaml": "^1.10.2"
+    "yaml": "^1.10.2",
+    "yaml-diff-patch": "^1.0.2"
   }
 }

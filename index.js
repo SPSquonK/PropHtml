@@ -1,4 +1,3 @@
-const conf = require('dotenv').config()
 const { Command } = require('commander');
 const express = require('express');
 const fs = require('fs');
@@ -9,59 +8,39 @@ const FR = require('./src/file_reader');
 const PropItemTxt = require('./src/itemProp');
 const ImageServer = require('./src/ImageServer');
 
-const port = 3000;
-
-// TODO: remove .env configuration
-
-const program = new Command()
-    .description('Can the server modify the resources')
-    .option('-e, --editable', 'The server can modify the resources')
-    .option('-r, --readonly', 'The server is in read-only mode');
-
-program.parse(process.argv);
-
-const options = program.opts();
-
-if (options.editable && options.readonly) {
-    console.error('editable and readonly are mutually exclusive');
-    return;
-}
-
-const isEditMode = !options.readonly;
-
-const yamlConf = YAML.parse(fs.readFileSync('item-categories.yaml', 'utf8'));
+const configurationReader = require('./src/configuration');
 
 function inDictReduce(acc, [id, value]) {
     acc[id] = value;
     return acc;
 }
 
-function loadResources() {
+function loadResources(configuration) {
     const content = {};
     
-    content.itemNames = FR.readStrings(path.join(conf.parsed.flyff, "propItem.txt.txt"))
+    content.itemNames = FR.readStrings(path.join(configuration['resource-folder'], "propItem.txt.txt"))
 
-    if (conf.parsed.flyff_src) {
-        const r = FR.readDSTMapping(path.join(conf.parsed.flyff_src, "_Interface", "WndManager.cpp"));
+    if (configuration['source-folder']) {
+        const r = FR.readDSTMapping(path.join(configuration['source-folder'], "_Interface", "WndManager.cpp"));
 
         for (const warning of r.warnings) {
             console.error("Warning: " + warning);
         }
 
         content.dstMapping = r.dst;
-    } else if (conf.parsed.dstPropPath) {
-        content.dstMapping = JSON.parse(fs.readFileSync(conf.parsed.dstPropPath, "utf8")).dst;
+    } else if (configuration['dst-prop-json']) {
+        content.dstMapping = JSON.parse(fs.readFileSync(configuration['dst-prop-json'], "utf8")).dst;
     } else {
         console.error("No path to source or path to dstProp");
     }
     
     content.textClient = FR.textClient(
-        path.join(conf.parsed.flyff, "textClient.inc"),
-        path.join(conf.parsed.flyff, "textClient.txt.txt")
+        path.join(configuration['resource-folder'], "textClient.inc"),
+        path.join(configuration['resource-folder'], "textClient.txt.txt")
     );
     
     /** @type PropItemTxt */
-    content.propItems = PropItemTxt.loadFile(path.join(conf.parsed.flyff, "propItem.txt"), content);
+    content.propItems = PropItemTxt.loadFile(path.join(configuration['resource-folder'], "propItem.txt"), content);
 
     return content;
 }
@@ -77,23 +56,17 @@ function buildCategories(yamlCategories) {
     return result;
 }
 
-const resources = loadResources();
-
-const items = [...resources.propItems];
-const categories = buildCategories(yamlConf['requestable-ik3']);
-
-
 /* ==== WEB SERVER ==== */
 
 /**
  * Starts the ExpressPropHtml web server
  * @param {number | string} port The port used by the server
- * @param {any[]} The list of categories
+ * @param {*} thing Things
  * @param {boolean} silent If true, the server will not display in console the
  * "Server has been started at ..." message
  * @returns The express instance of the server
  */
-function startWebServer(port, categories, silent = false) {
+function startWebServer(port, { configuration, resources, isEditMode, items, categories }, silent = false) {
     // Build the express instance
     const app = express();
     app.use(express.json());
@@ -102,7 +75,7 @@ function startWebServer(port, categories, silent = false) {
     app.use('/', express.static('static'));
 
     // Image folder
-    const imageServer = new ImageServer(path.join(conf.parsed.flyff, 'Item'));
+    const imageServer = new ImageServer(path.join(configuration['resource-folder'], 'Item'));
 
     app.get('/dds/:path', (req, res) => {
         const filename = path.normalize(req.params['path']);
@@ -249,9 +222,9 @@ function startWebServer(port, categories, silent = false) {
 
             if (chg.length !== 0) {
                 resources.propItems.persist(
-                    conf.parsed.flyff,
-                    conf.parsed.KEEP_ORIGINAL_PROP_ITEM,
-                    conf.parsed.NEW_PROP_ITEM_PATH
+                    configuration['resource-folder'],
+                    configuration['keep-original-prop-item'] || undefined,
+                    configuration['new-prop-item-path'] || undefined
                 );
             }
 
@@ -271,4 +244,37 @@ function startWebServer(port, categories, silent = false) {
     return app;
 }
 
-startWebServer(port, categories);
+
+/* ==== ==== */
+
+function main() {
+    const configuration = configurationReader();
+
+    const port = 3000;
+    
+    const program = new Command()
+        .description('Can the server modify the resources')
+        .option('-e, --editable', 'The server can modify the resources')
+        .option('-r, --readonly', 'The server is in read-only mode');
+    
+    program.parse(process.argv);
+    
+    const options = program.opts();
+    
+    if (options.editable && options.readonly) {
+        console.error('editable and readonly are mutually exclusive');
+        return;
+    }
+    
+    const isEditMode = !options.readonly;
+    
+    const yamlConf = YAML.parse(fs.readFileSync(path.join('configuration', 'item-categories.yaml'), 'utf8'));
+
+    const resources = loadResources(configuration);
+    const items = [...resources.propItems];
+    const categories = buildCategories(yamlConf['requestable-ik3']);
+
+    startWebServer(port, { configuration, resources, isEditMode, items, categories });
+}
+
+main();

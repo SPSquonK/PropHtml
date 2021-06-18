@@ -1,3 +1,4 @@
+
 ################################################################################
 # Finding the resources
 
@@ -5,16 +6,17 @@
 # - textClient.inc, textClient.txt.txt, 
 # - propItem.txt, propItem.txt.txt
 # - The Item folder
-flyff=B:\CleanFlyFF\FlyFF-VS17\Resource\
+resource-folder: false
 
 # Source folder is used for:
 # - _Interface/WndManager.cpp (TID of dst)
-flyff_src=B:\CleanFlyFF\FlyFF-VS17\Source\
+source-folder: false
 
-# You can also generate a json file, comment the flyff_src line and uncomment
-# this. The json file can either be written manually or generated with
-# `tools.js dstProp`. Look at the README for more information
-# dstPropPath=dstProp.json
+# The source folder is only required to the dst to text mapping. Instead of
+# using the source, you can use a dstProp.json file. It can either be written
+# manually or generated with `tools.js dstProp`. Look at the README for more
+# information
+dst-prop-json: false
 
 
 ################################################################################
@@ -24,9 +26,8 @@ flyff_src=B:\CleanFlyFF\FlyFF-VS17\Source\
 # here. If this variable does not exist, the original propItem will not be
 # stored. You may not want this feature if you
 # If the file already exists, it will not be replaced
-KEEP_ORIGINAL_PROP_ITEM=propItem.original.txt
+keep-original-prop-item: false
 
 # The default behaviour is to replace the original propItem.txt file. If you
 # prefer, you can specify a location for the generated propItem files.
-# NEW_PROP_ITEM_PATH=propItem.new.txt
-
+new-prop-item-path: false
