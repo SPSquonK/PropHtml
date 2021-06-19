@@ -8,6 +8,7 @@ const FR = require('./src/file-reader');
 const MiscResources = require('./src/misc-resources');
 const PropItemTxt = require('./src/itemProp');
 const ImageServer = require('./src/ImageServer');
+const PropItemEtc = require('./src/PropItemEtc');
 
 const configurationReader = require('./src/configuration');
 
@@ -37,6 +38,13 @@ function loadResources(configuration) {
     content.textClient = MiscResources.textClient(
         path.join(configuration['resource-folder'], "textClient.inc"),
         path.join(configuration['resource-folder'], "textClient.txt.txt")
+    );
+
+    content.setItems = PropItemEtc.readSetItems(
+        path.join(configuration['resource-folder'], "propItemEtc.inc")
+    );
+    content['propItemEtc.txt.txt'] = FR.readStrings(
+        path.join(configuration['resource-folder'], "propItemEtc.txt.txt")
     );
     
     /** @type PropItemTxt */
@@ -145,6 +153,17 @@ function startWebServer(port, { configuration, resources, isEditMode, items, cat
             .map(item => item.toClient());
 
         return res.json({ items: yourItems });
+    });
+
+    app.get('/rest/experimental/set_items', (req, res) => {
+        let r = resources.setItems.map(setItem => {
+            return setItem.toClient(
+                resources['propItemEtc.txt.txt'],
+                resources.propItems
+            );
+        })
+
+        return res.json(r);
     });
 
     if (isEditMode) {

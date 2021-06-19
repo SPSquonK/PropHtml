@@ -116,6 +116,32 @@ function listEither(beginSymbol, fields, endSymbol) {
 }
 
 /**
+ * listEither but fields must appear once (and only once) so a dictionary is
+ * built instead of a list
+ */
+function dict(beginSymbol, fields, endSymbol) {
+    return scanner => {
+        const le = listEither(beginSymbol, fields, endSymbol)(scanner);
+
+        const result = {};
+
+        for (const fieldName of Object.keys(fields)) {
+            const found = le.filter(x => x[0] === fieldName).map(x => x[1]);
+
+            if (found.length > 1) {
+                throw Error('dict: more than 1 ' + fieldName + ' found');
+            } else if (found.length === 0) {
+                throw Error('dict: no ' + fieldName + ' found');
+            } else {
+                result[fieldName] = found[0];
+            }
+        }
+
+        return result;
+    }
+}
+
+/**
  * Build a function that consumes the scanner with the given functions, in order
  * and produce an array of the results
  * @param {(function(Scanner): any)[]} functions The functions to apply
@@ -127,6 +153,7 @@ function sequential(functions) {
 
 module.exports = {
     listEither,
+    dict,
     either,
     identity,
     list,
