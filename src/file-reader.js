@@ -136,6 +136,10 @@ function tokenize(str) {
             } else if (loneSymbols.indexOf(currentChar) !== -1) {
                 result.push(str.substr(begin, cursor - begin));
                 begin = cursor;
+            } else if (begin == cursor - 1
+                && loneSymbols.indexOf(str[begin]) !== -1) {
+                result.push(str.substr(begin, cursor - begin));
+                begin = cursor;
             }
         } else if (currentState == QuoteState) {
             if (currentChar == '\"') {
