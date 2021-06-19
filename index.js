@@ -5,6 +5,7 @@ const path = require('path');
 const YAML = require('yaml');
 
 const FR = require('./src/file-reader');
+const MiscResources = require('./src/misc-resources');
 const PropItemTxt = require('./src/itemProp');
 const ImageServer = require('./src/ImageServer');
 
@@ -20,7 +21,7 @@ function loadResources(configuration) {
     content.itemNames = FR.readStrings(path.join(configuration['resource-folder'], "propItem.txt.txt"));
 
     if (configuration['source-folder']) {
-        const r = FR.readDSTMapping(path.join(configuration['source-folder'], "_Interface", "WndManager.cpp"));
+        const r = MiscResources.readDSTMapping(path.join(configuration['source-folder'], "_Interface", "WndManager.cpp"));
 
         for (const warning of r.warnings) {
             console.error("Warning: " + warning);
@@ -33,7 +34,7 @@ function loadResources(configuration) {
         console.error("No path to source or path to dstProp");
     }
     
-    content.textClient = FR.textClient(
+    content.textClient = MiscResources.textClient(
         path.join(configuration['resource-folder'], "textClient.inc"),
         path.join(configuration['resource-folder'], "textClient.txt.txt")
     );
