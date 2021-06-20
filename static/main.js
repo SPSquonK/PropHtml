@@ -70,6 +70,74 @@ const ItemModification = {
 
 };
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Item Set modification
+
+function transformNetworkedItemset(itemset) {
+    const data = {};
+    data.id = itemset.id;
+
+    data.sets = [{
+        name: itemset.tid,
+        items: itemset.items.map(item => {
+            return { name: item.name, iconpath: 'dds/' + item.icon };
+        })
+    }];
+
+    data.jobs = itemset.items.map(item => {
+        return { job: item.jobName, level: item.level }
+    }).reduce(
+        (acc, value) => {
+            acc.jobs.add(value.job);
+            acc.level = Math.max(acc.level, value.level)
+            return acc;
+        }, { jobs: new Set(), level: 0 }
+    );
+
+    data.jobs.jobs = [...data.jobs.jobs];
+
+    data.displayBonus = [];
+    const maxParts = data.sets[0].items.length;
+    let stackedBonuses = {};
+    for (let i = 0; i <= maxParts; ++i) {
+        const bonuses = itemset.bonus[i];
+
+        if (bonuses === undefined) {
+            if (data.displayBonus.length !== 0) {
+                data.displayBonus[data.displayBonus.length - 1].max = i;
+            }
+            continue;
+        }
+
+        let myBonuses = Object.assign({}, stackedBonuses);
+        for (const [k, v] of bonuses) {
+            myBonuses[k] = (myBonuses[k] || 0) + v;
+        }
+
+        stackedBonuses = {};
+        
+        for (const [k, v] of Object.entries(myBonuses)) {
+            if (v !== 0) {
+                stackedBonuses[k] = myBonuses[k];
+            }
+        }
+        
+        data.displayBonus.push({
+            min: i,
+            max: i,
+            bonus: Object.assign({}, stackedBonuses)
+        });
+    }
+
+    for (const db of data.displayBonus) {
+        if (db.min === db.max) db.range = db.min.toString();
+        else db.range = db.min + " -> " + db.max;
+    }
+
+    return data;
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -141,12 +209,16 @@ Vue.component(
     template: `
     <tr v-bind:style="itemset.style">
         <td>
-            <strong>{{ itemset.name }}</strong>
-            <span v-for="item in itemset.items">
-                <br />
-                <img v-bind:src="item.iconpath" style="width: 16px; height: 16px" />
-                {{ item.name }}
-            </span>
+            <div class="columns">
+                <div class="column" v-for="iset in itemset.sets">
+                <strong>{{ iset.name }}</strong>
+                    <span v-for="item in iset.items">
+                        <br />
+                        <img v-bind:src="item.iconpath" style="width: 16px; height: 16px" />
+                        {{ item.name }}
+                    </span>
+                </div>
+            </div>
         </td>
         <td>
             <span v-for="(job, index) in itemset.jobs.jobs">
@@ -217,71 +289,16 @@ let app = new Vue({
         modifyItemSetList(itemSets) {
             this.itemsets = {};
 
-            for (const itemset of itemSets) {
-                const data = {};
+            let existings = {};
 
-                data.name = itemset.tid;
-                data.items = itemset.items.map(item => {
-                    return {
-                        name: item.name,
-                        iconpath: 'dds/' + item.icon
-                    };
-                });
-
-                data.jobs = itemset.items.map(item => {
-                    return { job: item.jobName, level: item.level }
-                }).reduce(
-                    (acc, value) => {
-                        const i = acc.jobs.indexOf(value.job);
-                        if (i === -1 && value.job !== "") {
-                            acc.jobs.push(value.job);
-                        }
-                        acc.raw.push(value.job);
-
-                        acc.level = Math.max(acc.level, value.level)
-                        return acc;
-                    }, { jobs: [], level: 0, raw: [] }
-                );
-
-                data.displayBonus = [];
-                const maxParts = data.items.length;
-                let stackedBonuses = {};
-                for (let i = 0; i <= maxParts; ++i) {
-                    const bonuses = itemset.bonus[i];
-
-                    if (bonuses === undefined) {
-                        if (data.displayBonus.length !== 0) {
-                            data.displayBonus[data.displayBonus.length - 1].max = i;
-                        }
-                        continue;
-                    }
-
-                    let myBonuses = Object.assign({}, stackedBonuses);
-                    for (const [k, v] of bonuses) {
-                        myBonuses[k] = (myBonuses[k] || 0) + v;
-                    }
-
-                    stackedBonuses = {};
-                    
-                    for (const [k, v] of Object.entries(myBonuses)) {
-                        if (v !== 0) {
-                            stackedBonuses[k] = myBonuses[k];
-                        }
-                    }
-                    
-                    data.displayBonus.push({
-                        min: i,
-                        max: i,
-                        bonus: Object.assign({}, stackedBonuses)
-                    });
+            for (const itemset of itemSets.map(is => transformNetworkedItemset(is))) {
+                const key = JSON.stringify(itemset.jobs) + JSON.stringify(itemset.displayBonus)
+                if (existings[key] !== undefined) {
+                    this.itemsets[existings[key]].sets.push(itemset.sets[0]);
+                } else {
+                    existings[key] = itemset.id;
+                    this.itemsets[itemset.id] = itemset;
                 }
-
-                for (const db of data.displayBonus) {
-                    if (db.min === db.max) db.range = db.min.toString();
-                    else db.range = db.min + " -> " + db.max;
-                }
-
-                this.itemsets[itemset.id] = data;
             }
         },
         reset() {
