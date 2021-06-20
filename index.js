@@ -60,8 +60,14 @@ function buildCategories(yamlCategories) {
     const result = [];
 
     for (const [name, filters] of Object.entries(yamlCategories)) {
-        const filter = item => filters.indexOf(item.ik3) !== -1;
-        result.push({ name, filter });
+        let annotationItemSet = filters.indexOf('@ItemSet');
+
+        if (annotationItemSet !== -1) {
+            result.push({ type: 'Item Set', name });
+        } else {
+            const filter = item => filters.indexOf(item.ik3) !== -1;
+            result.push({ type: 'Single Item', name, filter });
+        }
     }
 
     return result;
@@ -141,7 +147,7 @@ function startWebServer(port, { configuration, resources, isEditMode, items, cat
         return res.json({ result });
     });
 
-    app.get('/rest/individual-items/category/:id', (req, res) => {
+    app.get('/rest/category/:id', (req, res) => {
         const category = parseInt(req.params['id']);
         if (isNaN(category) || category >= categories.length) {
             return res.status(404).json({ error: 'Bad request' });
@@ -149,21 +155,23 @@ function startWebServer(port, { configuration, resources, isEditMode, items, cat
 
         const categoryDict = categories[category];
 
-        const yourItems = items.filter(i => categoryDict.filter(i))
-            .map(item => item.toClient());
+        if (categoryDict.type === 'Single Item') {
+            const yourItems = items.filter(i => categoryDict.filter(i))
+                .map(item => item.toClient());
 
-        return res.json({ items: yourItems });
-    });
-
-    app.get('/rest/experimental/set_items', (req, res) => {
-        let r = resources.setItems.map(setItem => {
-            return setItem.toClient(
-                resources['propItemEtc.txt.txt'],
-                resources.propItems
+            return res.json({ type: 'Single Item', items: yourItems });
+        } else if (categoryDict.type === 'Item Set') {
+            const itemSets = resources.setItems.map(setItem => 
+                setItem.toClient(
+                    resources['propItemEtc.txt.txt'],
+                    resources.propItems
+                )
             );
-        })
 
-        return res.json(r);
+            return res.json({ type: 'Item Set', itemSets })
+        } else {
+            return res.status(500).json({ error: 'Malformed category' })
+        }
     });
 
     if (isEditMode) {

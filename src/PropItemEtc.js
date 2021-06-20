@@ -19,6 +19,25 @@ const PropItemEtcStructure = listEither(null, {
 
 
 class SetItem {
+    static availToDict(avail) {
+        // Build a nbParts -> bonuses mapping
+        let nbToBonuses = {};
+        for (const [[dst, valueStr], nbParts] of avail) {
+            if (nbToBonuses[nbParts] === undefined) {
+                nbToBonuses[nbParts] = [];
+            }
+
+            nbToBonuses[nbParts].push([dst, parseInt(valueStr)]);
+        }
+
+        // Reorder keys
+        let result = {};
+        for (const nbPart of Object.keys(nbToBonuses)) {
+            result[nbPart] = nbToBonuses[nbPart];
+        }
+        return result;
+    }
+
     constructor(propItemEtcContent) {
         this.content = propItemEtcContent;
     }
@@ -27,8 +46,8 @@ class SetItem {
         return {
             id: this.content[0],
             tid: propItemTxtStrings[this.content[1]],
-            items: this.content[2].Elem.map(i => items.getItem(i[0])?.toClient() || '???'),
-            bonus: this.content[2].Avail
+            items: this.content[2].Elem.map(i => items.getItem(i[0])?.toClient() || i[0]),
+            bonus: SetItem.availToDict(this.content[2].Avail)
         };
     }
 }

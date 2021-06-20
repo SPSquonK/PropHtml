@@ -61,7 +61,7 @@
               </li>
             </ul>
 
-            <article class="message is-danger  message-body" v-if="errorMessage">
+            <article class="message is-danger message-body" v-if="errorMessage">
               {{ errorMessage }}
               <br />
               <em>
@@ -90,6 +90,7 @@
 
           <table
             class="table is-hoverable is-striped is-bordered is-fullwidth itemlist has-text-centered"
+            v-if="categoryType === 'Single Item'"
           >
             <thead>
               <tr>
@@ -115,6 +116,47 @@
               </template>
             </tbody>
           </table>
+
+          <article
+            class="message is-danger message-body"
+            v-if="categoryType === 'Item Set' && editMode"
+          >
+            Edit mode is not yet supported for item sets
+          </article>
+
+          <table
+            class="table is-hoverable is-striped is-bordered is-fullwidth itemlist has-text-centered"
+            v-if="categoryType === 'Item Set'"
+          >
+            <thead>
+              <tr>
+                <th style="width: 30em;">Item set</th>
+                <th style="width: 10em;">Requirements</th>
+                <th class="has-text-left">Bonus</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <template>
+                <item-set-row
+                  v-for="itemset in itemsets"
+                  v-bind:itemset="itemset"
+                  v-bind:dstlist="dstList"
+
+
+                  v-bind:key="itemset.id"
+                >
+                </item-set-row>
+              </template>
+            </tbody>
+          </table>
+
+          <article
+            class="message is-danger message-body"
+            v-if="categoryType && categoryType.startsWith('Unsupported ')"
+          >
+            {{ categoryType }}
+          </article>
         </div>
         
         <footer class="has-text-right">

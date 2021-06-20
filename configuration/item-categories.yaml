@@ -22,3 +22,5 @@ requestable-ik3:
     - IK3_MAGICBARUNA
     - IK3_ZEMBARUNA
     - IK3_SHILDBARUNA
+  'Item Set':
+    - '@ItemSet'

@@ -84,7 +84,9 @@ let data = {
     pending: [],
     errorMessage: false,
     commitMessage: false,
-    categories: []
+    categories: [],
+    categoryType: null,
+    itemsets: {}
 };
 
 Vue.component(
@@ -133,12 +135,71 @@ Vue.component(
     }
 })
 
+Vue.component(
+    'item-set-row', {
+    props: [ 'itemset', 'dstlist' ],
+    template: `
+    <tr v-bind:style="itemset.style">
+        <td>
+            <strong>{{ itemset.name }}</strong>
+            <span v-for="item in itemset.items">
+                <br />
+                <img v-bind:src="item.iconpath" style="width: 16px; height: 16px" />
+                {{ item.name }}
+            </span>
+        </td>
+        <td>
+            <span v-for="(job, index) in itemset.jobs.jobs">
+                <span v-if="index > 0"> / </span>
+                {{ job }}
+            </span>
+            <br v-if="itemset.jobs.jobs.length !== 0" />
+            <em>Level {{ itemset.jobs.level }}</em>
+        </td>
+        <td>
+            <div class="columns">
+                <div
+                    class="column"
+                    v-for="displaybonus in itemset.displayBonus"
+                >
+                    <strong>{{ displaybonus.range }} parts</strong>
+                    <span v-html="buildBonus(displaybonus.bonus)">
+                    </span>
+                </div>
+            </div>
+
+        </td>
+    </tr>
+    
+    
+    
+    `,
+    methods: {
+        buildBonus(bonuses) {
+            return Object.entries(bonuses)
+                .map(x => stringify.awake(x, data.dstList))
+                .map(x => "<br />" + x)
+                .join("");
+        }
+
+
+    }
+
+
+});
+
 let app = new Vue({
     el: "#app",
     data: data,
     methods: {
         modifyItemList(items) {
-            this.items = items;
+            let z = {};
+        
+            Object.values(items)
+                .map(item => transformNetworkedItem(item))
+                .forEach(i => z[i.id] = i);
+
+            this.items = z;
 
             for (let i = 0; i != this.pending.length; ++i) {
                 const pendingItem = this.pending[i];
@@ -151,6 +212,76 @@ let app = new Vue({
                     realItem.isModified = ItemModification.hasBeenModified(realItem);
                     realItem.style = realItem.isModified ? 'color: red' : 'color: inherit';
                 }
+            }
+        },
+        modifyItemSetList(itemSets) {
+            this.itemsets = {};
+
+            for (const itemset of itemSets) {
+                const data = {};
+
+                data.name = itemset.tid;
+                data.items = itemset.items.map(item => {
+                    return {
+                        name: item.name,
+                        iconpath: 'dds/' + item.icon
+                    };
+                });
+
+                data.jobs = itemset.items.map(item => {
+                    return { job: item.jobName, level: item.level }
+                }).reduce(
+                    (acc, value) => {
+                        const i = acc.jobs.indexOf(value.job);
+                        if (i === -1 && value.job !== "") {
+                            acc.jobs.push(value.job);
+                        }
+                        acc.raw.push(value.job);
+
+                        acc.level = Math.max(acc.level, value.level)
+                        return acc;
+                    }, { jobs: [], level: 0, raw: [] }
+                );
+
+                data.displayBonus = [];
+                const maxParts = data.items.length;
+                let stackedBonuses = {};
+                for (let i = 0; i <= maxParts; ++i) {
+                    const bonuses = itemset.bonus[i];
+
+                    if (bonuses === undefined) {
+                        if (data.displayBonus.length !== 0) {
+                            data.displayBonus[data.displayBonus.length - 1].max = i;
+                        }
+                        continue;
+                    }
+
+                    let myBonuses = Object.assign({}, stackedBonuses);
+                    for (const [k, v] of bonuses) {
+                        myBonuses[k] = (myBonuses[k] || 0) + v;
+                    }
+
+                    stackedBonuses = {};
+                    
+                    for (const [k, v] of Object.entries(myBonuses)) {
+                        if (v !== 0) {
+                            stackedBonuses[k] = myBonuses[k];
+                        }
+                    }
+                    
+                    data.displayBonus.push({
+                        min: i,
+                        max: i,
+                        bonus: Object.assign({}, stackedBonuses)
+                    });
+                }
+
+                for (const db of data.displayBonus) {
+                    if (db.min === db.max) db.range = db.min.toString();
+                    else db.range = db.min + " -> " + db.max;
+                }
+
+                this.itemsets[itemset.id] = data;
             }
         },
         reset() {
@@ -271,7 +402,7 @@ function requestServices() {
 
 function requestIk3(requestedCategory) {
     $.ajax({
-        url: 'rest/individual-items/category/' + requestedCategory
+        url: 'rest/category/' + requestedCategory
     }).done(function (c) {
         if (c.error) {
             console.error(c.error);
@@ -283,11 +414,15 @@ function requestIk3(requestedCategory) {
 
         data.category = data.categories[requestedCategory];
 
-        let z = {};
-        
-        Object.values(c.items).map(item => transformNetworkedItem(item)).forEach(i => z[i.id] = i);
-
-        app.modifyItemList(z);
+        if (c.type === 'Single Item') {
+            app.modifyItemList(c.items);
+            data.categoryType = 'Single Item';
+        } else if (c.type === 'Item Set') {
+            app.modifyItemSetList(c.itemSets);
+            data.categoryType = 'Item Set';
+        } else {
+            data.categoryType = 'Unsupported type: ' + c.type;
+        }
     });
 }
 
