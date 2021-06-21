@@ -9,6 +9,10 @@ const { identity } = require('../src/Scanner');
 describe("NewScanner", function () {
   // TODO: Tokenizer
 
+  describe('AbstractScanner', function () {
+
+  });
+
 
   describe('identity', function () {
     it('should be able to parse', function () {
@@ -30,8 +34,13 @@ describe("NewScanner", function () {
     it('should be able to fix', function () {
       const id = identity();
 
+      assert.strictEqual(id.fix("toto", "toto"), "toto");
+      assert.strictEqual(id.fix("  toto    ", "toto"), "  toto    ");
       assert.strictEqual(id.fix("toto", "tutu"), "tutu");
       assert.strictEqual(id.fix("  both   ", "neither"), "  neither   ");
+
+      assert.strictEqual(id.fix("a", "b"), "b");
+      assert.throws(() => id.fix("a", ["b"]));
     });
   });
 
