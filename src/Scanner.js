@@ -239,6 +239,65 @@ class Identity extends AbstractScanner {
     }
 }
 
+class Pack extends AbstractScanner {
+    constructor(quantity) {
+        super()
+        this._quantity = quantity;
+    }
+
+    _process(tokenizer) {
+        let result = [];
+
+        while (result.length < this._quantity) {
+            const r = tokenizer.nextToken();
+            if (r === null) {
+                this._raiseError(
+                    'Pack only found ' + result.length +" / "
+                    + this._quantity + " tokens"
+                );
+            }
+            if (r.type !== 'whitespace') {
+                result.push(r.str);
+            }
+        }
+
+        return result;
+    }
+
+    _fixing(tokenizer, replacements) {
+        if (!Array.isArray(replacements)) {
+            this._raiseError('Replacements is not an array');
+        }
+
+        if (replacements.find(x => typeof x !== 'string') !== undefined) {
+            this._raiseError('Replacements is not composed of strings only');
+        }
+
+        if (replacements.length !== this._quantity) {
+            this._raiseError('Replacements have an incorrect number of tokens');
+        }
+
+        const result = [];
+        let numberOfNonWhiteSpace = 0;
+
+        while (numberOfNonWhiteSpace < this._quantity) {
+            const r = tokenizer.nextToken();
+            if (r === null) {
+                this._raiseError('Invalid origin on fixing');
+            }
+
+            if (r.type === 'whitespace') {
+                result.push(r.str);
+            } else {
+                result.push(replacements[numberOfNonWhiteSpace]);
+                ++numberOfNonWhiteSpace;
+            }
+        }
+
+        return result.join("");
+    }
+}
+
 
 // TODO: leftoversScanner
 
@@ -253,6 +312,8 @@ module.exports = {
      * string), and is only usefull when you are composing other Scanners.
      * @returns {Identity} An Identity Scanner
      */
-    identity: () => new Identity()
+    identity: () => new Identity(),
+
+    pack: (qtt) => new Pack(qtt)
 }
 
