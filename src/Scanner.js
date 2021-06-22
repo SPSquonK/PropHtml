@@ -437,9 +437,9 @@ class List extends AbstractScanner {
         }
 
         let r = [];
+        tokenizer.goToNonWhitespace(r);
 
         if (this.beginSymbol !== null) {
-            tokenizer.goToNonWhitespace(r);
             const begin = tokenizer.nextToken(); // non whitespace
             if (begin === null || begin.str !== this.beginSymbol) {
                 this._raiseError("List doesn't start with " + this.beginSymbol);
