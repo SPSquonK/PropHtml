@@ -115,6 +115,26 @@ describe("NewScanner", function () {
       );
     });
 
+    it('should parse with fixed strings', function () {
+      const seq = sequential(identity(), "is", identity());
+
+      assert.deepStrictEqual(seq.parse("toto is young"), ["toto", "is", "young"]);
+      assert.throws(() => seq.parse("toto has money"));
+
+      assert.deepStrictEqual(
+        seq.fix("toto is young", ["tata", "is", "old"]),
+        "tata is old"
+      );
+
+      assert.throws(
+        () => seq.fix("toto is young", ["toto", "isnt", "young"])
+      );
+      
+      assert.throws(
+        () => seq.fix("toto isnt young", ["toto", "is", "young"])
+      );
+    });
+
     it('should detect invalid number of elements', function () {
       const seq = sequential(pack(3), identity());
       assert.throws(() => seq.parse('   ok  ok  boom '));

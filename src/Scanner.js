@@ -119,7 +119,6 @@ class Tokenizer {
 ////////////////////////////////////////////////////////////////////////////////
 // Scanners
 
-
 /**
  * An `AbstractScanner` is a class that is able to scan a string and extract
  * from it structured data, depending on the `AbstractScanner` implementation.
@@ -233,6 +232,75 @@ class AbstractScanner {
             'Not enough token found: expected ' + expectedQuantity
             + ' for the currents scanner but found ' + foundQuantity
         );
+    }
+}
+
+
+/**
+ * A Scanner that looks for a precise token
+ * 
+ * In the current version, the PreciseToken can't be explicitely instancied by
+ * the user, but it will be if a string is provided in the sequenece of
+ * Sequential.
+ */
+ class PreciseToken extends AbstractScanner {
+    /**
+     * Builds a Scanner that look for the expected token, and can only parse
+     * this one
+     * @param {string} expected The only token this Scanner accepts
+     */
+    constructor(expected) {
+        super();
+        this.expected = expected;
+    }
+
+    /**
+     * Check if the next token in the tokenizer is the expected one by this
+     * Scanner.
+     * @param {Tokenizer} tokenizer The tokenizer
+     * @returns {string} The expected token
+     * @throws Will throw if the next token is not the expected one
+     * @override
+     */
+    _process(tokenizer) {
+        const token = tokenizer.nextNonWhitespace();
+
+        if (token !== this.expected) {
+            this._raiseError(
+                'Expected ' + this.expected + " but found " + token
+            );
+        }
+
+        return this.expected;
+    }
+
+    /**
+     * Consumes the next token, which must be the expected one and return it
+     * with the found leading whitespace in the tokenizer.
+     * @param {Tokenizer} tokenizer The tokenizer with the source data
+     * @param {string} replacements Must be the expected token
+     * @returns {string} The expected string, with the leading whitespaces found
+     * to reach it
+     * @throws If the next concrete token is not the expected one.
+     * @override
+     */
+    _fixing(tokenizer, replacements) {
+        if (replacements !== this.expected) {
+            this._raiseError(
+                "PreciseToken::_fixing can't modify the content"
+            )
+        }
+
+        let r = [];
+        tokenizer.goToNonWhitespace(r);
+        const n = tokenizer.nextToken();
+        if (n === null || n.str !== this.expected) {
+            this._raiseError(
+                "PreciseToken::_fixing didn't found " + this.expected
+            );
+        }
+
+        return r.join("") + this.expected;
     }
 }
 
@@ -363,6 +431,12 @@ class Sequential extends AbstractScanner {
             } else {
                 return [scanner];
             }
+        }).map(x => {
+            if (typeof(x) === 'string') {
+                return new PreciseToken(x);
+            } else {
+                return x;
+            }
         });
     }
 
@@ -490,6 +564,7 @@ class List extends AbstractScanner {
         return r.join("");
     }
 }
+
 
 
 // TODO: leftoversScanner
