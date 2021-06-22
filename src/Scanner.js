@@ -127,7 +127,9 @@ class AbstractScanner {
             let n = tokenizer.nextToken();
             if (n === null) break;
             if (n.type !== 'whitespace') {
-                this._raiseError('Not everything was consumed');
+                this._raiseError(
+                    'Not everything was consumed, currently on <' + n.str + '>'
+                );
             }
         }
 
@@ -158,11 +160,17 @@ class AbstractScanner {
             }
         };
 
-        consumeWhitespaces();
+        // consumeWhitespaces(); 
+        // -> should be managed by this scanner but I'm not sure if whitespace
+        // conservation should be done by fix or _fixing
 
         rebuiltString += this._fixing(tokenizer, replacements);
 
         consumeWhitespaces();
+
+        if (tokenizer.peek() !== null) {
+            this._raiseError('Fix has not fixed the whole string');
+        }
 
         return rebuiltString;
     }
@@ -199,6 +207,13 @@ class AbstractScanner {
         // TODO: make the _raiseError function add some context
         throw new Error(message);
     }
+
+    _raiseNotEnoughTokenError(foundQuantity, expectedQuantity) {
+        throw new Error(
+            'Not enough token found: expected ' + expectedQuantity
+            + ' for the currents scanner but found ' + foundQuantity
+        );
+    }
 }
 
 
@@ -234,14 +249,29 @@ class Identity extends AbstractScanner {
         }
 
         // We don't pretend we care about what is served by the tokenizer
-        tokenizer.nextToken();
-        return replacements;
+        let s = "";
+
+        while (true) {
+            const t = tokenizer.nextToken();
+            if (t === null) {
+                this._raiseError('Not enough token');
+            }
+
+            if (t.type === 'whitespace') {
+                s += t.str;
+            } else {
+                s += replacements;
+                break;
+            }
+        }
+
+        return s;
     }
 }
 
 class Pack extends AbstractScanner {
     constructor(quantity) {
-        super()
+        super();
         this._quantity = quantity;
     }
 
@@ -251,9 +281,8 @@ class Pack extends AbstractScanner {
         while (result.length < this._quantity) {
             const r = tokenizer.nextToken();
             if (r === null) {
-                this._raiseError(
-                    'Pack only found ' + result.length +" / "
-                    + this._quantity + " tokens"
+                this._raiseNotEnoughTokenError(
+                    this._quantity, result.length
                 );
             }
             if (r.type !== 'whitespace') {
@@ -298,6 +327,48 @@ class Pack extends AbstractScanner {
     }
 }
 
+class Sequential extends AbstractScanner {
+    /**
+     * 
+     * @param {(AbstractScanner|AbstractScanner[])[]} subScanners Sub scanners
+     * to use
+     */
+    constructor(subScanners) {
+        super();
+
+        /** @type AbstractScanner[] */
+        this.subScanners = subScanners.flatMap(scanner => {
+            if (Array.isArray(scanner)) {
+                return scanner;
+            } else {
+                return [scanner];
+            }
+        });
+    }
+
+    _process(tokenizer) {
+        return this.subScanners.map(scanner => scanner._process(tokenizer));
+    }
+
+    _fixing(tokenizer, replacements) {
+        if (!Array.isArray(replacements)) {
+            this._raiseError('Replacements is not an array');
+        }
+
+        if (replacements.length !== this.subScanners.length) {
+            this._raiseError('Replacements have an incorrect number of tokens');
+        }
+
+        let r = [];
+
+        for (let i = 0; i != this.subScanners.length; ++i) {
+            r.push(this.subScanners[i]._fixing(tokenizer, replacements[i]));
+        }
+
+        return r.join("");
+    }
+}
+
 
 // TODO: leftoversScanner
 
@@ -314,6 +385,8 @@ module.exports = {
      */
     identity: () => new Identity(),
 
-    pack: (qtt) => new Pack(qtt)
+    pack: (qtt) => new Pack(qtt),
+
+    sequential: (...subScanners) => new Sequential(subScanners)
 }
 
