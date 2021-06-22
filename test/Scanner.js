@@ -1,8 +1,6 @@
 const assert = require("assert");
 
-//const { sequential, list, identity } = require("../src/Scanner");
-
-const { identity, pack, sequential } = require('../src/Scanner');
+const { identity, pack, sequential, list } = require('../src/Scanner');
 
 
 
@@ -148,12 +146,200 @@ describe("NewScanner", function () {
   });
 
 
+  describe('List', function () {
+    describe('parsing', function () {
+      it('should be able to parse the whole string', function () {
+        const simpleList = list(identity());
+  
+        assert.deepStrictEqual(simpleList.parse("a b c"), ["a", "b", "c"]);
+        
+        assert.deepStrictEqual(
+          simpleList.parse("a b c d e f"),
+          ["a", "b", "c", "d", "e", "f"]
+        );
+  
+        const packedList = list(pack(2));
+  
+        assert.deepStrictEqual(
+          packedList.parse("a b c d e f"),
+          [["a", "b"], ["c", "d"], ["e", "f"]]
+        );
+  
+        assert.throws(() => packedList.parse("a b c"));
+  
+        assert.deepStrictEqual(simpleList.parse(""), []);
+        assert.deepStrictEqual(packedList.parse(""), []);
+      });
+  
+      it('should be able to parse sections of a string', function () {
+        const parser = sequential(
+          list(pack(2), '{', '}'),
+          list(identity(), '(', ')')
+        );
+  
+        assert.deepStrictEqual(parser.parse("{ } ( )"), [[], []]);
+  
+        assert.deepStrictEqual(
+          parser.parse("{ 1 2 3 4 } ( a b )"),
+          [ [ ["1", "2"], ["3", "4"] ], [ "a", "b" ] ]
+        );
+      });
+  
+      it('should let user parse nested lists', function () {
+        const parser = list(sequential(
+          identity(), list(identity(), ">", "<")
+        ));
+  
+        assert.deepStrictEqual(
+          parser.parse("rabbits > cool awesome < cats > meow < squirrels > <"),
+          [
+            [ "rabbits"  , ["cool", "awesome"] ],
+            [ "cats"     , ["meow"]],
+            [ "squirrels", [] ]
+          ]
+        );
+  
+        const nesterParenthesis = list(list(identity(), "(", ")"), "(", ")");
+  
+        assert.deepStrictEqual(
+          nesterParenthesis.parse(
+            "( ( Asia Europe Africa America Oceania ) ( Blue Red Yellow ) "
+            + " ( Anna Agathe Lillia Oceane Jessica ) )"
+          ),
+          [
+            ["Asia", "Europe", "Africa", "America", "Oceania"],
+            ["Blue", "Red", "Yellow"],
+            ["Anna", "Agathe", "Lillia", "Oceane", "Jessica"]
+          ]
+        );
+      });
+  
+      it('should let the user use weird delimiters', function () {
+        assert.deepStrictEqual(
+          list(identity(), "this_document_is_about").parse(
+            "this_document_is_about love friendship poneys blondes"
+          ),
+          [ "love", "friendship", "poneys", "blondes" ]
+        );
+  
+        assert.deepStrictEqual(
+          sequential(
+            list(identity(), null, "blondes"),
+            list(pack(3), '"but I prefer"')
+          ).parse('I know some blondes "but I prefer" white haired girls'),
+          [
+            ['I', 'know', 'some'],
+            [ ['white', 'haired', 'girls'] ]
+          ]
+        );
+      });
+  
+      it('should be unable to parse invalid lists', function () {
+        assert.throws(() =>
+          list(identity(), "Animals").parse("Cats Dogs Rabbits")
+        );
+  
+        assert.throws(() =>
+          list(identity(), "(", ")").parse("( I forgot something")
+        );
+  
+        assert.throws(() =>
+          list(list(identity(), "(", ")"), "(", ")")
+            .parse("( me too ( but not me )")
+        );
+
+        assert.throws(() => list(identity(), "(").parse(""));
+      });
+    });
+
+    describe('fixing', function () {
+      it('should be able to fix the whole string', function () {
+        const spaced = list(identity(), null, null, " x");
+
+        assert.strictEqual(spaced.fix("", []), "");
+
+        assert.strictEqual(list(identity(), null, null)
+          .fix("ejobrez boezreoz bzeze", []),
+          ""
+        );
+        
+        assert.strictEqual(spaced.fix("", ["AA", "BB"]), " AA BB");
+        assert.strictEqual(
+          spaced.fix("\tAA\tBB CC", ["AA", "BB", "DD", "EE"]),
+          "\tAA\tBB DD EE"
+        );
+
+        assert.strictEqual(
+          list(pack(2), null, null, "\nX Y").fix("", [["a", "b"], ["c", "d"]]),
+          "\na b\nc d"
+        );
+
+        // Whethever
+        // "\tAA\t\BB\tCC"
+        // should produce "\tAA\BB DD EE" or "\tAA\BB\tDD EE"
+        // is currently undefined
+        // ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+      });
+
+      it('should fix when delimiters are involved', function () {
+        assert.strictEqual(
+          list(identity(), "(", ")", " x").fix("\n( a b c\t)", ["1", "2", "3"]),
+          "\n( 1 2 3\t)"
+        );
+
+        assert.strictEqual(
+          list(identity(), null, "STOP", " x").fix("x\t\tSTOP", []),
+          "\t\tSTOP"
+        );
+
+        // Whetever fix("\tx\t\tSTOP", []) should produce
+        // \t\t\tSTOP or \t\tSTOP is currently undefined
+      });
+
+      it('should detect bad patches', function () {
+        assert.throws(
+          () => list(identity(), null, null, " x").fix("a b c", "toto")
+        );
+
+        assert.throws(
+          () => list(pack(2), null, null, " X Y").fix("a b", ["toto", "titi"])
+        );
+
+        assert.throws(
+          () => list(pack(2), null, null, " X").fix("", [["toto", "titi"]])
+        );
+      });
+
+      it('should detect unfixable lists', function () {
+        const l123 = ["1", "2", "3"]
+
+        assert.throws(
+          () => list(identity(), "{", "}", " x").fix("( a b c }", l123)
+        );
+
+        assert.throws(
+          () => list(identity(), "{", "}", " x").fix("{ a b c )", l123)
+        );
+
+        assert.throws(
+          () => list(identity(), "{", "}", " x").fix("{ a b c", l123)
+        );
+
+        assert.throws(
+          () => list(identity(), "(", ")", " x").fix("", [])
+        );
+      });
+
+    });
+  });
+
+
   
 //  describe("Global tests", function () {
 //    it("First", function () {
 //      const content = "list = { a b c } /* yes */ no";
 //
-//      const structure = sequential("list", "=", list("{", identity(), "}"), "no");
+//      const structure = sequential("list", "=", list(identity(), "{", "}"), "no");
 //
 //      const parsed = structure.parse(content);
 //

@@ -1,4 +1,4 @@
-const { readFileSync } = require('./file-reader');
+const { readFileSync, tokenize } = require('./file-reader');
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -53,6 +53,14 @@ class Tokenizer {
         }
     }
 
+    nextNonWhitespace() {
+        while (true) {
+            const token = this.nextToken();
+            if (token === null) return null;
+            if (token.type !== 'whitespace') return token.str;
+        }
+    }
+
     /**
      * Return the token that will be the next `nextToken` call, but
      * does not change the state of this object
@@ -64,6 +72,18 @@ class Tokenizer {
         const result = this.nextToken();
         this.cursor = currentCursor;
         return result;
+    }
+
+
+    goToNonWhitespace(tokens) {
+        while (true) {
+            let token = this.peek();
+            if (token === null) return;
+            if (token.type !== 'whitespace') return;
+
+            tokens.push(token.str);
+            this.nextToken();
+        }
     }
 
     /**
@@ -169,7 +189,7 @@ class AbstractScanner {
         consumeWhitespaces();
 
         if (tokenizer.peek() !== null) {
-            this._raiseError('Fix has not fixed the whole string');
+            this._raiseError('Fix has not fixed the whole string ' + JSON.stringify(tokenizer.peek()));
         }
 
         return rebuiltString;
@@ -370,6 +390,108 @@ class Sequential extends AbstractScanner {
 }
 
 
+class List extends AbstractScanner {
+    constructor(subScanner, beginSymbol = null, endSymbol = null, templateForFixing = null) {
+        super();
+        this.subScanner = subScanner;
+        this.beginSymbol = beginSymbol;
+        this.endSymbol = endSymbol;
+        this.templateForFixing = templateForFixing;
+    }
+
+    _process(tokenizer) {
+        if (this.beginSymbol !== null) {
+            if (tokenizer.nextNonWhitespace() !== this.beginSymbol) {
+                this._raiseError("List doesn't start with " + this.beginSymbol);
+            }
+        }
+
+        const r = [];
+        while (true) {
+            const peek = tokenizer.peek();
+            if (peek === null || peek.str === this.endSymbol) {
+                break;
+            }
+
+            if (peek.type !== 'whitespace') {
+                r.push(this.subScanner._process(tokenizer));
+            } else {
+                tokenizer.nextToken();
+            }
+        }
+
+        if (this.endSymbol !== null) {
+            const t = tokenizer.nextToken();
+            if (t === null) {
+                this._raiseError('EOF reached for a list that should end with ' + this.endSymbol);
+            }
+            // else : out because peek.str was === this.endSymbol
+        }
+
+        return r;
+    }
+
+    _fixing(tokenizer, replacements) {
+        if (!Array.isArray(replacements)) {
+            this._raiseError('Replacements of list is not an array');
+        }
+
+        let r = [];
+
+        if (this.beginSymbol !== null) {
+            tokenizer.goToNonWhitespace(r);
+            const begin = tokenizer.nextToken(); // non whitespace
+            if (begin === null || begin.str !== this.beginSymbol) {
+                this._raiseError("List doesn't start with " + this.beginSymbol);
+            }
+            r.push(begin.str);
+        }
+
+        for (let i = 0; i != replacements.length; ++i) {
+            let innerTokenizer;
+
+            let realPeak = tokenizer.peek();
+            if (realPeak === null || realPeak.str === this.endSymbol) {
+                innerTokenizer = new Tokenizer(this.templateForFixing);
+            } else {
+                innerTokenizer = tokenizer;
+            }
+
+            r.push(this.subScanner._fixing(innerTokenizer, replacements[i]));
+        }
+
+        // Go to the end of the list
+        if (this.endSymbol === null) {
+            // EOF
+            while (tokenizer.nextToken() !== null) {
+                // Waste every token
+            }
+        } else {
+            // endSymbol terminated
+            let lastwhitespace = "";
+            while (true) {
+                let p = tokenizer.peek();
+
+                if (p === null) {
+                    this._raiseError('Fixing badly terminated');
+                } else if (p.type === 'whitespace') {
+                    lastwhitespace = tokenizer.nextToken().str;
+                } else if (p.str === this.endSymbol) {
+                    r.push(lastwhitespace);
+                    r.push(tokenizer.nextToken().str);
+                    break;
+                } else {
+                    this.subScanner._process(tokenizer);
+                    lastwhitespace = "";
+                }
+            }
+        }
+
+        return r.join("");
+    }
+}
+
+
 // TODO: leftoversScanner
 
 
@@ -387,6 +509,9 @@ module.exports = {
 
     pack: (qtt) => new Pack(qtt),
 
-    sequential: (...subScanners) => new Sequential(subScanners)
+    sequential: (...subScanners) => new Sequential(subScanners),
+
+
+    list: (subScanner, beginSymbol, endSymbol, templateForFixing) => new List(subScanner, beginSymbol, endSymbol, templateForFixing)
 }
 
