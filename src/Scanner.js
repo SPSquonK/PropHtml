@@ -521,18 +521,25 @@ class List extends AbstractScanner {
             r.push(begin.str);
         }
 
+        let forTheEnd = [];
         for (let i = 0; i != replacements.length; ++i) {
+            let tmp = [];
+            tokenizer.goToNonWhitespace(tmp);
+
             let innerTokenizer;
 
             let realPeak = tokenizer.peek();
             if (realPeak === null || realPeak.str === this.endSymbol) {
+                tmp.forEach(x => forTheEnd.push(x));
                 innerTokenizer = new Tokenizer(this.templateForFixing);
             } else {
+                tmp.forEach(x => r.push(x));
                 innerTokenizer = tokenizer;
             }
 
             r.push(this.subScanner._fixing(innerTokenizer, replacements[i]));
         }
+        forTheEnd.forEach(x => r.push(x));
 
         // Go to the end of the list
         if (this.endSymbol === null) {
@@ -547,7 +554,7 @@ class List extends AbstractScanner {
                 let p = tokenizer.peek();
 
                 if (p === null) {
-                    this._raiseError('Fixing badly terminated');
+                    this._raiseError('Fixing badly terminated (no end symbol)');
                 } else if (p.type === 'whitespace') {
                     lastwhitespace = tokenizer.nextToken().str;
                 } else if (p.str === this.endSymbol) {
@@ -565,6 +572,68 @@ class List extends AbstractScanner {
     }
 }
 
+
+class Either extends AbstractScanner {
+    constructor(possibilities, defaultTokenizers) {
+        super();
+        this._possibilities = possibilities;
+        this._defaultTokenizers = defaultTokenizers;
+    }
+
+    _process(tokenizer) {
+        const word = tokenizer.nextNonWhitespace();
+        if (word === null) {
+            this._raiseError("Either reached end of file");
+        }
+
+        const handler = this._possibilities[word];
+        if (handler === undefined) {
+            this._raiseError("Either found unknown keyword " + word);
+        }
+
+        return {
+            type: word,
+            data: handler._process(tokenizer)
+        };
+    }
+
+    _fixing(tokenizer, replacements) {
+        if (replacements.type === undefined || replacements.data === undefined) {
+            this._raiseError("Replacements is not a {type, data} dict");
+        }
+
+        let r = [];
+        tokenizer.goToNonWhitespace(r);
+
+        const word = tokenizer.nextNonWhitespace();
+        if (word === null) {
+            this._raiseError("Either reached end of file");
+        }
+
+        r.push(replacements.type);
+
+        const handler = this._possibilities[word];
+        if (handler === undefined) {
+            this._raiseError("Either found unknown keyword " + word);
+        }
+
+        let fixed;
+        if (word === replacements.type) {
+            fixed = handler._fixing(tokenizer, replacements.data);
+        } else {
+            fixed = this._possibilities[replacements.type]._fixing(
+                new Tokenizer(this._defaultTokenizers[replacements.type]),
+                replacements.data
+            );
+
+            handler._process(tokenizer);
+        }
+
+        r.push(fixed);
+
+        return r.join("");
+    }
+}
 
 
 // TODO: leftoversScanner
@@ -587,6 +656,8 @@ module.exports = {
     sequential: (...subScanners) => new Sequential(subScanners),
 
 
-    list: (subScanner, beginSymbol, endSymbol, templateForFixing) => new List(subScanner, beginSymbol, endSymbol, templateForFixing)
+    list: (subScanner, beginSymbol, endSymbol, templateForFixing) => new List(subScanner, beginSymbol, endSymbol, templateForFixing),
+
+    either: (handlers, defaultTokenizers) => new Either(handlers, defaultTokenizers),
 }
 

@@ -1,8 +1,13 @@
 const assert = require("assert");
 
-const { identity, pack, sequential, list } = require('../src/Scanner');
+const { identity, pack, sequential, list, either } = require('../src/Scanner');
 
 
+function assertIdempotentcy(scanner, string) {
+  const parsed = scanner.parse(string);
+  const fixed = scanner.fix(string, parsed);
+  assert.strictEqual(string, fixed);
+}
 
 describe("NewScanner", function () {
   // TODO: Tokenizer
@@ -40,6 +45,8 @@ describe("NewScanner", function () {
       assert.strictEqual(id.fix("a", "b"), "b");
       assert.throws(() => id.fix("a", ["b"]));
       assert.throws(() => id.fix("a b", "c"));
+
+      assertIdempotentcy(identity(), "somestring");
     });
   });
 
@@ -316,6 +323,18 @@ describe("NewScanner", function () {
         // \t\t\tSTOP or \t\tSTOP is currently undefined
       });
 
+      it('should properly fix lists with an end symbol', function () {
+        assert.strictEqual(
+          list(identity(), "(", null, " x").fix("(", ["a", "b"]),
+          "( a b"
+        );
+        
+        assert.strictEqual(
+          list(identity(), "(", ")", " x").fix("( )", ["a", "b"]),
+          "( a b )"
+        );
+      });
+
       it('should detect bad patches', function () {
         assert.throws(
           () => list(identity(), null, null, " x").fix("a b c", "toto")
@@ -349,11 +368,83 @@ describe("NewScanner", function () {
           () => list(identity(), "(", ")", " x").fix("", [])
         );
       });
-
     });
   });
 
+  describe('Either', function () {
+    it('should be able to process one possibilty', function () {
+      assert.deepStrictEqual(
+        either({ hey: identity() }).parse('hey there'),
+        { type: 'hey', data: "there" }
+      );
 
+      assert.deepStrictEqual(
+        either({ only: pack(3) }).parse('only 1 2 3'),
+        { type: 'only', data: ["1", "2", "3"] }
+      );
+
+      assert.throws(
+        () => either({ someone: identity() }).parse('someoneelse x')
+      );
+
+      assert.throws(
+        () => either({ someone: pack(2) }).parse("someone onlyonetoken")
+      );
+
+      assert.throws(
+        () => either({ someone: identity() }).parse("someone is someone")
+      );
+      
+      assert.throws(
+        () => either({ someone: identity() }).parse("someone is someone else")
+      );
+
+      assert.throws(() => either({ z: identity()}).parse("\n\t\n"));
+      assert.throws(() => either({ z: identity()}).fix("\n\t", { type: 'z', data: "1" }));
+
+      assertIdempotentcy(either({ key: pack(2) }), "key a b");
+      assertIdempotentcy(either({ key: pack(2) }), "key value1 value2");
+
+      assert.throws(() =>
+        either({ someone: identity() })
+        .fix("b x", { type: 'someone', data: 'z' })
+      );
+
+      assert.throws(() =>
+        either({ someone: identity() })
+        .fix("someone 5", { type: 'other', data: 'y' })
+      );
+
+      assert.throws(() =>
+        either({ someone: identity() })
+        .fix("someone 5", [ "x", "y"])
+      );
+    });
+    
+    it('should be able to process multiple possibilties', function () {
+      const multi = either({
+        one: identity(),
+        two: pack(2),
+        elements: list(identity(), "{", "}", " e")
+      }, {
+        one: "\t\tx",
+        two: "\nx\ny",
+        elements: "  { z }"
+      });
+
+      assert.deepStrictEqual(multi.parse("one 2"), { type: 'one', data: "2" });
+
+      assert.deepStrictEqual(
+        multi.parse("two 1 2"),
+        { type: 'two', data: ["1", "2"] }
+      );
+
+      assert.deepStrictEqual(
+        multi.fix("one 1", { type: 'elements', data: ["1", "2"]}),
+        "elements  { 1 2 }"
+      )
+    });
+  });
   
 //  describe("Global tests", function () {
 //    it("First", function () {
