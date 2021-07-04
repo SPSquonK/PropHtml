@@ -246,36 +246,6 @@ class Scanner {
     }
 
     /**
-     * Consumes the next token. Throws if it was not the expected token
-     * @param {string} expectedToken The expected token
-     */
-    expect(expectedToken) {
-        const next = this.nextString();
-        if (next !== expectedToken) {
-            throw Error("expect('" + expectedToken + "') found '" + next + "'");
-        }
-    }
-
-    /**
-     * 
-     * @param {*} handlers A dictionary of candidate handlers
-     * @returns `null` if end of file has been reached, an
-     * `{ error: string, type: string }` if no handler have been found, a
-     * `{ type: string, data }` if a handler has been found and used.
-     */
-    nextStructuredData(handlers) {
-        const type = this.nextString();
-        if (type === null) return null;
-
-        const handler = handlers[type];
-        if (handler === undefined) {
-            return { error: 'Invalid type found', type: type };
-        }
-
-        return { type, data: handler(this) };
-    }
-
-    /**
      * Return the next token that would be returned by `nextString()`, without
      * consuming it
      * @returns The next token
@@ -286,33 +256,6 @@ class Scanner {
         } else {
             return null;
         }
-    }
-
-    /**
-     * Applies the `unaryFunction` to build new elements until `endSymbol` is
-     * encountered.
-     * @template T Type of elements returned by unaryFunction
-     * @param {string?} endSymbol The symbol that makes the loop stops. You can
-     * pass `null` to loop until the end of the file
-     * @param {(Scanner) => T} unaryFunction A function that reads the next data
-     * @returns {T[]} The elements produced by `unaryFunction`
-     */
-    consumeUntil(endSymbol, unaryFunction) {
-        const elements = [];
-
-        while (true) {
-            const t = this.peek();
-            if (t === null) break;
-
-            if (t === endSymbol) {
-                this.nextString(); // Consume
-                break;
-            }
-
-            elements.push(unaryFunction(this));
-        }
-
-        return elements;
     }
 }
 

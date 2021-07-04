@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "npx mocha",
+    "nyc": "npx nyc npx mocha"
   },
   "repository": {
     "type": "git",
@@ -29,5 +31,9 @@
     "sdds": "^0.0.2",
     "yaml": "^1.10.2",
     "yaml-diff-patch": "^1.0.2"
+  },
+  "devDependencies": {
+    "mocha": "^9.0.1",
+    "nyc": "^15.1.0"
   }
 }

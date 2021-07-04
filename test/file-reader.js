@@ -75,53 +75,5 @@ describe("Scanner", function () {
       assert.strictEqual(scanner2.nextString(), null);
     });
   });
-
-  describe('consumeUntil', function () {
-    it("should return all tokens if null is passed", function () {
-      const s = new Scanner("1 2 3 soleil");
-      const tokens = s.consumeUntil(null, s => s.nextString());
-      assert.deepStrictEqual(tokens, ["1", "2", "3", "soleil"]);
-    });
-
-    it("should return all tokens in the given permiter", function () {
-      const s = new Scanner("{ 1 2 3 soleil } nextOne { hey notcaptured }");
-      
-      s.expect("{");
-
-      const tokens = s.consumeUntil('}', s => s.nextString());
-      assert.deepStrictEqual(tokens, ["1", "2", "3", "soleil"]);
-
-      assert.strictEqual(s.nextString(), "nextOne");
-
-      const otherTokens = s.consumeUntil('notcaptured', s => s.nextString());
-      assert.deepStrictEqual(otherTokens, ['{', 'hey']);
-    });
-
-    it("should let the unary function consume multiple tokens", function () {
-      const s = new Scanner("( a 1 b 2 c 3 d 4 e 5 ) ok");
-
-      s.expect("(");
-      const tokens = s.consumeUntil(")", s => [s.nextString(), s.nextString()]);
-
-      assert.deepStrictEqual(tokens, [
-        ['a', '1'], ['b', '2'], ['c', '3'], ['d', '4'], ['e', '5']
-      ]);
-
-      assert.strictEqual(s.nextString(), "ok");
-      assert.strictEqual(s.nextString(), null);
-    });
-    
-    it("should let the user use the end token inside the read data", function () {
-      const s = new Scanner("{ { 1a 2b } { 3c 4d } }");
-
-      s.expect("{");
-      const elements = s.consumeUntil("}", s => {
-        s.expect("{");
-        return s.consumeUntil("}", s => s.nextString());
-      });
-
-      assert.deepStrictEqual(elements, [["1a", "2b"], ["3c", "4d"]]);
-    });
-  });
 });
 
