@@ -281,7 +281,7 @@ function startWebServer(port, { configuration, resources, isEditMode, items, cat
 function main() {
     const configuration = configurationReader();
 
-    const port = 3000;
+    const port = 8000;
     
     const program = new Command()
         .description('Can the server modify the resources')

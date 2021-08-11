@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npx ts-node index.ts",
+    "build": "npx tsc --build && npx copyfiles static/* configuration/* build",
+    "test": "npx ts-mocha"
   },
   "repository": {
     "type": "git",
@@ -29,5 +31,11 @@
     "sdds": "^0.0.2",
     "yaml": "^1.10.2",
     "yaml-diff-patch": "^1.0.2"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.4.1",
+    "ts-mocha": "^8.0.0",
+    "ts-node": "^10.2.0",
+    "typescript": "^4.3.5"
   }
 }
