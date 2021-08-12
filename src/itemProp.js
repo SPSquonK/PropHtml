@@ -81,7 +81,7 @@ function modifyBonuses(item, fields, newBonuses) {
 
 class ItemPropTxt {
     static loadFile(path, context, fields) {
-        const file = FR.readFileSync(path, true);
+        const file = FR.readFileSyncWithEncoding(path, true);
         return new ItemPropTxt(
             file.content.split(/\r?\n/), file.encoding, context, fields
         );
