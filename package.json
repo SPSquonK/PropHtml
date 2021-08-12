@@ -33,6 +33,7 @@
     "yaml-diff-patch": "^1.0.2"
   },
   "devDependencies": {
+    "@types/pngjs": "^6.0.1",
     "copyfiles": "^2.4.1",
     "ts-mocha": "^8.0.0",
     "ts-node": "^10.2.0",

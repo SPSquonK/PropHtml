@@ -7,7 +7,7 @@ const YAML = require('yaml');
 const FR = require('./src/file-reader');
 const MiscResources = require('./src/misc-resources');
 const PropItemTxt = require('./src/itemProp');
-const ImageServer = require('./src/ImageServer');
+const { default: ImageServer } = require('./src/ImageServer');
 const PropItemEtc = require('./src/PropItemEtc');
 
 const configurationReader = require('./src/configuration');
