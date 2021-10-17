@@ -1,4 +1,5 @@
 const FR = require('./file-reader');
+const fs = require('fs');
 
 const { listEither, dict, sequential, identity, list, pack } = require('./declarative-scanner');
 
@@ -22,12 +23,14 @@ class SetItem {
     static availToDict(avail) {
         // Build a nbParts -> bonuses mapping
         let nbToBonuses = {};
-        for (const [[dst, valueStr], nbParts] of avail) {
-            if (nbToBonuses[nbParts] === undefined) {
-                nbToBonuses[nbParts] = [];
+        for (const [nbParts, d] of Object.entries(avail)) {
+            for (const [dst, valueStr] of Object.entries(d)) {
+                if (nbToBonuses[nbParts] === undefined) {
+                    nbToBonuses[nbParts] = [];
+                }
+    
+                nbToBonuses[nbParts].push([dst, parseInt(valueStr)]);
             }
-
-            nbToBonuses[nbParts].push([dst, parseInt(valueStr)]);
         }
 
         // Reorder keys
@@ -38,39 +41,39 @@ class SetItem {
         return result;
     }
 
-    constructor(propItemEtcContent) {
+    constructor(id, propItemEtcContent, ent) {
+        this.id = id;
         this.content = propItemEtcContent;
+        this.ent = ent;
     }
 
     toClient(propItemTxtStrings, items) {
-        return {
-            id: this.content[0],
-            tid: propItemTxtStrings[this.content[1]],
-            items: this.content[2].Elem.map(i => items.getItem(i[0])?.toClient() || i[0]),
-            bonus: SetItem.availToDict(this.content[2].Avail)
+        let me = this.content;
+        while (me.sameAs !== undefined) {
+            me = this.ent[me.sameAs];
+        }
+        let r = {
+            id: this.id,
+            tid: propItemTxtStrings[this.content.name],
+            items: this.content.items.map(i => items.getItem(i)?.toClient() || i),
+            bonus: SetItem.availToDict(me.bonus)
         };
+        return r;
     }
 }
 
-function _readPropItemEtc(path) {
-    return PropItemEtcStructure(FR.Scanner.readFile(path));
-}
-
 function readSetItems(path) {
-    return _readPropItemEtc(path)
-        .filter(element => element[0] === 'SetItem')
-        .map(element => new SetItem(element[1]));
+    const content = fs.readFileSync(path, 'utf-8');
+    const jsonContent = JSON.parse(content);
+    let i = 0;
+    let r = Object.entries(jsonContent['Sets'])
+        .filter(entry => entry[1].items !== undefined)
+        .map(entry => new SetItem(++i, entry[1], jsonContent['Sets']));
+    return r;
 }
-
-function persistSetItemsModifications(path, modifications) {
-    // TODO
-}
-
-
 
 module.exports = {
-    readSetItems,
-    persistSetItemsModifications
+    readSetItems
 };
 
 /*

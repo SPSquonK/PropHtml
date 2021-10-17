@@ -328,11 +328,29 @@ class ItemPropInContext extends ItemProp {
     get jobName() {
         if (this.job === "=") return "";
         if (!this.job.startsWith("JOB_")) return this.job;
-        return this.job.substr(4)
+
+        const names = {
+            "Vagrant": "Vagabond",
+            "Mercenary": "Mercenaire",
+            "Knight": "Chevalier",
+            "Blade": "Assassin",
+            "Magician": "Magicien",
+            "Elementor": "Élémentaliste",
+            "Psychikeeper": "Sorcier",
+            "Acrobat": "Acrobate",
+            "Assist": "Acolyte",
+            "Billposter": "Moine",
+            "Ringmaster": "Prêtre",
+            "Hero": "Héros"
+        }
+
+        const tag = this.job.substr(4)
             .replace("_", "-")
             .split("-")
             .map(str => str.length === 0 ? "" : str[0] + str.substr(1).toLowerCase())
             .join("-");
+
+        return names[tag] || tag;
     }
 
     /**
@@ -344,10 +362,16 @@ class ItemPropInContext extends ItemProp {
             id     : this.id,
             name   : this.name,
             jobName: this.jobName,
-            level  : this.level,
+            level  : convertLevel(this.level),
             bonus  : this.bonus
         };
     }
+}
+
+function convertLevel(level) {
+    if (level >= 140) return 100;
+    if (level <= 40) return 1;
+    else return level - 40
 }
 
 module.exports = ItemPropTxt;

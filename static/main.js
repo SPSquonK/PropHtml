@@ -163,7 +163,7 @@ Vue.component(
     template: `
     <tr v-bind:style="item.style">
         <td><img v-bind:src="'dds/' + item.icon" /></td>
-        <td><span style="font-family: monospace;">{{ item.id }}</span><br />{{ item.name }}</td>
+        <td>{{ item.name }}</td>
         <td>{{ item.jobName }}</td>
         <td><span v-if="item.level != 0">{{ item.level }}</span></td>
         <td class="has-text-left" v-html="buildBonus(item.bonus)" v-if="editmode !== true"></td>
@@ -226,7 +226,7 @@ Vue.component(
                 {{ job }}
             </span>
             <br v-if="itemset.jobs.jobs.length !== 0" />
-            <em>Level {{ itemset.jobs.level }}</em>
+            <em>Niveau {{ itemset.jobs.level }}</em>
         </td>
         <td>
             <div class="columns">
@@ -234,7 +234,7 @@ Vue.component(
                     class="column"
                     v-for="displaybonus in itemset.displayBonus"
                 >
-                    <strong>{{ displaybonus.range }} parts</strong>
+                    <strong>{{ displaybonus.range }} parties</strong>
                     <span v-html="buildBonus(displaybonus.bonus)">
                     </span>
                 </div>

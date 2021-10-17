@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Express Prop Html</title>
+    <title>Équipements de SFlyFF</title>
     <!-- <link href="itemlist.css" rel="stylesheet" /> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -17,14 +17,14 @@
   <body>
 
     <section class="section">
-      <h1 class="title has-text-centered is-link">Express Prop Html</h1>
+      <h1 class="title has-text-centered is-link">Équipements de SFlyFF</h1>
       <div id="loading"></div>
       <div id="app" class="hidden">
         <div class="block">
           <nav class="navbar is-link has-shadow" role="navigation" aria-label="main navigation">
 
             <div class="navbar-brand">
-              <span class="navbar-item" style="font-weight: bold;">Categories</span>
+              <span class="navbar-item" style="font-weight: bold;">Catégories</span>
             </div>
 
             <div class="navbar-menu">
@@ -41,50 +41,6 @@
           </nav>
         </div>
 
-        <div class="block box" v-if="editable">
-          <p>
-            <label for="editMode" class="checkbox">
-              <input type="checkbox" name="editMode" v-model="editMode" />
-              Switch to edit mode
-            </label>
-          </p>
-
-          <div v-if="editMode" class="box">
-            <h2 class="title is-3">Pending changes</h2>
-
-            <ul style="height: 7.7em; overflow-y: scroll;">
-              <li v-for="item in pending">
-                <em>{{ item.name }}</em>:
-                <span v-html="strInLine(item.originalBonus)" style="text-decoration: line-through"></span>
-                -&gt;
-                <span v-html="strInLine(item.bonus)"></span>
-              </li>
-            </ul>
-
-            <article class="message is-danger message-body" v-if="errorMessage">
-              {{ errorMessage }}
-              <br />
-              <em>
-                If you think your input was correct, submit an issue here:
-                <a href="https://github.com/SPSquonK/PropHtml/issues">
-                  https://github.com/SPSquonK/PropHtml/issues
-                </a>
-              </em>
-            </article>
-            <article class="message is-success message-body" v-if="commitMessage">{{ commitMessage }}</article>
-
-            <div class="field is-grouped">
-              <p class="control">
-                <input type="submit" value="Submit" v-on:click="submit()" class="button is-primary" />
-              </p>
-              <p class="control">
-                <input type="Reset" value="Reset"   v-on:click="reset()" class="button is-light"  />
-              </p>
-            </div>
-          </div>
-          
-        </div>
-
         <div class="block box">
           <h2 class="title is-3">{{ category }}</h2>
 
@@ -94,10 +50,10 @@
           >
             <thead>
               <tr>
-                <th style="width: 64px;">Icon</th>
-                <th style="width: 30em;">Name</th>
-                <th style="width: 10em;">Job</th>
-                <th style="width: 5em;">Level</th>
+                <th style="width: 64px;">Icone</th>
+                <th style="width: 30em;">Nom</th>
+                <th style="width: 10em;">Classe</th>
+                <th style="width: 5em;">Niveau</th>
                 <th class="has-text-left">Bonus</th>
               </tr>
             </thead>
@@ -130,8 +86,8 @@
           >
             <thead>
               <tr>
-                <th style="width: 30em;">Item set</th>
-                <th style="width: 10em;">Requirements</th>
+                <th style="width: 30em;">Set</th>
+                <th style="width: 10em;">Classe</th>
                 <th class="has-text-left">Bonus</th>
               </tr>
             </thead>
@@ -161,7 +117,7 @@
         
         <footer class="has-text-right">
           <strong><a href="https://github.com/SPSquonK/PropHtml">Express Prop Html</a></strong>
-          by <a href="https://squonk.fr">SquonK</a>, 2021.
+          par <a href="https://squonk.fr">SquonK</a>, 2021.
         </footer>
       </div>
     </section>

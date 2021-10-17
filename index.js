@@ -40,8 +40,10 @@ function loadResources(configuration) {
         path.join(configuration['resource-folder'], "textClient.txt.txt")
     );
 
+    content.setItems = [];
+
     content.setItems = PropItemEtc.readSetItems(
-        path.join(configuration['resource-folder'], "propItemEtc.inc")
+        path.join(configuration['resource-folder'], "propItemEtc.json")
     );
     content['propItemEtc.txt.txt'] = FR.readStrings(
         path.join(configuration['resource-folder'], "propItemEtc.txt.txt")
@@ -173,99 +175,6 @@ function startWebServer(port, { configuration, resources, isEditMode, items, cat
             return res.status(500).json({ error: 'Malformed category' })
         }
     });
-
-    if (isEditMode) {
-        function numberOfAwakes(items) {
-            for (const item of items) {
-                return item.bonus.length;
-            }
-            
-            return undefined;
-        }
-
-        app.post('/rest/individual-items/awakes', (req, res) => {
-            // Note: we don't check if the modified items are actually
-            // displayable because edit mode should be run only if the
-            // administrator trusts the user (most likely themself)
-
-            // Check DST validity
-            const awakeMaxNb = numberOfAwakes(items);
-
-            let badElements = [];
-
-            for (const [itemId, newBonuses] of Object.entries(req.body)) {
-                let item = items.find(i => i.id === itemId);
-
-                if (item === undefined) {
-                    badElements.push({ 'item': itemId, 'type': 'Invalid ItemId' });
-                }
-
-                if (newBonuses.length > awakeMaxNb) {
-                    badElements.push({
-                        'item': itemId,
-                        'type': 'Requested too much lines',
-                        'requestedQuantity': newBonuses.length,
-                        'maxQuantity': awakeMaxNb
-                    });
-                }
-
-                for (const line of newBonuses) {
-                    const addBadElement = extra => badElements.push({
-                        'item': itemId, 'type': 'Bad line',
-                        'line': line  , 'extra': extra
-                    });
-
-                    if (line === undefined || line === null || line.length > 2) {
-                        addBadElement('Format should be [dst, value]');
-                        continue;
-                    }
-
-                    const [dst, value] = line;
-
-                    if (resources.dstMapping[dst] === undefined) {
-                        addBadElement('The given DST is not valid');
-                    }
-
-                    if (isNaN(value) || parseInt(value) === 0) {
-                        addBadElement('The value is not a valid quantity (should be ≠ 0)');
-                    }
-                }
-            }
-
-            if (badElements.length !== 0) {
-                return res.json({
-                    error: {
-                        message: 'Invalid request - Requested bonuses are ill-formed',
-                        badElements
-                    }
-                });
-            }
-
-            // 
-            let chg = resources.propItems.applyBonusChange(req.body);
-
-            let notProcessed = Object.entries(req.body)
-                .filter(([id, _]) => chg.find(i => i.id === id) === undefined)
-                .reduce(inDictReduce, {});
-
-            if (Object.keys(notProcessed).length === 0) notProcessed = undefined;
-
-            if (chg.length !== 0) {
-                resources.propItems.persist(
-                    configuration['resource-folder'],
-                    configuration['keep-original-prop-item'] || undefined,
-                    configuration['new-prop-item-path'] || undefined,
-                    configuration['propItemDotTxt']
-                );
-            }
-
-            return res.json({
-                result: 'ok',
-                modified: chg.map(i => i.toClient()),
-                notProcessed: notProcessed,
-            });
-        });
-    }
 
     // Start the server
     app.listen(port, () => {

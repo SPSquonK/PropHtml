@@ -35,7 +35,17 @@ class ImageServer {
         const lastDot = imageName.lastIndexOf('.');
         if (lastDot === -1) return { error: 'File not found (1)' };
 
+        const a = imageName.indexOf('.');
+        if (a === 0) return { error: 'File not found (1)' };
+
+        const b = imageName.indexOf('/');
+        if (b === 0) return { error: 'File not found (1)' };
+
+        const c = imageName.indexOf('/');
+        if (c === 0) return { error: 'File not found (1)' };
+
         const extension = imageName.substr(lastDot + 1).toLowerCase();
+
         if (extension === 'png') {
             return this.#getPng(imageName);
         } else if (extension === 'dds') {
