@@ -10,6 +10,8 @@ in JavaScript.
 
 The current goal is to support the same features as PropHtml.
 
+Demo: https://items.sflyff.fr/
+
 ## Getting started
 
 ### Configuration
